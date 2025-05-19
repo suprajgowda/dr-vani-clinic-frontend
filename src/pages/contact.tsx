@@ -1,32 +1,101 @@
 import React, { useState } from "react";
+import Head from "next/head";
 
-export default function ContactPage() {
+const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <main className="contact-page">
-      <h1>Contact / Appointment</h1>
+    <>
+      <Head>
+        <title>Contact | Dr. Vani’s Clinic</title>
+      </Head>
 
-      {submitted ? (
-        <p className="thank-you">Thank you! Your message has been sent.</p>
-      ) : (
-        <form
-          className="contact-form"
-          action="https://formspree.io/f/mwpoyqnk"
-          method="POST"
-          onSubmit={() => setSubmitted(true)}
-        >
-          <input type="text" name="name" placeholder="Your Name" required />
-          <input type="email" name="email" placeholder="Your Email" required />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            rows={5}
-            required
-          />
-          <button type="submit">Send</button>
-        </form>
-      )}
-    </main>
+      {/* Section 1 – Banner */}
+      <section className="relative w-full py-16 sm:py-20 md:py-24 bg-blue-800 text-white text-center">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4">
+          Contact Us
+        </h1>
+      </section>
+
+      {/* Section 2 – Form + Info Grid */}
+      <section className="py-16 px-4 md:px-12 bg-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Left – Contact Form */}
+          {submitted ? (
+            <p className="thank-you">Thank you! Your message has been sent.</p>
+          ) : (
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
+              <form
+                action="https://formspree.io/f/mwpoyqnk"
+                method="POST"
+                onSubmit={() => setSubmitted(true)}
+                className="space-y-6"
+              >
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full border border-gray-300 rounded px-4 py-3"
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full border border-gray-300 rounded px-4 py-3"
+                />
+                <textarea
+                  placeholder="Your Message"
+                  rows={6}
+                  className="w-full border border-gray-300 rounded px-4 py-3"
+                ></textarea>
+                <button
+                  type="submit"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* Right – Contact Info */}
+          <div className="text-gray-700">
+            <h2 className="text-2xl font-bold mb-6">Clinic Info</h2>
+            <p className="mb-4">
+              <strong>Phone:</strong>
+              <br />
+              +91 98765 43210
+            </p>
+            <p className="mb-4">
+              <strong>Email:</strong>
+              <br />
+              dr.vani@example.com
+            </p>
+            <p className="mb-4">
+              <strong>Address:</strong>
+              <br />
+              #123, Health Street,
+              <br />
+              Bangalore, India - 560001
+            </p>
+
+            {/* Google Maps Embed */}
+            <div className="mt-6 w-full h-64">
+              <iframe
+                title="Clinic Location"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.470657267229!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzE3LjgiTiA3N8KwMzUnNDUuNiJF!5e0!3m2!1sen!2sin!4v1715760000000!5m2!1sen!2sin"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
-}
+};
+
+export default ContactPage;
