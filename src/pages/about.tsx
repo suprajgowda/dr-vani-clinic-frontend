@@ -2,6 +2,7 @@ import React from "react";
 import { GetStaticProps } from "next";
 import { sanityClient, urlFor } from "../lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Image from "next/image";
 
 type AboutProps = {
   section1Title: string;
@@ -30,15 +31,18 @@ const AboutPage = ({
 }: AboutProps) => {
   return (
     <main className="about-page">
-
       {/* Section 1 – Banner */}
       <section className="relative w-full min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] overflow-hidden">
         {section1BannerImage && (
-          <img
-            src={urlFor(section1BannerImage).url()}
-            alt="About Page Banner"
-            className="absolute inset-0 w-full h-full object-cover object-center sm:object-top"
-          />
+          <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh]">
+            <Image
+              src={urlFor(section1BannerImage).url()}
+              alt="About Page Banner"
+              fill
+              priority
+              className="object-cover object-center sm:object-top"
+            />
+          </div>
         )}
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-center text-white px-4 z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
@@ -100,11 +104,14 @@ const AboutPage = ({
                 className="bg-gray-50 rounded-lg shadow-md p-4 flex flex-col items-center text-center hover:shadow-lg transition"
               >
                 {award.awardImage && (
-                  <img
-                    src={urlFor(award.awardImage).width(400).url()}
-                    alt={award.awardTitle}
-                    className="w-full h-48 object-contain mb-4"
-                  />
+                  <div className="relative w-full h-48">
+                    <Image
+                      src={urlFor(award.awardImage).width(400).url()}
+                      alt={award.awardTitle}
+                      fill
+                      className="object-contain mb-4"
+                    />
+                  </div>
                 )}
                 <h3 className="text-lg font-medium text-gray-800">
                   {award.awardTitle}
@@ -127,7 +134,8 @@ export const getStaticProps: GetStaticProps = async () => {
       section1Title: data?.section1Title || "",
       section1BannerImage: data?.section1BannerImage || null,
       aboutDrVanititle: data?.aboutDrVanititle || "",
-      aboutDrVaniCompleteDescription: data?.aboutDrVaniCompleteDescription || "",
+      aboutDrVaniCompleteDescription:
+        data?.aboutDrVaniCompleteDescription || "",
       highlightedFacts: data?.highlightedFacts || [],
       whyDrVaniTitle: data?.whyDrVaniTitle || "",
       whyDrVaniDescription: data?.whyDrVaniDescription || "",

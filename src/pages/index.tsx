@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import { sanityClient, urlFor } from "../lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Head from "next/head";
+import Image from "next/image";
 
 type HomeProps = {
   heroTitle: string;
@@ -54,11 +55,15 @@ export default function Home({
 
       {/* Hero Banner Section */}
       <section className="relative w-full min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] overflow-hidden">
-        <img
-          src={urlFor(heroImage).url()}
-          alt="Clinic Banner"
-          className="absolute inset-0 w-full h-full object-cover object-center sm:object-top"
-        />
+        <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh]">
+          <Image
+            src={urlFor(heroImage).url()}
+            alt="Clinic Banner"
+            fill
+            priority
+            className="object-cover object-center sm:object-top"
+          />
+        </div>
 
         <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center text-white px-4 py-12 sm:py-20 z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
@@ -87,12 +92,13 @@ export default function Home({
               {services.map((service, idx) => (
                 <div
                   key={idx}
-                  className="relative group overflow-hidden rounded-lg shadow-md"
+                  className="relative group overflow-hidden rounded-lg shadow-md h-64"
                 >
-                  <img
+                  <Image
                     src={urlFor(service.serviceImage).width(600).url()}
                     alt={service.serviceText}
-                    className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
+                    fill
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
                   />
 
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-white text-xl font-semibold text-center px-4">
@@ -110,12 +116,15 @@ export default function Home({
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             {/* Image */}
             {sectionImage && (
-              <div>
-                <img
-                  src={urlFor(sectionImage).width(600).url()}
-                  alt="Dr. Vani"
-                  className="rounded-lg shadow-md w-full"
-                />
+              <div className="relative w-full h-auto max-w-lg mx-auto">
+                <div className="relative w-full h-[350px]">
+                  <Image
+                    src={urlFor(sectionImage).width(600).url()}
+                    alt="Dr. Vani"
+                    fill
+                    className="rounded-lg shadow-md object-cover"
+                  />
+                </div>
               </div>
             )}
 
@@ -161,11 +170,14 @@ export default function Home({
                   key={idx}
                   className="bg-gray-50 rounded-lg shadow-md p-4 flex flex-col items-center text-center hover:shadow-lg transition"
                 >
-                  <img
-                    src={urlFor(award.awardImage).width(400).url()}
-                    alt={award.awardTitle}
-                    className="w-full h-48 object-contain mb-4"
-                  />
+                  <div className="relative w-full h-48 mb-4">
+                    <Image
+                      src={urlFor(award.awardImage).width(400).url()}
+                      alt={award.awardTitle}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                   <h3 className="text-lg font-medium text-gray-800">
                     {award.awardTitle}
                   </h3>
@@ -193,11 +205,14 @@ export default function Home({
                   >
                     <div className="flex flex-col items-center text-center">
                       {t.photo ? (
-                        <img
-                          src={urlFor(t.photo).width(100).height(100).url()}
-                          alt={t.name}
-                          className="w-24 h-24 rounded-full mb-4 object-cover"
-                        />
+                        <div className="relative w-24 h-24 mb-4">
+                          <Image
+                            src={urlFor(t.photo).width(100).height(100).url()}
+                            alt={t.name}
+                            fill
+                            className="rounded-full object-cover"
+                          />
+                        </div>
                       ) : (
                         <div className="w-24 h-24 rounded-full bg-gray-300 mb-4" />
                       )}

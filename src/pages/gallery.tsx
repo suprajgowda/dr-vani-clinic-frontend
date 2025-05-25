@@ -3,6 +3,7 @@ import Head from "next/head";
 import { sanityClient, urlFor } from "../lib/sanity";
 import { GetStaticProps } from "next";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Image from "next/image";
 
 type GalleryImage = {
   image: SanityImageSource;
@@ -45,11 +46,14 @@ export default function GalleryPage({
                   key={idx}
                   className="bg-gray-50 rounded-lg shadow-md overflow-hidden"
                 >
-                  <img
-                    src={urlFor(item.image).width(800).url()}
-                    alt={item.title || "Gallery Image"}
-                    className="w-full h-64 object-cover"
-                  />
+                  <div className="relative w-full h-64">
+                    <Image
+                      src={urlFor(item.image).width(800).url()}
+                      alt={item.title || "Gallery Image"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="p-4 text-left">
                     {item.title && (
                       <h3 className="text-lg font-semibold text-gray-800 mb-1">

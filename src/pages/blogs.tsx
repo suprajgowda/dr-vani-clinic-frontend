@@ -4,6 +4,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { sanityClient, urlFor } from "../lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Image from "next/image";
 
 type BlogPost = {
   title: string;
@@ -37,11 +38,14 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
                   key={idx}
                   className="bg-gray-50 rounded-lg shadow-md overflow-hidden"
                 >
-                  <img
-                    src={urlFor(post.coverImage).width(800).url()}
-                    alt={post.title}
-                    className="w-full h-48 object-cover"
-                  />
+                  <div className="relative w-full h-48">
+                    <Image
+                      src={urlFor(post.coverImage).width(800).url()}
+                      alt={post.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="p-4">
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">
                       {post.title}

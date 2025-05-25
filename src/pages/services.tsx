@@ -2,6 +2,7 @@ import React from "react";
 import { GetStaticProps } from "next";
 import { sanityClient, urlFor } from "../lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Image from "next/image";
 
 type Service = {
   title: string;
@@ -44,11 +45,15 @@ const ServicesPage = ({
       {/* Hero Section */}
       <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] text-white text-center">
         {heroBackgroundImage && (
-          <img
-            src={urlFor(heroBackgroundImage).url()}
-            alt="Services Hero"
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          />
+          <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh]">
+            <Image
+              src={urlFor(heroBackgroundImage).url()}
+              alt="Services Hero"
+              fill
+              priority
+              className="object-cover z-0"
+            />
+          </div>
         )}
 
         {/* Full overlay on top of the image */}
@@ -69,11 +74,14 @@ const ServicesPage = ({
               className="relative h-64 rounded-lg overflow-hidden shadow-md group"
             >
               {service.icon && (
-                <img
-                  src={urlFor(service.icon).url()}
-                  alt={service.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={urlFor(service.icon).url()}
+                    alt={service.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               )}
 
               {/* Overlay for darkening background */}

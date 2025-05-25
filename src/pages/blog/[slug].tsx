@@ -1,16 +1,17 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { sanityClient, urlFor } from "../../lib/sanity";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextBlock } from "@portabletext/react";
 import Link from "next/link";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Image from "next/image";
 
 type BlogPost = {
   title: string;
   slug: { current: string };
   publishedAt: string;
   coverImage?: SanityImageSource;
-  body: any;
+  body: PortableTextBlock[];
 };
 
 type RelatedPost = {
@@ -51,11 +52,15 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
 
           {/* Cover Image */}
           {post.coverImage && (
-            <img
-              src={urlFor(post.coverImage).width(800).url()}
-              alt={post.title}
-              className="w-full h-auto rounded-lg mb-8"
-            />
+            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px]">
+              <Image
+                src={urlFor(post.coverImage).width(800).url()}
+                alt={post.title}
+                fill
+                className="rounded-lg object-cover"
+                priority
+              />
+            </div>
           )}
 
           {/* Blog Body */}
@@ -76,11 +81,14 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
                     className="bg-gray-50 rounded-lg shadow-md overflow-hidden"
                   >
                     {item.coverImage && (
-                      <img
-                        src={urlFor(item.coverImage).width(600).url()}
-                        alt={item.title}
-                        className="w-full h-40 object-cover"
-                      />
+                      <div className="relative w-full h-40">
+                        <Image
+                          src={urlFor(item.coverImage).width(600).url()}
+                          alt={item.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     )}
                     <div className="p-4">
                       <h3 className="text-lg font-semibold text-gray-800 mb-2">
