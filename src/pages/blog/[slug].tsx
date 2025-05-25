@@ -45,6 +45,7 @@ type BlogPost = {
   title: string;
   slug: { current: string };
   publishedAt: string;
+  excerpt: string;
   coverImage?: SanityImageSource;
   sections: {
     title: string;
@@ -87,6 +88,9 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
               day: "numeric",
             })}
           </p>
+
+          {/* Short Description */}
+          {post.excerpt && <p className="text-gray-700 mb-6">{post.excerpt}</p>}
 
           {/* Cover Image */}
           {post.coverImage && (
@@ -181,15 +185,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const post = await sanityClient.fetch(
     `*[_type == "blog" && slug.current == $slug][0]{
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    coverImage,
+    sections[]{
       title,
-      slug,
-      publishedAt,
-      coverImage,
-      sections[]{
-        title,
-        content
-      }
-    }`,
+      content
+    }
+  }`,
     { slug }
   );
 
