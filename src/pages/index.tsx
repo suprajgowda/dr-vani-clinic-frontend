@@ -23,6 +23,12 @@ type HomeProps = {
     awardImage: SanityImageSource;
     awardTitle: string;
   }[];
+  testimonials: {
+    name: string;
+    photo: SanityImageSource; // or use SanityImageSource if typed
+    content: string;
+    rating: number;
+  }[];
 };
 
 export default function Home({
@@ -38,7 +44,8 @@ export default function Home({
   awardsSectionTitle,
   awardsSectionDescription,
   sectionAwards,
-}: HomeProps) {
+  testimonials,
+}: HomeProps & { testimonials: never[] }) {
   return (
     <>
       <Head>
@@ -168,12 +175,69 @@ export default function Home({
           </div>
         </section>
       )}
+
+      {testimonials && testimonials.length > 0 && (
+        <section className="bg-gray-100 py-16 px-4 md:px-8">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+              What Patients Say
+            </h2>
+
+            {/* Force scroll container to be constrained and enable scroll */}
+            <div className="overflow-x-auto">
+              <div className="flex gap-6 w-[200%] sm:w-[150%] md:w-[120%] lg:w-auto">
+                {testimonials.map((t, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white rounded-lg shadow-md p-6 my-2 flex-shrink-0 w-[85vw] sm:w-[60vw] md:w-[40vw] lg:w-[30vw] max-w-[90vw]"
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      {t.photo ? (
+                        <img
+                          src={urlFor(t.photo).width(100).height(100).url()}
+                          alt={t.name}
+                          className="w-24 h-24 rounded-full mb-4 object-cover"
+                        />
+                      ) : (
+                        <div className="w-24 h-24 rounded-full bg-gray-300 mb-4" />
+                      )}
+
+                      <p className="text-gray-700 italic mb-4">
+                        `&quot;`{t.content}`&quot;`
+                      </p>
+                      <p className="font-semibold text-gray-800 mb-2">
+                        {t.name}
+                      </p>
+
+                      <div className="text-yellow-500">
+                        {Array.from({ length: t.rating }).map((_, i) => (
+                          <span key={i}>★</span>
+                        ))}
+                        {Array.from({ length: 5 - t.rating }).map((_, i) => (
+                          <span key={i}>☆</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await sanityClient.fetch(`*[_type == "home"][0]`);
+
+  const testimonials = await sanityClient.fetch(`*[_type == "testimonial"]{
+    name,
+    photo,
+    content,
+    rating
+  }`);
 
   return {
     props: {
@@ -189,6 +253,7 @@ export const getStaticProps: GetStaticProps = async () => {
       awardsSectionTitle: data?.awardsSectionTitle || "",
       awardsSectionDescription: data?.awardsSectionDescription || "",
       sectionAwards: data?.sectionAwards || [],
+      testimonials: testimonials || [],
     },
     revalidate: 60,
   };

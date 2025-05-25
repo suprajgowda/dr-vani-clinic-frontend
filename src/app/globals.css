@@ -84,3 +84,12 @@ a.cta-button:hover {
   background-color: #005bb5;
 }
 /* Styles Ending for Home Page */
+
+/* styles/globals.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
