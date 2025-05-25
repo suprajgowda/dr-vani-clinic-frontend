@@ -1,17 +1,55 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import { ReactNode } from "react";
 import Head from "next/head";
-import { sanityClient, urlFor } from "../../lib/sanity";
-import { PortableText, PortableTextBlock } from "@portabletext/react";
 import Link from "next/link";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import {
+  PortableText,
+  PortableTextBlock,
+  PortableTextReactComponents,
+} from "@portabletext/react";
+import { sanityClient, urlFor } from "../../lib/sanity";
+
+const components: Partial<PortableTextReactComponents> = {
+  list: {
+    bullet: ({ children }: { children?: ReactNode }) => (
+      <ul className="list-disc pl-6 mb-4">{children}</ul>
+    ),
+    number: ({ children }: { children?: ReactNode }) => (
+      <ol className="list-decimal pl-6 mb-4">{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }: { children?: ReactNode }) => (
+      <li className="mb-1">{children}</li>
+    ),
+    number: ({ children }: { children?: ReactNode }) => (
+      <li className="mb-1">{children}</li>
+    ),
+  },
+  block: {
+    normal: ({ children }: { children?: ReactNode }) => (
+      <p className="mb-4">{children}</p>
+    ),
+    h2: ({ children }: { children?: ReactNode }) => (
+      <h2 className="text-2xl font-bold mt-8 mb-4">{children}</h2>
+    ),
+    h3: ({ children }: { children?: ReactNode }) => (
+      <h3 className="text-xl font-semibold mt-6 mb-3">{children}</h3>
+    ),
+  },
+};
 
 type BlogPost = {
   title: string;
   slug: { current: string };
   publishedAt: string;
   coverImage?: SanityImageSource;
-  body: PortableTextBlock[];
+  sections: {
+    title: string;
+    content: PortableTextBlock[];
+  }[];
 };
 
 type RelatedPost = {
@@ -52,7 +90,7 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
 
           {/* Cover Image */}
           {post.coverImage && (
-            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px]">
+            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] mb-10">
               <Image
                 src={urlFor(post.coverImage).width(800).url()}
                 alt={post.title}
@@ -63,10 +101,18 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
             </div>
           )}
 
-          {/* Blog Body */}
-          <article className="prose prose-blue max-w-none">
-            <PortableText value={post.body} />
-          </article>
+          {/* Blog Sections */}
+          {post.sections?.map((section, idx) => (
+            <article
+              key={idx}
+              className="prose prose-blue max-w-none mb-12 mt-10"
+            >
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                {section.title}
+              </h2>
+              <PortableText value={section.content} components={components} />
+            </article>
+          ))}
 
           {/* Related Posts */}
           {relatedPosts?.length > 0 && (
@@ -133,15 +179,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
 
-  // Fetch current post
   const post = await sanityClient.fetch(
-    `*[_type == "blog" && slug.current == $slug][0]`,
+    `*[_type == "blog" && slug.current == $slug][0]{
+      title,
+      slug,
+      publishedAt,
+      coverImage,
+      sections[]{
+        title,
+        content
+      }
+    }`,
     { slug }
   );
 
   if (!post) return { notFound: true };
 
-  // Fetch related posts (excluding current)
   const relatedPosts = await sanityClient.fetch(
     `*[_type == "blog" && slug.current != $slug] | order(publishedAt desc)[0...3] {
       title,

@@ -71,14 +71,15 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts =
-    await sanityClient.fetch(`*[_type == "blog"] | order(publishedAt desc){
-    title,
-    slug,
-    publishedAt,
-    excerpt,
-    coverImage
-  }`);
+  const posts = await sanityClient.fetch(`
+    *[_type == "blog"] | order(publishedAt desc){
+      title,
+      slug,
+      publishedAt,
+      excerpt,
+      coverImage
+    }
+  `);
 
   return {
     props: { posts },
