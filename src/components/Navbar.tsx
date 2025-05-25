@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import logo from "../app/logo.jpg";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,8 +50,15 @@ export default function Navbar() {
     <header className="bg-white shadow-md sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
         {/* Logo/Brand */}
-        <Link href="/" className="text-2xl font-bold text-blue-700">
-          Dr. Vani R
+        <Link href="/" className="flex items-center space-x-2">
+          <Image
+            src={logo} // path relative to public
+            alt="Dr. Vani R Logo"
+            width={40}
+            height={40}
+            priority
+          />
+          <span className="sr-only">Dr. Vani R</span>
         </Link>
 
         {/* Desktop Nav Links */}
