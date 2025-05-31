@@ -1,76 +1,72 @@
-import React from "react";
-import Head from "next/head";
-import { sanityClient, urlFor } from "../lib/sanity";
 import { GetStaticProps } from "next";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
+import { sanityClient, urlFor } from "../lib/sanity";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-type GalleryImage = {
-  image: SanityImageSource;
-  title?: string;
-  description?: string;
+type Album = {
+  albumTitle: string;
+  albumDescription?: string;
+  slug: { current: string };
+  photos: SanityImageSource[];
 };
 
-type GalleryPageProps = {
-  galleryTitle: string;
-  galleryDescription: string;
-  images: GalleryImage[];
+type GalleryProps = {
+  albums: Album[];
 };
 
-export default function GalleryPage({
-  galleryTitle,
-  galleryDescription,
-  images,
-}: GalleryPageProps) {
+export default function Gallery({ albums }: GalleryProps) {
   return (
     <>
       <Head>
-        <title>{galleryTitle || "Gallery"} | Dr. Vani R</title>
+        <title>Gallery | Dr. Vani R</title>
+        <meta
+          name="description"
+          content="Explore precious moments captured in our gallery – real families, happy smiles, and memorable experiences."
+        />
       </Head>
 
       <section className="bg-white py-16 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            {galleryTitle || "Gallery"}
-          </h1>
-          {galleryDescription && (
-            <p className="text-gray-600 max-w-2xl mx-auto mb-10">
-              {galleryDescription}
-            </p>
-          )}
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-3xl font-bold text-center text-gray-800 mb-10">
+            Gallery - Real Stories, Expert Care, and Remarkable Moments with Dr.
+            Vani R
+          </h3>
 
-          {images?.length > 0 ? (
+          {albums.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {images.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="bg-gray-50 rounded-lg shadow-md overflow-hidden"
-                >
-                  <div className="relative w-full h-64">
-                    <Image
-                      src={urlFor(item.image).width(800).url()}
-                      alt={item.title || "Gallery Image"}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-4 text-left">
-                    {item.title && (
-                      <h3 className="text-lg font-semibold text-gray-800 mb-1">
-                        {item.title}
-                      </h3>
-                    )}
-                    {item.description && (
-                      <p className="text-gray-600 text-sm">
-                        {item.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
+              {albums.map((album, idx) =>
+                album.slug?.current && album.photos?.length > 0 ? (
+                  <Link
+                    key={idx}
+                    href={`/gallery/${album.slug.current}`}
+                    className="block cursor-pointer bg-gray-100 rounded-lg overflow-hidden shadow hover:shadow-lg transition"
+                  >
+                    <div className="relative w-full h-56">
+                      <Image
+                        src={urlFor(album.photos[0]).width(800).url()}
+                        alt={album.albumTitle || "Gallery Album"}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h2 className="text-lg font-semibold text-gray-800">
+                        {album.albumTitle}
+                      </h2>
+                      {album.albumDescription && (
+                        <p className="text-sm text-gray-600 mt-1">
+                          {album.albumDescription}
+                        </p>
+                      )}
+                    </div>
+                  </Link>
+                ) : null
+              )}
             </div>
           ) : (
-            <p className="text-gray-500">No images found in the gallery.</p>
+            <p className="text-center text-gray-600">No albums available.</p>
           )}
         </div>
       </section>
@@ -79,22 +75,22 @@ export default function GalleryPage({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await sanityClient.fetch(`*[_type == "gallery"][0]{
-    title,
-    description,
-    images[]{
-      image,
-      title,
-      description
+  // Fetch the first (and only) gallery document, grabbing its albums array
+  const galleryData = await sanityClient.fetch(`
+    *[_type == "gallery"][0] {
+      albums[]{
+        albumTitle,
+        albumDescription,
+        slug,
+        photos
+      }
     }
-  }`);
+  `);
 
   return {
     props: {
-      galleryTitle: data?.title || "Gallery",
-      galleryDescription: data?.description || "",
-      images: data?.images || [],
+      albums: galleryData?.albums || [],
     },
-    revalidate: 60, // ISR (optional)
+    revalidate: 60, // Rebuild page at most once per minute if data changes
   };
 };

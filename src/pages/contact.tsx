@@ -63,7 +63,7 @@ const ContactPage = () => {
             <p className="mb-4">
               <strong>Phone:</strong>
               <br />
-              +91 98765 43210
+              +91 95914 93575
             </p>
             <p className="mb-4">
               <strong>Email:</strong>
@@ -73,22 +73,21 @@ const ContactPage = () => {
             <p className="mb-4">
               <strong>Address:</strong>
               <br />
-              #123, Health Street,
-              <br />
-              Bangalore, India - 560001
+              04/1, Bull Temple Rd, NR Colony, Basavanagudi, Bengaluru,
+              Karnataka 560050
             </p>
 
             {/* Google Maps Embed */}
             <div className="mt-6 w-full h-64">
               <iframe
                 title="Clinic Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5345179630567!2d77.5666224!3d12.9376116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae158be206d233%3A0x4bcd1e0d78b8312!2sBalaji%20Gynaecology%20%26%20Infertility%20Centre!5e0!3m2!1sen!2sin!4v1748680686053!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
-                loading="lazy"
                 allowFullScreen
+                loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.470657267229!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzE3LjgiTiA3N8KwMzUnNDUuNiJF!5e0!3m2!1sen!2sin!4v1715760000000!5m2!1sen!2sin"
               ></iframe>
             </div>
           </div>
