@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import logo from "../app/logo.jpg";
+import logo from "../app/logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

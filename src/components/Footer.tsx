@@ -35,11 +35,10 @@ export default function Footer() {
         <div>
           <h4 className="text-lg font-semibold mb-4">Clinic Info</h4>
           <p className="mb-2">
-            #123, Health Street,
-            <br />
-            Bangalore, India - 560001
+            04/1, Bull Temple Rd, NR Colony, Basavanagudi, Bengaluru, Karnataka
+            560050
           </p>
-          <p>📞 +91 9999999999</p>
+          <p>📞 +91 95914 93575 | 080 26616000</p>
         </div>
 
         {/* Social Media Icons */}
@@ -75,7 +74,8 @@ export default function Footer() {
       </div>
 
       <div className="text-center text-sm text-gray-500 mt-10">
-        © {new Date().getFullYear()} Dr. Vani’s Clinic. All rights reserved.
+        © {new Date().getFullYear()} Dr. Vani&lsquo;s Clinic. All rights
+        reserved.
       </div>
     </footer>
   );
