@@ -27,29 +27,106 @@ const ContactPage = () => {
             <div>
               <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
               <form
-                action="https://formspree.io/f/mwpoyqnk"
-                method="POST"
-                onSubmit={() => setSubmitted(true)}
-                className="space-y-6"
+                className="space-y-6 bg-white p-6 rounded-lg shadow-md"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const form = e.currentTarget;
+                  console.log("The Contact Us Form---->", form);
+
+                  const formData = {
+                    name: form.name.value,
+                    email: form.email.value,
+                    message: form.message.value,
+                    phone: form.phone.value,
+                    preferredDate: form.preferredDate.value,
+                  };
+                  console.log("The Form Data---->", formData);
+
+                  const res = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                  });
+
+                  console.log("The Response from the contact api----->", res);
+
+                  if (res.ok) setSubmitted(true);
+                }}
               >
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full border border-gray-300 rounded px-4 py-3"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full border border-gray-300 rounded px-4 py-3"
-                />
-                <textarea
-                  placeholder="Your Message"
-                  rows={6}
-                  className="w-full border border-gray-300 rounded px-4 py-3"
-                ></textarea>
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    className="w-full border border-gray-300 rounded px-4 py-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    className="w-full border border-gray-300 rounded px-4 py-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Phone
+                  </label>
+                  <input
+                    type="text"
+                    name="phone"
+                    required
+                    className="w-full border border-gray-300 rounded px-4 py-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="preferredDate"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Preferred Appointment Date
+                  </label>
+                  <input
+                    type="date"
+                    name="preferredDate"
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                    className="w-full border border-gray-300 rounded px-4 py-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={5}
+                    required
+                    className="w-full border border-gray-300 rounded px-4 py-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
                 <button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded"
+                  className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded hover:bg-blue-700 transition"
                 >
                   Send Message
                 </button>
