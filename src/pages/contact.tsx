@@ -1,8 +1,40 @@
 import React, { useState } from "react";
 import Head from "next/head";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    if (!executeRecaptcha) {
+      console.warn("reCAPTCHA not loaded yet");
+      return;
+    }
+
+    const token = await executeRecaptcha("contact_form");
+    const data = new FormData(form);
+
+    const formData = {
+      name: data.get("name")?.toString() || "",
+      email: data.get("email")?.toString() || "",
+      phone: data.get("phone")?.toString() || "",
+      preferredDate: data.get("preferredDate")?.toString() || "",
+      message: data.get("message")?.toString() || "",
+      recaptchaToken: token,
+    };
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) setSubmitted(true);
+  };
 
   return (
     <>
@@ -28,30 +60,7 @@ const ContactPage = () => {
               <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
               <form
                 className="space-y-6 bg-white p-6 rounded-lg shadow-md"
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const form = e.currentTarget;
-                  console.log("The Contact Us Form---->", form);
-
-                  const formData = {
-                    name: form.name.value,
-                    email: form.email.value,
-                    message: form.message.value,
-                    phone: form.phone.value,
-                    preferredDate: form.preferredDate.value,
-                  };
-                  console.log("The Form Data---->", formData);
-
-                  const res = await fetch("/api/contact", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(formData),
-                  });
-
-                  console.log("The Response from the contact api----->", res);
-
-                  if (res.ok) setSubmitted(true);
-                }}
+                onSubmit={handleSubmit}
               >
                 <div>
                   <label
