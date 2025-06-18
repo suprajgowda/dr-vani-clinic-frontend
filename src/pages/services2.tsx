@@ -104,8 +104,8 @@ const Services = () => {
               className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg hover:-translate-y-2"
             >
               <CardContent className="p-8">
-                <div className="bg-blue-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <service.icon className="h-8 w-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="bg-pink-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-pink-600 transition-colors duration-300">
+                  <service.icon className="h-8 w-8 text-pink-600 group-hover:text-white transition-colors duration-300" />
                 </div>
 
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -119,7 +119,7 @@ const Services = () => {
                       key={idx}
                       className="flex items-center text-sm text-gray-600"
                     >
-                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-pink-600 rounded-full mr-3"></div>
                       {feature}
                     </li>
                   ))}
@@ -130,16 +130,16 @@ const Services = () => {
         </div>
 
         <div className="text-center mt-12">
-          <div className="bg-blue-600 text-white rounded-2xl p-8 md:p-12">
+          <div className="bg-pink-600 text-white rounded-2xl p-8 md:p-12">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               Ready to Start Your Journey?
             </h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-pink-100 mb-6 max-w-2xl mx-auto">
               Schedule your first consultation today and let our expert team
               guide you through every step of your pregnancy with personalized
               care and support.
             </p>
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors duration-200">
+            <button className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors duration-200">
               Schedule Consultation
             </button>
           </div>

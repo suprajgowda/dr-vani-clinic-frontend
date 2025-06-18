@@ -55,9 +55,9 @@ const About = () => {
               {achievements.map((achievement, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center"
+                  className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl p-6 text-center"
                 >
-                  <div className="bg-blue-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <div className="bg-pink-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
                     <achievement.icon className="h-6 w-6 text-white" />
                   </div>
                   <div className="text-3xl font-bold text-gray-900 mb-2">
@@ -70,7 +70,7 @@ const About = () => {
               ))}
             </div>
 
-            <div className="bg-gradient-to-r from-pink-50 to-blue-50 rounded-2xl p-8">
+            <div className="bg-gradient-to-r from-pink-50 to-pink-50 rounded-2xl p-8">
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 Our Mission
               </h3>
@@ -82,7 +82,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="bg-white border-2 border-blue-100 rounded-2xl p-8">
+            <div className="bg-white border-2 border-pink-100 rounded-2xl p-8">
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 Patient Testimonial
               </h3>
@@ -92,7 +92,7 @@ const About = () => {
                 my entire pregnancy. I couldn&lsquo;t have asked for better
                 support.&quot;
               </p>
-              <div className="text-sm font-semibold text-blue-600">
+              <div className="text-sm font-semibold text-pink-600">
                 — Sarah Johnson, New Mom
               </div>
             </div>

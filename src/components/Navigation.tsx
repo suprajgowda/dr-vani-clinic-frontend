@@ -18,9 +18,9 @@ const Navigation = () => {
   return (
     <nav className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       {/* Top bar */}
-      <div className="bg-blue-50 py-2">
+      <div className="bg-pink-50 py-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center text-sm text-blue-600">
+          <div className="flex justify-between items-center text-sm text-pink-600">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-1">
                 <Phone className="h-4 w-4" />
@@ -51,7 +51,7 @@ const Navigation = () => {
                   height={40}
                   priority
                 />
-                <h1 className="text-2xl font-bold text-blue-600">Dr. Vani R</h1>
+                <h1 className="text-2xl font-bold text-pink-600">Dr. Vani R</h1>
               </Link>
             </div>
           </div>
@@ -69,7 +69,7 @@ const Navigation = () => {
                 // </a>
                 <Link
                   key={index}
-                  className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                  className="text-gray-700 hover:text-pink-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
                   href={item.href}
                 >
                   {item.name}
@@ -79,7 +79,7 @@ const Navigation = () => {
           </div>
 
           <div className="hidden md:block">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+            <Button className="bg-pink-600 hover:bg-pink-700 text-white">
               Book Appointment
             </Button>
           </div>
@@ -88,7 +88,7 @@ const Navigation = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none"
+              className="text-gray-700 hover:text-pink-600 focus:outline-none"
             >
               {isOpen ? (
                 <X className="h-6 w-6" />
@@ -108,13 +108,13 @@ const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium"
+                className="text-gray-700 hover:text-pink-600 block px-3 py-2 text-base font-medium"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
               </a>
             ))}
-            <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white">
+            <Button className="w-full mt-4 bg-pink-600 hover:bg-pink-700 text-white">
               Book Appointment
             </Button>
           </div>

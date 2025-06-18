@@ -51,8 +51,8 @@ const Contact = () => {
               >
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
-                    <div className="bg-blue-100 w-12 h-12 rounded-xl flex items-center justify-center">
-                      <info.icon className="h-6 w-6 text-blue-600" />
+                    <div className="bg-pink-100 w-12 h-12 rounded-xl flex items-center justify-center">
+                      <info.icon className="h-6 w-6 text-pink-600" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">
@@ -138,7 +138,7 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3">
+                  <Button className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3">
                     Schedule Consultation
                   </Button>
                 </form>
@@ -147,11 +147,11 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="mt-16 bg-blue-600 rounded-2xl p-8 md:p-12 text-center text-white">
+        <div className="mt-16 bg-pink-500 rounded-2xl p-8 md:p-12 text-center text-white">
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
             Emergency Contact
           </h3>
-          <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+          <p className="text-pink-100 mb-6 max-w-2xl mx-auto">
             For urgent pregnancy-related concerns or emergencies, please
             don&apos;t hesitate to contact our 24/7 emergency hotline. Our
             medical team is always ready to help.
@@ -160,14 +160,14 @@ const Contact = () => {
             <Button
               variant="secondary"
               size="lg"
-              className="bg-white text-blue-600 hover:bg-gray-50"
+              className="bg-white text-pink-400 hover:text-pink-600"
             >
               Call Emergency Line
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-blue-600 hover:text-blue-600"
+              className="border-white text-pink-400 hover:text-pink-600"
             >
               Chat with Nurse
             </Button>

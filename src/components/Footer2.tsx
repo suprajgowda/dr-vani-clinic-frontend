@@ -1,5 +1,4 @@
 import {
-  Heart,
   MapPin,
   Phone,
   Mail,
@@ -51,17 +50,17 @@ const Footer2 = () => {
 
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <MapPin className="h-5 w-5 text-blue-400" />
+                <MapPin className="h-5 w-5 text-pink-400" />
                 <span className="text-gray-300">
                   123 Medical Center Drive, City 12345
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-blue-400" />
+                <Phone className="h-5 w-5 text-pink-400" />
                 <span className="text-gray-300">+1 (555) 123-4567</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-blue-400" />
+                <Mail className="h-5 w-5 text-pink-400" />
                 <span className="text-gray-300">info@medicora.com</span>
               </div>
             </div>
@@ -75,7 +74,7 @@ const Footer2 = () => {
                 <li key={index}>
                   <a
                     href="#"
-                    className="text-gray-300 hover:text-blue-400 transition-colors duration-200"
+                    className="text-gray-300 hover:text-pink-400 transition-colors duration-200"
                   >
                     {link}
                   </a>
@@ -92,7 +91,7 @@ const Footer2 = () => {
                 <li key={index}>
                   <a
                     href="#"
-                    className="text-gray-300 hover:text-blue-400 transition-colors duration-200"
+                    className="text-gray-300 hover:text-pink-400 transition-colors duration-200"
                   >
                     {service}
                   </a>
@@ -112,9 +111,9 @@ const Footer2 = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                  className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg text-white placeholder-gray-400 focus:outline-none focus:border-pink-400"
                 />
-                <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-r-lg transition-colors duration-200">
+                <button className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-r-lg transition-colors duration-200">
                   Subscribe
                 </button>
               </div>
@@ -125,7 +124,7 @@ const Footer2 = () => {
                     key={index}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors duration-200"
+                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-colors duration-200"
                   >
                     <social.icon className="h-5 w-5" />
                   </a>
@@ -139,14 +138,14 @@ const Footer2 = () => {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-300 text-sm mb-4 md:mb-0">
-              © 2024 Medicora. All rights reserved. | Privacy Policy | Terms of
-              Service
+              © {new Date().getFullYear()} Dr. Vani&lsquo;s Clinic. All rights
+              reserved. | Privacy Policy | Terms of Service
             </div>
-            <div className="flex items-center space-x-2 text-gray-300 text-sm">
+            {/* <div className="flex items-center space-x-2 text-gray-300 text-sm">
               <span>Made with</span>
               <Heart className="h-4 w-4 text-red-500" />
               <span>for expectant mothers</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
