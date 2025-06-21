@@ -49,15 +49,15 @@ const About = ({
   return (
     <>
       {/* Section 1 – Banner */}
-      <section className="relative w-full min-h-[60vh] sm:min-h-[60vh] md:min-h-[70vh] overflow-hidden">
+      <section className="relative w-full min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] overflow-hidden">
         {section1BannerImage && (
-          <div className="relative w-full h-[60vh] sm:h-[60vh] md:h-[70vh]">
+          <div className="absolute inset-0 z-0">
             <Image
               src={urlFor(section1BannerImage).url()}
               alt="About Page Banner"
               fill
               priority
-              className="object-cover object-bottom sm:object-top"
+              className="object-cover object-center"
             />
           </div>
         )}

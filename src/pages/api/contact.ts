@@ -8,11 +8,22 @@ export default async function handler(
 ) {
   if (req.method !== "POST") return res.status(405).end();
 
-  const { name, email, message, phone, preferredDate, recaptchaToken } =
-    req.body;
+  // const { name, email, message, phone, preferredDate, recaptchaToken } = req.body;
+
+  const {
+    firstName,
+    lastName,
+    email,
+    message,
+    phone,
+    preferredDate,
+    recaptchaToken,
+  } = req.body;
+  const fullName = `${firstName} ${lastName}`.trim();
+
   console.log("The Request body inside contact api file---->", req.body);
 
-  if (!name || !email || !message || !phone || !preferredDate) {
+  if (!fullName || !email || !message || !phone || !preferredDate) {
     return res.status(400).json({ error: "Missing fields" });
   }
 
@@ -34,7 +45,7 @@ export default async function handler(
 
   const { error } = await supabase.from("contact_submissions").insert([
     {
-      name,
+      name: fullName,
       email,
       message,
       phone,
