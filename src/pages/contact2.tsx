@@ -9,17 +9,20 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Our Clinic",
-      details: ["123 Medical Center Drive", "Healthcare District, City 12345"],
+      details: [
+        "04/1, Bull Temple Rd, NR Colony",
+        "Basavanagudi, Bengaluru, Karnataka 560050",
+      ],
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+1 (555) 123-4567", "Emergency: +1 (555) 911-HELP"],
+      details: ["95914 93575", "080 26616000"],
     },
     {
       icon: Mail,
       title: "Email Us",
-      details: ["info@medicora.com", "appointments@medicora.com"],
+      details: ["info@dr_vani.com", "appointments@dr_vani.com"],
     },
     {
       icon: Clock,
@@ -147,7 +150,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="mt-16 bg-pink-500 rounded-2xl p-8 md:p-12 text-center text-white">
+        <div className="mt-16 bg-pink-700 rounded-2xl p-8 md:p-12 text-center text-white">
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
             Emergency Contact
           </h3>

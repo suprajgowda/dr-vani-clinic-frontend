@@ -149,7 +149,7 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
                       </p>
                       <Link
                         href={`/blog/${item.slug.current}`}
-                        className="text-blue-600 text-sm hover:underline font-medium"
+                        className="text-pink-600 text-sm hover:underline font-medium"
                       >
                         Read more →
                       </Link>

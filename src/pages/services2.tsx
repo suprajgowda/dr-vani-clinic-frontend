@@ -7,6 +7,7 @@ import {
   Shield,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 
 const Services = () => {
   const services = [
@@ -139,9 +140,12 @@ const Services = () => {
               guide you through every step of your pregnancy with personalized
               care and support.
             </p>
-            <button className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors duration-200">
+            <Link
+              href="/contact2"
+              className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors duration-200"
+            >
               Schedule Consultation
-            </button>
+            </Link>
           </div>
         </div>
       </div>

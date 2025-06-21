@@ -35,7 +35,7 @@ export default function AlbumPage({ album }: AlbumPageProps) {
         <div className="max-w-5xl mx-auto">
           <Link
             href="/gallery"
-            className="text-blue-600 hover:underline mb-6 inline-block"
+            className="text-pink-600 hover:underline mb-6 inline-block"
           >
             ← All Albums
           </Link>

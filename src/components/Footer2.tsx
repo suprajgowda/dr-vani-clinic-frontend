@@ -41,7 +41,7 @@ const Footer2 = () => {
           {/* Company Info */}
           <div className="space-y-6">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">Medicora</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Dr Vani</h3>
               <p className="text-gray-300 leading-relaxed">
                 Providing exceptional pregnancy care with compassion and
                 expertise. Your trusted partner in the journey to motherhood.
@@ -52,16 +52,19 @@ const Footer2 = () => {
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-pink-400" />
                 <span className="text-gray-300">
-                  123 Medical Center Drive, City 12345
+                  04/1, Bull Temple Rd, NR Colony, Basavanagudi, Bengaluru,
+                  Karnataka 560050
                 </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-pink-400" />
-                <span className="text-gray-300">+1 (555) 123-4567</span>
+                <span className="text-gray-300">
+                  +91 95914 93575 | 080 26616000
+                </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-pink-400" />
-                <span className="text-gray-300">info@medicora.com</span>
+                <span className="text-gray-300">info@Dr Vani.com</span>
               </div>
             </div>
           </div>
@@ -104,10 +107,10 @@ const Footer2 = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Stay Connected</h4>
             <p className="text-gray-300 mb-4">
-              Subscribe to our newsletter for pregnancy tips and health updates.
+              Subscribe to our channels for pregnancy tips and health updates.
             </p>
             <div className="space-y-4">
-              <div className="flex">
+              {/* <div className="flex">
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -116,7 +119,7 @@ const Footer2 = () => {
                 <button className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-r-lg transition-colors duration-200">
                   Subscribe
                 </button>
-              </div>
+              </div> */}
 
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
@@ -141,11 +144,6 @@ const Footer2 = () => {
               © {new Date().getFullYear()} Dr. Vani&lsquo;s Clinic. All rights
               reserved. | Privacy Policy | Terms of Service
             </div>
-            {/* <div className="flex items-center space-x-2 text-gray-300 text-sm">
-              <span>Made with</span>
-              <Heart className="h-4 w-4 text-red-500" />
-              <span>for expectant mothers</span>
-            </div> */}
           </div>
         </div>
       </div>

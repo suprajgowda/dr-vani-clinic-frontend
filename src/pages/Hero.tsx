@@ -1,5 +1,7 @@
 import { ArrowRight, Heart, Shield, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -24,20 +26,26 @@ const Hero = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                className="bg-pink-600 hover:bg-pink-700 text-white group"
-              >
-                Book Consultation
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-pink-600 text-pink-600 hover:bg-pink-50"
-              >
-                Learn More
-              </Button>
+              <Link href="/contact2" style={{ cursor: "pointer" }}>
+                <Button
+                  size="lg"
+                  style={{ cursor: "pointer" }}
+                  className="bg-pink-600 hover:bg-pink-700 text-white group"
+                >
+                  Book Consultation
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              <Link href="/services2" style={{ cursor: "pointer" }}>
+                <Button
+                  size="lg"
+                  style={{ cursor: "pointer" }}
+                  variant="outline"
+                  className="border-pink-600 text-pink-600 hover:bg-pink-50"
+                >
+                  Learn More
+                </Button>
+              </Link>
             </div>
 
             <div className="grid grid-cols-3 gap-8 pt-8">
@@ -56,11 +64,11 @@ const Hero = () => {
                 <div className="text-sm text-gray-600">Years Experience</div>
               </div>
               <div className="text-center">
-                <div className="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                {/* <div className="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Users className="h-8 w-8 text-pink-600" />
                 </div>
                 <div className="text-2xl font-bold text-gray-900">50+</div>
-                <div className="text-sm text-gray-600">Expert Doctors</div>
+                <div className="text-sm text-gray-600">Expert Doctors</div> */}
               </div>
             </div>
           </div>
@@ -68,10 +76,14 @@ const Hero = () => {
           <div className="relative">
             <div className="relative bg-gradient-to-br from-pink-100 to-pink-50 rounded-3xl p-8 overflow-hidden">
               <div className="aspect-square bg-white rounded-2xl shadow-2xl flex items-center justify-center">
-                <img
-                  src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=800&q=80"
-                  alt="Pregnant woman"
-                  className="w-full h-full object-cover rounded-2xl"
+                <Image
+                  src={
+                    "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=800&q=80"
+                  }
+                  alt="Clinic Banner"
+                  fill
+                  priority
+                  className="object-cover object-center sm:object-top"
                 />
               </div>
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-pink-200 rounded-full opacity-60"></div>

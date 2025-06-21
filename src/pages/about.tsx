@@ -1,6 +1,6 @@
 import React from "react";
 import { GetStaticProps } from "next";
-import { sanityClient, urlFor } from "../lib/sanity";
+import { sanityClient, urlFor } from "@/lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 

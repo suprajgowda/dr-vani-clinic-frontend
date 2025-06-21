@@ -11,7 +11,9 @@ const Navigation = () => {
   const navItems = [
     { name: "Home", href: "/Hero" },
     { name: "Services", href: "/services2" },
+    { name: "Blogs", href: "/blogs" },
     { name: "About", href: "/about2" },
+    { name: "Gallery", href: "/gallery" },
     { name: "Contact", href: "/contact2" },
   ];
 
@@ -28,7 +30,7 @@ const Navigation = () => {
               </div>
               <div className="flex items-center space-x-1">
                 <Mail className="h-4 w-4" />
-                <span>info@medicora.com</span>
+                <span>info@Dr Vani.com</span>
               </div>
             </div>
             <div className="hidden md:block">
@@ -60,13 +62,6 @@ const Navigation = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item, index) => (
-                // <a
-                //   key={item.name}
-                //   href={item.href}
-                //   className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
-                // >
-                //   {item.name}
-                // </a>
                 <Link
                   key={index}
                   className="text-gray-700 hover:text-pink-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
@@ -79,9 +74,13 @@ const Navigation = () => {
           </div>
 
           <div className="hidden md:block">
-            <Button className="bg-pink-600 hover:bg-pink-700 text-white">
+            <Link
+              href="/contact2"
+              className="bg-pink-600 hover:bg-pink-700 text-white py-2 px-4"
+              style={{ borderRadius: "5px" }}
+            >
               Book Appointment
-            </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
