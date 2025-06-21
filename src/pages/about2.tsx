@@ -18,18 +18,7 @@ type AboutProps = {
   awards: { awardImage: SanityImageSource; awardTitle: string }[];
 };
 
-const About = ({
-  section1Title,
-  section1BannerImage,
-  aboutDrVanititle,
-  aboutDrVaniCompleteDescription,
-  highlightedFacts,
-  whyDrVaniTitle,
-  whyDrVaniDescription,
-  awardsSectionTitle,
-  awardsSectionDescription,
-  awards,
-}: AboutProps) => {
+const About = ({ section1Title, section1BannerImage }: AboutProps) => {
   const achievements = [
     { icon: Users, number: "5000+", label: "Successful Deliveries" },
     { icon: Award, number: "15+", label: "Years of Excellence" },

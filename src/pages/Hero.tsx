@@ -38,18 +38,7 @@ type HomeProps = {
 const Hero = ({
   heroTitle,
   heroSubtitle,
-  ctaText,
-  ctaLink,
   heroImage,
-  services,
-  sectionImage,
-  sectionTitle,
-  sectionDescription,
-  sectionAchievements,
-  awardsSectionTitle,
-  awardsSectionDescription,
-  sectionAwards,
-  testimonials,
 }: HomeProps & { testimonials: never[] }) => {
   return (
     <>
