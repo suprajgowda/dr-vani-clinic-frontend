@@ -35,36 +35,46 @@ const contactInfo = [
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
+    setLoading(true);
 
     if (!executeRecaptcha) {
       console.warn("reCAPTCHA not loaded yet");
+      setLoading(false);
       return;
     }
 
-    const token = await executeRecaptcha("contact_form");
-    const data = new FormData(form);
+    try {
+      const token = await executeRecaptcha("contact_form");
+      const data = new FormData(form);
 
-    const formData = {
-      name: data.get("name")?.toString() || "",
-      email: data.get("email")?.toString() || "",
-      phone: data.get("phone")?.toString() || "",
-      preferredDate: data.get("preferredDate")?.toString() || "",
-      message: data.get("message")?.toString() || "",
-      recaptchaToken: token,
-    };
+      const formData = {
+        firstName: data.get("firstName")?.toString() || "",
+        lastName: data.get("lastName")?.toString() || "",
+        email: data.get("email")?.toString() || "",
+        phone: data.get("phone")?.toString() || "",
+        preferredDate: data.get("preferredDate")?.toString() || "",
+        message: data.get("message")?.toString() || "",
+        recaptchaToken: token,
+      };
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    if (res.ok) setSubmitted(true);
+      if (res.ok) setSubmitted(true);
+      setLoading(false);
+    } catch (error) {
+      console.error("There is an error while executing form submit--->", error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -123,6 +133,8 @@ const Contact = () => {
                     <p className="thank-you">
                       Thank you! Your message has been sent.
                     </p>
+                  ) : loading ? (
+                    <p className="thank-you">Loading....</p>
                   ) : (
                     <form className="space-y-6" onSubmit={handleSubmit}>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
