@@ -26,7 +26,7 @@ export default function NavBar2() {
         {/* Desktop Nav Links */}
         <div className="hidden items-center md:flex space-x-8 text-gray-700 font-medium">
           <Link href="/">Home</Link>
-          <Link href="/services">Services</Link>
+          <Link href="/services2">Services</Link>
           <Link href="/blogs">Blogs</Link>
           <Link href="/gallery">Gallery</Link>
           <Link href="/about">About</Link>
@@ -83,7 +83,7 @@ export default function NavBar2() {
             <Link href="/" onClick={() => setIsOpen(false)}>
               Home
             </Link>
-            <Link href="/services" onClick={() => setIsOpen(false)}>
+            <Link href="/services2" onClick={() => setIsOpen(false)}>
               Services
             </Link>
             <Link href="/blogs" onClick={() => setIsOpen(false)}>

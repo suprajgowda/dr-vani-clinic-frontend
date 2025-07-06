@@ -92,7 +92,7 @@ export default function Home({
                 {testimonials.map((t, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#F3F3F7] mb-4 p-4 rounded-md flex-shrink-0 w-[75vw] sm:w-[50vw] md:w-[30vw] lg:w-[15vw] max-w-[75vw]"
+                    className="bg-[#F3F3F7] mb-4 p-4 rounded-md flex-shrink-0 w-[75vw] sm:w-[50vw] md:w-[30vw] lg:w-[20vw] max-w-[75vw]"
                   >
                     {/*-- Top 70%: Review Text --*/}
                     <div className="p-4 h-[65%]">
