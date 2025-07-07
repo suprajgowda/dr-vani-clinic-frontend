@@ -2,7 +2,9 @@ import React from "react";
 import { GetStaticProps } from "next";
 import { sanityClient, urlFor } from "../lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
+import HeroImage from "../app/hero_image.jpg";
+import { FaStar } from "react-icons/fa";
 
 type AboutProps = {
   section1Title: string;
@@ -18,8 +20,8 @@ type AboutProps = {
 };
 
 const AboutPage = ({
-  section1Title,
-  section1BannerImage,
+  // section1Title,
+  // section1BannerImage,
   aboutDrVanititle,
   aboutDrVaniCompleteDescription,
   highlightedFacts,
@@ -31,25 +33,7 @@ const AboutPage = ({
 }: AboutProps) => {
   return (
     <main className="about-page">
-      {/* Section 1 – Banner */}
-      <section className="relative w-full min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] overflow-hidden">
-        {section1BannerImage && (
-          <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh]">
-            <Image
-              src={urlFor(section1BannerImage).url()}
-              alt="About Page Banner"
-              fill
-              priority
-              className="object-cover object-center sm:object-top"
-            />
-          </div>
-        )}
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-center text-white px-4 z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            {section1Title}
-          </h1>
-        </div>
-      </section>
+      <HomeBanner3 heroImage={HeroImage} />
 
       {/* Section 2 – About Dr. Vani */}
       <section className="bg-gray-50 py-12 px-4 md:px-8">
@@ -124,6 +108,53 @@ const AboutPage = ({
     </main>
   );
 };
+
+function HomeBanner3({ heroImage }: { heroImage: StaticImageData }) {
+  const imageUrl = (heroImage as StaticImageData).src;
+  return (
+    <section className="flex flex-col md:flex-row w-full min-h-[80vh]">
+      {/* Left Section – Text */}
+      <div className="w-full md:w-3/5 bg-white flex items-center justify-center px-6 py-12">
+        <div className="w-full max-w-xl text-left">
+          <h3 className="text-sm text-[#ED9282] mb-2">Meet Dr Vani R</h3>
+          <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">
+            Expert Gynecological Care
+          </h1>
+          <h2 className="text-lg text-gray-700 mb-6">
+            Compassionate. Trusted. Experienced.
+          </h2>
+          <button className="bg-[#ED9282] text-white px-6 py-3 rounded-full hover:bg-[#e28172] transition">
+            How can we help
+          </button>
+
+          <div className="flex mt-6">
+            {[...Array(5)].map((_, i) => (
+              <FaStar className="text-[#f9ca53] mx-0.5" key={i} />
+            ))}
+          </div>
+          <h6 className="mt-1">
+            from 1,250+ <span className="underline">reviews</span>
+          </h6>
+        </div>
+      </div>
+
+      {/* Right Section – Image */}
+      <div
+        className="w-full md:w-2/5 bg-[#f3f3f7] flex justify-center md:justify-start items-center px-0 py-10 md:py-0"
+        style={{ borderRadius: "0px 0px 0px 50px" }}
+      >
+        <div className="w-full max-w-md h-auto aspect-[4/5] md:aspect-auto md:h-full md:pl-0">
+          <div
+            className="w-full h-full bg-contain bg-no-repeat bg-center md:bg-left"
+            style={{
+              backgroundImage: `url(${imageUrl})`,
+            }}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   const query = `*[_type == "about"][0]`;

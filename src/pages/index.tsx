@@ -13,6 +13,7 @@ import Ultrasound from "../app/ultrasound.svg";
 import GeneticTesting from "../app/genetic-testing.svg";
 import FertilityServices from "../app/fertility-services.svg";
 import Vaccinations from "../app/vaccinations.svg";
+import HeroCarousel from "./HeroCarousel";
 
 const faqContent = [
   {
@@ -58,7 +59,7 @@ type HomeProps = {
   }[];
   testimonials: {
     name: string;
-    photo: SanityImageSource; // or use SanityImageSource if typed
+    photo: SanityImageSource;
     content: string;
     rating: number;
   }[];
@@ -75,6 +76,7 @@ export default function Home({
         <title>Dr. Vani R | Gynecologist in Bangalore</title>
       </Head>
 
+      <HeroCarousel />
       <HomeBanner3 heroImage={heroImage} />
       <HomeSectionTwo services={services} />
       <ServicesSplitSection />
@@ -121,7 +123,7 @@ export default function Home({
                 {testimonials.map((t, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#F3F3F7] p-6 rounded-md shadow-md flex-shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] max-w-[90vw]"
+                    className="bg-[#F3F3F7] p-6 rounded-md shadow-md flex-shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[26vw] max-w-[90vw]"
                   >
                     {/* Content */}
                     <div className="mb-6">
@@ -229,7 +231,7 @@ function HomeBanner3({ heroImage }: { heroImage: SanityImageSource }) {
       {/* Left Section – Text */}
       <div className="w-full md:w-3/5 bg-white flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-xl text-left">
-          <h3 className="text-sm text-[#ED9282] mb-2">Welcome to Our Clinic</h3>
+          {/* <h3 className="text-sm text-[#ED9282] mb-2">Welcome to Our Clinic</h3> */}
           <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">
             Expert Gynecological Care
           </h1>
@@ -279,8 +281,9 @@ function ServicesSplitSection() {
     },
     {
       icon: LaborDelivery,
-      title: "Advanced Techniques",
-      description: "State-of-the-art procedures ensuring safety and comfort.",
+      title: "Pregnancy Care",
+      description:
+        "End-to-end care from conception to postpartum, ensuring the wellbeing of both mother and baby.",
     },
     {
       icon: Ultrasound,
@@ -289,18 +292,21 @@ function ServicesSplitSection() {
     },
     {
       icon: GeneticTesting,
-      title: "Advanced Techniques",
-      description: "State-of-the-art procedures ensuring safety and comfort.",
+      title: "Fertility Services",
+      description:
+        "Comprehensive workups and treatments tailored for couples trying to conceive.",
     },
     {
       icon: FertilityServices,
-      title: "Advanced Techniques",
-      description: "State-of-the-art procedures ensuring safety and comfort.",
+      title: "Adolescent Health",
+      description:
+        "Guiding teenagers through physical, emotional, and hormonal changes with empathy and expertise.",
     },
     {
       icon: Vaccinations,
-      title: "Advanced Techniques",
-      description: "State-of-the-art procedures ensuring safety and comfort.",
+      title: "Annual Wellness Checks",
+      description:
+        "Preventive health check-ups to ensure holistic gynaecological wellness.",
     },
   ];
 
@@ -318,7 +324,7 @@ function ServicesSplitSection() {
             delivery and beyond.
           </h4>
 
-          <button className="mt-6 bg-[#ED9282] text-white px-6 py-3 rounded-full hover:bg-[#ED9282] transition">
+          <button className="mt-6 bg-[#ED9282] cursor-pointer text-white px-6 py-3 rounded-full hover:bg-[#ED9282] transition">
             View all services
           </button>
         </div>
@@ -370,7 +376,7 @@ function SplitImageTextSection() {
             through pregnancy, parenthood, and beyond.
           </h4>
 
-          <button className="mt-6 bg-[#ED9282] text-white px-6 py-3 rounded-full hover:bg-[#ED9282] transition">
+          <button className="mt-6 bg-[#ED9282] text-white cursor-pointer px-6 py-3 rounded-full hover:bg-[#ED9282] transition">
             Learn More
           </button>
         </div>

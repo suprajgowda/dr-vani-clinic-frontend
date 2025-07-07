@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import ContactImage from "../app/contact_us.jpg";
+import Image from "next/image";
 
 const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -39,11 +41,25 @@ const ContactPage = () => {
   return (
     <>
       <Head>
-        <title>Contact | Dr. Vani’s Clinic</title>
+        <title>Contact | Dr. Vani&lsquo;s Clinic</title>
       </Head>
 
       {/* Section 1 – Banner */}
-      <section className="relative w-full py-16 sm:py-20 md:py-24 bg-[#ed9282] text-white text-center">
+      <section className="relative flex items-center justify-center w-full py-16 sm:py-20 md:py-24 min-h-120 text-white text-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src={ContactImage}
+            alt="Contact Background"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Optional: dark overlay */}
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        {/* Text Content */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4">
           Contact Us
         </h1>
