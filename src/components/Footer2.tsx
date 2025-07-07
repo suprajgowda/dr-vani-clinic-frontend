@@ -55,7 +55,7 @@ const SocialButton = ({
   icon,
   label,
 }: {
-  icon: JSX.Element;
+  icon: React.ReactNode;
   label: string;
 }) => (
   <button className="flex items-center gap-2 bg-[#FFFFFF12] hover:bg-[#ED9282] text-white px-4 py-1.5 rounded-xl text-sm transition">
