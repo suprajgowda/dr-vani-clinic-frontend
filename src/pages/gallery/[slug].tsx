@@ -35,7 +35,7 @@ export default function AlbumPage({ album }: AlbumPageProps) {
         <div className="max-w-5xl mx-auto">
           <Link
             href="/gallery"
-            className="text-blue-600 hover:underline mb-6 inline-block"
+            className="text-[#ed9282] hover:underline mb-6 inline-block"
           >
             ← All Albums
           </Link>
@@ -50,17 +50,18 @@ export default function AlbumPage({ album }: AlbumPageProps) {
           )}
 
           {album.photos?.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
               {album.photos.map((photo, idx) => (
                 <div
                   key={idx}
-                  className="relative w-full h-64 rounded overflow-hidden shadow-md"
+                  className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-md bg-white"
                 >
                   <Image
                     src={urlFor(photo).width(800).url()}
                     alt={`Photo ${idx + 1}`}
-                    fill
-                    className="object-cover"
+                    width={800}
+                    height={600} // Ideally dynamic based on image or use fixed aspect
+                    className="w-full h-auto object-contain"
                   />
                 </div>
               ))}

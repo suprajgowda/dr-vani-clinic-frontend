@@ -53,7 +53,7 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
                     <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
                     <Link
                       href={`/blog/${post.slug.current}`}
-                      className="text-blue-600 hover:underline text-sm font-medium"
+                      className="text-[#ed9282] hover:underline text-sm font-medium"
                     >
                       Read more →
                     </Link>

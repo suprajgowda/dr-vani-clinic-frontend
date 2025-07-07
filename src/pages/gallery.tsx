@@ -35,22 +35,21 @@ export default function Gallery({ albums }: GalleryProps) {
           </h3>
 
           {albums.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
               {albums.map((album, idx) =>
                 album.slug?.current && album.photos?.length > 0 ? (
                   <Link
                     key={idx}
                     href={`/gallery/${album.slug.current}`}
-                    className="block cursor-pointer bg-gray-100 rounded-lg overflow-hidden shadow hover:shadow-lg transition"
+                    className="block w-full break-inside-avoid mb-4 bg-gray-100 rounded-lg overflow-hidden shadow hover:shadow-lg transition"
                   >
-                    <div className="relative w-full h-56">
-                      <Image
-                        src={urlFor(album.photos[0]).width(800).url()}
-                        alt={album.albumTitle || "Gallery Album"}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
+                    <Image
+                      src={urlFor(album.photos[0]).width(800).url()}
+                      alt={album.albumTitle || "Gallery Album"}
+                      width={800}
+                      height={600} // use consistent aspect or dynamic values
+                      className="w-full h-auto object-contain"
+                    />
                     <div className="p-4">
                       <h2 className="text-lg font-semibold text-gray-800">
                         {album.albumTitle}

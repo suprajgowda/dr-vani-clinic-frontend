@@ -66,7 +66,7 @@ const FooterLinks = (props: { title: string; links: string[] }) => {
   return (
     <div className="col-span-1 text-white py-4 px-2">
       <div className="text-lg text-white pb-2">{props.title}</div>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 gap-2">
         <div className="flex flex-col">
           {links.map((link, index) => {
             return (

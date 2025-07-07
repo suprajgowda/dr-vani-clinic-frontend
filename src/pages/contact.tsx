@@ -43,7 +43,7 @@ const ContactPage = () => {
       </Head>
 
       {/* Section 1 – Banner */}
-      <section className="relative w-full py-16 sm:py-20 md:py-24 bg-blue-800 text-white text-center">
+      <section className="relative w-full py-16 sm:py-20 md:py-24 bg-[#ed9282] text-white text-center">
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4">
           Contact Us
         </h1>
@@ -135,7 +135,7 @@ const ContactPage = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded hover:bg-blue-700 transition"
+                  className="w-full bg-[#ed9282] text-white font-semibold py-3 px-6 rounded hover:bg-[#ed9282] transition"
                 >
                   Send Message
                 </button>

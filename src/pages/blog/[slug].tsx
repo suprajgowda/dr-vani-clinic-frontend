@@ -74,6 +74,18 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
       </Head>
 
       <section className="bg-white py-16 px-4 md:px-8">
+        {/* Cover Image */}
+        {post.coverImage && (
+          <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] mb-10">
+            <Image
+              src={urlFor(post.coverImage).width(800).url()}
+              alt={post.title}
+              fill
+              className="rounded-lgr"
+              priority
+            />
+          </div>
+        )}
         <div className="max-w-3xl mx-auto">
           {/* Blog Title */}
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
@@ -91,19 +103,6 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
 
           {/* Short Description */}
           {post.excerpt && <p className="text-gray-700 mb-6">{post.excerpt}</p>}
-
-          {/* Cover Image */}
-          {post.coverImage && (
-            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] mb-10">
-              <Image
-                src={urlFor(post.coverImage).width(800).url()}
-                alt={post.title}
-                fill
-                className="rounded-lg object-cover"
-                priority
-              />
-            </div>
-          )}
 
           {/* Blog Sections */}
           {post.sections?.map((section, idx) => (
@@ -149,7 +148,7 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
                       </p>
                       <Link
                         href={`/blog/${item.slug.current}`}
-                        className="text-blue-600 text-sm hover:underline font-medium"
+                        className="text-[#ed9282] text-sm hover:underline font-medium"
                       >
                         Read more →
                       </Link>
