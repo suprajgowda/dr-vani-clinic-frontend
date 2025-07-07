@@ -167,7 +167,7 @@ export default function Home({
                 <span className="bg-gradient-to-b from-transparent to-white">
                   Questions?
                 </span>{" "}
-                We're glad you asked
+                We&lsquo;re glad you asked
               </h2>
               <p className="text-[#2E231FCC] font-light text-base sm:text-lg">
                 Get clear, expert answers to the most important questions about
