@@ -43,7 +43,7 @@ export default function HomeSectionTwo({ services }: { services: Service[] }) {
       </div>
 
       {/* Active Tab Content */}
-      <div className="max-w-7xl mx-auto bg-[#F3F3F7] rounded-xl shadow p-16 md:p-16 flex flex-col md:flex-row gap-8 items-center">
+      <div className="max-w-7xl mx-auto bg-[#F3F3F7] rounded-xl shadow p-8 md:p-16 flex flex-col md:flex-row gap-8 items-center">
         {/* Left - Text */}
         <div className="flex-1 text-center md:text-left">
           <h3 className="text-lg text-[#ED9282] mb-2">Compassion & Care</h3>
