@@ -240,7 +240,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-function HomeBanner3({ heroImage }: { heroImage: any }) {
+function HomeBanner3({ heroImage }: { heroImage: SanityImageSource }) {
   return (
     <section className="flex flex-col md:flex-row w-full min-h-[80vh]">
       {/* Section 1 – Text Content */}
