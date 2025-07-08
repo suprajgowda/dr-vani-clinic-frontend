@@ -1,6 +1,5 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import Image from "next/image";
 import { sanityClient, urlFor } from "../lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
@@ -8,7 +7,6 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 type Album = {
   albumTitle: string;
   albumDescription?: string;
-  slug: { current: string };
   photos: SanityImageSource[];
 };
 
@@ -35,35 +33,37 @@ export default function Gallery({ albums }: GalleryProps) {
           </h3>
 
           {albums.length > 0 ? (
-            <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
-              {albums.map((album, idx) =>
-                album.slug?.current && album.photos?.length > 0 ? (
-                  <Link
-                    key={idx}
-                    href={`/gallery/${album.slug.current}`}
-                    className="block w-full break-inside-avoid mb-4 bg-gray-100 rounded-lg overflow-hidden shadow hover:shadow-lg transition"
-                  >
-                    <Image
-                      src={urlFor(album.photos[0]).width(800).url()}
-                      alt={album.albumTitle || "Gallery Album"}
-                      width={800}
-                      height={600} // use consistent aspect or dynamic values
-                      className="w-full h-auto object-contain"
-                    />
-                    <div className="p-4">
-                      <h2 className="text-lg font-semibold text-gray-800">
-                        {album.albumTitle}
-                      </h2>
-                      {album.albumDescription && (
-                        <p className="text-sm text-gray-600 mt-1">
-                          {album.albumDescription}
-                        </p>
-                      )}
+            albums.map((album, albumIdx) => (
+              <div key={albumIdx} className="mb-16">
+                {/* Album Title and Description */}
+                <h4 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
+                  {album.albumTitle}
+                </h4>
+                {album.albumDescription && (
+                  <p className="text-center text-gray-600 mb-6">
+                    {album.albumDescription}
+                  </p>
+                )}
+
+                {/* Image Grid */}
+                <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
+                  {album.photos?.map((photo, photoIdx) => (
+                    <div
+                      key={photoIdx}
+                      className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-md bg-white"
+                    >
+                      <Image
+                        src={urlFor(photo).width(800).url()}
+                        alt={`Photo ${photoIdx + 1}`}
+                        width={800}
+                        height={600}
+                        className="w-full h-auto object-contain"
+                      />
                     </div>
-                  </Link>
-                ) : null
-              )}
-            </div>
+                  ))}
+                </div>
+              </div>
+            ))
           ) : (
             <p className="text-center text-gray-600">No albums available.</p>
           )}
@@ -74,13 +74,11 @@ export default function Gallery({ albums }: GalleryProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // Fetch the first (and only) gallery document, grabbing its albums array
   const galleryData = await sanityClient.fetch(`
     *[_type == "gallery"][0] {
-      albums[]{
+      albums[] {
         albumTitle,
         albumDescription,
-        slug,
         photos
       }
     }
@@ -90,6 +88,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       albums: galleryData?.albums || [],
     },
-    revalidate: 60, // Rebuild page at most once per minute if data changes
+    revalidate: 60,
   };
 };

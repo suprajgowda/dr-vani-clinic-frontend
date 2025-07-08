@@ -34,25 +34,26 @@ export default function HeroCarousel() {
   ];
 
   return (
-    <div className="relative w-full h-[70vh] md:h-[80vh]">
+    <div className="relative w-full">
       <Slider {...settings}>
         {slides.map((slide, idx) => (
-          <div key={idx} className="relative w-full h-[70vh] md:h-[80vh]">
-            <Image
-              src={slide.img}
-              alt={`Hero Slide ${idx + 1}`}
-              fill
-              className="object-cover object-center"
-              priority={idx === 0}
-            />
-            {/* Overlay Text */}
-            <div className="absolute inset-0 bg-black/2 flex flex-col items-start justify-center text-white text-left px-8 md:px-16">
-              <h2 className="text-3xl text-[#fea38e] sm:text-4xl md:text-5xl font-bold mb-3">
-                {slide.title}
-              </h2>
-              <p className="text-base text-black sm:text-lg md:text-xl max-w-xl">
-                {slide.subtitle}
-              </p>
+          <div key={idx}>
+            <div className="relative w-full aspect-[3/2] sm:aspect-[16/9] md:aspect-[21/9]">
+              <Image
+                src={slide.img}
+                alt={`Hero Slide ${idx + 1}`}
+                fill
+                priority={idx === 0}
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-black/40 flex flex-col items-start justify-center px-6 sm:px-10 md:px-16 text-white">
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-[#fea38e] mb-3 leading-tight">
+                  {slide.title}
+                </h2>
+                <p className="text-sm sm:text-base md:text-lg max-w-xl">
+                  {slide.subtitle}
+                </p>
+              </div>
             </div>
           </div>
         ))}
