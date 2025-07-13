@@ -2,8 +2,7 @@ import React from "react";
 import { GetStaticProps } from "next";
 import { sanityClient, urlFor } from "../lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import Image, { StaticImageData } from "next/image";
-import HeroImage from "../app/hero_image.jpg";
+import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 
 type AboutProps = {
@@ -17,11 +16,16 @@ type AboutProps = {
   awardsSectionTitle: string;
   awardsSectionDescription: string;
   awards: { awardImage: SanityImageSource; awardTitle: string }[];
+  educationAndTraining: string[];
+  expertise: string[];
+  experience: string[];
+  memberships: string[];
+  personalInterests: string[];
 };
 
 const AboutPage = ({
-  // section1Title,
-  // section1BannerImage,
+  section1Title,
+  section1BannerImage,
   aboutDrVanititle,
   aboutDrVaniCompleteDescription,
   highlightedFacts,
@@ -30,10 +34,38 @@ const AboutPage = ({
   awardsSectionTitle,
   awardsSectionDescription,
   awards,
+  educationAndTraining,
+  expertise,
+  experience,
+  memberships,
+  personalInterests,
 }: AboutProps) => {
   return (
     <main className="about-page">
-      <HomeBanner3 heroImage={HeroImage} />
+      {/* Section 1 – Banner */}
+      {/* <section className="relative w-full min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] overflow-hidden">
+        {section1BannerImage && (
+          <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh]">
+            <Image
+              src={urlFor(section1BannerImage).url()}
+              alt="About Page Banner"
+              fill
+              priority
+              className="object-cover object-center sm:object-top"
+            />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-center text-white px-4 z-10">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+            {section1Title}
+          </h1>
+        </div>
+      </section> */}
+
+      <HomeBanner3
+        section1Title={section1Title}
+        heroImage={section1BannerImage}
+      />
 
       {/* Section 2 – About Dr. Vani */}
       <section className="bg-gray-50 py-12 px-4 md:px-8">
@@ -88,12 +120,12 @@ const AboutPage = ({
                 className="bg-gray-50 rounded-lg shadow-md p-4 flex flex-col items-center text-center hover:shadow-lg transition"
               >
                 {award.awardImage && (
-                  <div className="relative w-full h-48">
+                  <div className="relative w-full h-48 mb-4">
                     <Image
                       src={urlFor(award.awardImage).width(400).url()}
                       alt={award.awardTitle}
                       fill
-                      className="object-contain mb-4"
+                      className="object-contain"
                     />
                   </div>
                 )}
@@ -105,20 +137,62 @@ const AboutPage = ({
           </div>
         </section>
       )}
+
+      {/* Section 6 – Education & Training */}
+      {educationAndTraining?.length > 0 && (
+        <ContentListSection
+          title="Education & Training"
+          items={educationAndTraining}
+        />
+      )}
+
+      {/* Section 7 – Areas of Expertise */}
+      {expertise?.length > 0 && (
+        <ContentListSection title="Areas of Expertise" items={expertise} />
+      )}
+
+      {/* Section 8 – Professional Experience */}
+      {experience?.length > 0 && (
+        <ContentListSection
+          title="Professional Experience"
+          items={experience}
+        />
+      )}
+
+      {/* Section 9 – Memberships & Affiliations */}
+      {memberships?.length > 0 && (
+        <ContentListSection
+          title="Memberships & Affiliations"
+          items={memberships}
+        />
+      )}
+
+      {/* Section 10 – Personal Interests */}
+      {personalInterests?.length > 0 && (
+        <ContentListSection
+          title="Hobbies & Interests"
+          items={personalInterests}
+        />
+      )}
     </main>
   );
 };
 
-function HomeBanner3({ heroImage }: { heroImage: StaticImageData }) {
-  const imageUrl = (heroImage as StaticImageData).src;
+function HomeBanner3({
+  section1Title,
+  heroImage,
+}: {
+  section1Title: string;
+  heroImage: SanityImageSource;
+}) {
   return (
     <section className="flex flex-col md:flex-row w-full min-h-[80vh]">
       {/* Left Section – Text */}
       <div className="w-full md:w-3/5 bg-white flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-xl text-left">
-          <h3 className="text-sm text-[#ED9282] mb-2">Meet Dr Vani R</h3>
+          {/* <h3 className="text-sm text-[#ED9282] mb-2">Welcome to Our Clinic</h3> */}
           <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">
-            Expert Gynecological Care
+            {section1Title}
           </h1>
           <h2 className="text-lg text-gray-700 mb-6">
             Compassionate. Trusted. Experienced.
@@ -147,7 +221,7 @@ function HomeBanner3({ heroImage }: { heroImage: StaticImageData }) {
           <div
             className="w-full h-full bg-contain bg-no-repeat bg-center md:bg-left"
             style={{
-              backgroundImage: `url(${imageUrl})`,
+              backgroundImage: `url(${urlFor(heroImage).url()})`,
             }}
           />
         </div>
@@ -155,6 +229,25 @@ function HomeBanner3({ heroImage }: { heroImage: StaticImageData }) {
     </section>
   );
 }
+
+const ContentListSection = ({
+  title,
+  items,
+}: {
+  title: string;
+  items: string[];
+}) => (
+  <section className="bg-gray-50 py-12 px-4 md:px-8">
+    <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+      {title}
+    </h2>
+    <ul className="max-w-4xl mx-auto list-disc pl-6 text-gray-700 space-y-2">
+      {items.map((item, idx) => (
+        <li key={idx}>{item}</li>
+      ))}
+    </ul>
+  </section>
+);
 
 export const getStaticProps: GetStaticProps = async () => {
   const query = `*[_type == "about"][0]`;
@@ -173,6 +266,11 @@ export const getStaticProps: GetStaticProps = async () => {
       awardsSectionTitle: data?.awardsSectionTitle || "",
       awardsSectionDescription: data?.awardsSectionDescription || "",
       awards: data?.awards || [],
+      educationAndTraining: data?.educationAndTraining || [],
+      expertise: data?.expertise || [],
+      experience: data?.experience || [],
+      memberships: data?.memberships || [],
+      personalInterests: data?.personalInterests || [],
     },
     revalidate: 60,
   };
