@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { GetStaticProps } from "next";
 import { sanityClient, urlFor } from "../lib/sanity";
@@ -16,7 +17,7 @@ type AboutProps = {
   awardsSectionTitle: string;
   awardsSectionDescription: string;
   awards: { awardImage: SanityImageSource; awardTitle: string }[];
-  educationAndTraining: string[];
+  educationAndTraining: unknown[];
   expertise: string[];
   experience: string[];
   memberships: string[];
@@ -40,6 +41,17 @@ const AboutPage = ({
   memberships,
   personalInterests,
 }: AboutProps) => {
+  console.log("****section1Title:", section1Title);
+  console.log("****aboutDrVanititle:", aboutDrVanititle);
+  console.log(
+    "****aboutDrVaniCompleteDescription:",
+    aboutDrVaniCompleteDescription
+  );
+  console.log("****whyDrVaniTitle:", whyDrVaniTitle);
+  console.log("****whyDrVaniDescription:", whyDrVaniDescription);
+  console.log("****awardsSectionTitle:", awardsSectionTitle);
+  console.log("****awardsSectionDescription:", awardsSectionDescription);
+
   return (
     <main className="about-page">
       {/* Section 1 – Banner */}
@@ -81,14 +93,19 @@ const AboutPage = ({
       {highlightedFacts?.length > 0 && (
         <section className="bg-white py-12 px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {highlightedFacts.map((fact, idx) => (
-              <div key={idx} className="text-center p-6">
-                <h3 className="text-xl font-semibold text-blue-700 mb-2">
-                  {fact.title}
-                </h3>
-                <p className="text-gray-600">{fact.description}</p>
-              </div>
-            ))}
+            {highlightedFacts.map((fact, idx) => {
+              console.log("Fact:", fact);
+              return (
+                <div key={idx} className="text-center p-6">
+                  <h3 className="text-xl font-semibold text-blue-700 mb-2">
+                    {typeof fact.title === "string"
+                      ? fact.title
+                      : JSON.stringify(fact.title)}
+                  </h3>
+                  <p className="text-gray-600">{fact.description}</p>
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
@@ -114,26 +131,29 @@ const AboutPage = ({
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {awards.map((award, idx) => (
-              <div
-                key={idx}
-                className="bg-gray-50 rounded-lg shadow-md p-4 flex flex-col items-center text-center hover:shadow-lg transition"
-              >
-                {award.awardImage && (
-                  <div className="relative w-full h-48 mb-4">
-                    <Image
-                      src={urlFor(award.awardImage).width(400).url()}
-                      alt={award.awardTitle}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                )}
-                <h3 className="text-lg font-medium text-gray-800">
-                  {award.awardTitle}
-                </h3>
-              </div>
-            ))}
+            {awards.map((award, idx) => {
+              console.log("Award:", award);
+              return (
+                <div
+                  key={idx}
+                  className="bg-gray-50 rounded-lg shadow-md p-4 flex flex-col items-center text-center hover:shadow-lg transition"
+                >
+                  {award.awardImage && (
+                    <div className="relative w-full h-48 mb-4">
+                      <Image
+                        src={urlFor(award.awardImage).width(400).url()}
+                        alt={award.awardTitle}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  )}
+                  <h3 className="text-lg font-medium text-gray-800">
+                    {award.awardTitle}
+                  </h3>
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
@@ -235,15 +255,18 @@ const ContentListSection = ({
   items,
 }: {
   title: string;
-  items: string[];
+  items: any[];
 }) => (
   <section className="bg-gray-50 py-12 px-4 md:px-8">
     <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
       {title}
     </h2>
     <ul className="max-w-4xl mx-auto list-disc pl-6 text-gray-700 space-y-2">
-      {items.map((item, idx) => (
+      {/* {items.map((item, idx) => (
         <li key={idx}>{item}</li>
+      ))} */}
+      {items.map((item, idx) => (
+        <li key={idx}>{typeof item === "string" ? item : item.title}</li>
       ))}
     </ul>
   </section>
@@ -252,6 +275,8 @@ const ContentListSection = ({
 export const getStaticProps: GetStaticProps = async () => {
   const query = `*[_type == "about"][0]`;
   const data = await sanityClient.fetch(query);
+  console.log("Raw about page data:", JSON.stringify(data, null, 2));
+  console.log("------------RAW Data End Section------------");
 
   return {
     props: {
