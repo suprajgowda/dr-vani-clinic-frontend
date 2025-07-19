@@ -136,19 +136,19 @@ const AboutPage = ({
               return (
                 <div
                   key={idx}
-                  className="bg-gray-50 rounded-lg shadow-md p-4 flex flex-col items-center text-center hover:shadow-lg transition"
+                  className="bg-gray-50 rounded-lg shadow-md p-4 flex flex-col md:flex-row items-center md:items-center text-center md:text-left gap-4 hover:shadow-lg transition"
                 >
                   {award.awardImage && (
-                    <div className="relative w-full h-48 mb-4">
+                    <div className="relative w-24 h-24 flex-shrink-0">
                       <Image
-                        src={urlFor(award.awardImage).width(400).url()}
+                        src={urlFor(award.awardImage).width(200).url()}
                         alt={award.awardTitle}
                         fill
-                        className="object-contain"
+                        className="object-contain rounded"
                       />
                     </div>
                   )}
-                  <h3 className="text-lg font-medium text-gray-800">
+                  <h3 className="text-lg  items-center font-medium text-gray-800">
                     {award.awardTitle}
                   </h3>
                 </div>
@@ -206,9 +206,9 @@ function HomeBanner3({
   heroImage: SanityImageSource;
 }) {
   return (
-    <section className="flex flex-col md:flex-row w-full min-h-[80vh]">
+    <section className="flex bg-[#fbebe9b8] flex-col md:flex-row w-full min-h-[80vh]">
       {/* Left Section – Text */}
-      <div className="w-full md:w-3/5 bg-white flex items-center justify-center px-6 py-12">
+      <div className="w-full md:w-3/5 flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-xl text-left">
           {/* <h3 className="text-sm text-[#ED9282] mb-2">Welcome to Our Clinic</h3> */}
           <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">
@@ -234,7 +234,7 @@ function HomeBanner3({
 
       {/* Right Section – Image */}
       <div
-        className="w-full md:w-2/5 bg-[#f3f3f7] flex justify-center md:justify-start items-center px-0 py-10 md:py-0"
+        className="w-full md:w-2/5 bg-[#fff] flex justify-center md:justify-start items-center px-0 py-10 md:py-0"
         style={{ borderRadius: "0px 0px 0px 50px" }}
       >
         <div className="w-full max-w-md h-auto aspect-[4/5] md:aspect-auto md:h-full md:pl-0">
@@ -261,14 +261,22 @@ const ContentListSection = ({
     <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
       {title}
     </h2>
-    <ul className="max-w-4xl mx-auto list-disc pl-6 text-gray-700 space-y-2">
-      {/* {items.map((item, idx) => (
-        <li key={idx}>{item}</li>
-      ))} */}
-      {items.map((item, idx) => (
-        <li key={idx}>{typeof item === "string" ? item : item.title}</li>
-      ))}
-    </ul>
+    <div className="flex flex-col gap-4 max-w-2xl mx-auto">
+      {items.map((item, idx) => {
+        const content = typeof item === "string" ? item : item.title;
+        return (
+          <div
+            key={idx}
+            className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition"
+          >
+            {/* <BsHeartFill className="w-5 h-5 text-pink-300" /> */}
+            <span className="text-gray-700 text-base font-medium">
+              {content}
+            </span>
+          </div>
+        );
+      })}
+    </div>
   </section>
 );
 

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 // import logo from "../app/white_logo.png";
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import logo from "../app/logo.png";
 
 export default function Footer2() {
@@ -44,9 +44,27 @@ const FooterFirstRow = () => {
       </Link>
 
       <div className="flex flex-wrap justify-center gap-3">
-        <SocialButton icon={<FaFacebookF />} label="Facebook" />
-        <SocialButton icon={<FaYoutube />} label="Youtube" />
-        <SocialButton icon={<FaInstagram />} label="Instagram" />
+        <a
+          href="https://www.facebook.com/profile.php?id=61572265288032"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <SocialButton icon={<FaFacebookF />} label="Facebook" />
+        </a>
+        <a
+          href="https://wa.me/919886413073"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <SocialButton icon={<FaWhatsapp />} label="Whatsapp" />
+        </a>
+        <a
+          href="https://www.instagram.com/dr.vani76/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <SocialButton icon={<FaInstagram />} label="Instagram" />
+        </a>
       </div>
     </div>
   );
