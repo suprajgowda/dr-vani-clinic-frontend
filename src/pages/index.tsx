@@ -126,27 +126,13 @@ export default function Home({
                     className="bg-[#F3F3F7] p-6 rounded-md shadow-md flex-shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[26vw] max-w-[90vw]"
                   >
                     {/* Content */}
-                    <div className="mb-6">
+                    <div className="mb-3 flex justify-between items-end">
                       <p className="text-gray-700 text-base leading-relaxed">
                         {t.content}
+                        <span className="text-gray-900 font-semibold text-sm ml-4 whitespace-nowrap">
+                          - {t.name}
+                        </span>
                       </p>
-                    </div>
-
-                    {/* User Info */}
-                    <div className="flex items-center">
-                      <div className="w-12 h-12 relative">
-                        <Image
-                          src={urlFor(t.photo).url()}
-                          alt={t.name}
-                          fill
-                          className="rounded-full object-cover"
-                        />
-                      </div>
-                      <div className="pl-3">
-                        <p className="text-gray-900 font-semibold text-sm">
-                          {t.name}
-                        </p>
-                      </div>
                     </div>
                   </div>
                 ))}
