@@ -162,35 +162,82 @@ const ContactPage = () => {
           {/* Right – Contact Info */}
           <div className="text-gray-700">
             <h2 className="text-2xl font-bold mb-6">Clinic Info</h2>
-            <p className="mb-4">
-              <strong>Phone:</strong>
-              <br />
-              +91 95914 93575
-            </p>
-            <p className="mb-4">
-              <strong>Email:</strong>
-              <br />
-              dr.vani@example.com
-            </p>
-            <p className="mb-4">
-              <strong>Address:</strong>
-              <br />
-              04/1, Bull Temple Rd, NR Colony, Basavanagudi, Bengaluru,
-              Karnataka 560050
-            </p>
+            <div className="flex flex-col sm:flex-row mb-4 sm:items-start sm:space-x-12">
+              <p className="mb-4 sm:mb-0">
+                <strong>Phone:</strong>
+                <br />
+                <a
+                  href="tel:+919886413073"
+                  className="text-[#ed9282] hover:underline"
+                >
+                  +91 98864 13073
+                </a>
+              </p>
+              <p className="mb-4 sm:mb-0">
+                <strong>Email:</strong>
+                <br />
+                <a
+                  href="mailto:dr.vani@example.com"
+                  className="text-[#ed9282] hover:underline"
+                >
+                  dr.vani@example.com
+                </a>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-6 mt-8">
+              {/* Sri Balaji Hospital Card */}
+              <div className="bg-white rounded-xl shadow-md p-6 space-y-4">
+                <h3 className="text-xl font-semibold text-gray-800">
+                  Sri Balaji Hospital
+                </h3>
+                <p>
+                  <strong>Timings:</strong> 10:00 AM - 2:00 PM
+                </p>
+                <p>
+                  <strong>Address:</strong>
+                  <br />
+                  Balaji Gynaecology & Infertility Centre, Bangalore
+                </p>
+                <div className="w-full h-64 rounded-lg overflow-hidden">
+                  <iframe
+                    title="Sri Balaji Hospital Location"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5345179630567!2d77.5666224!3d12.9376116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae158be206d233%3A0x4bcd1e0d78b8312!2sBalaji%20Gynaecology%20%26%20Infertility%20Centre!5e0!3m2!1sen!2sin!4v1748680686053!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              </div>
 
-            {/* Google Maps Embed */}
-            <div className="mt-6 w-full h-64">
-              <iframe
-                title="Clinic Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5345179630567!2d77.5666224!3d12.9376116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae158be206d233%3A0x4bcd1e0d78b8312!2sBalaji%20Gynaecology%20%26%20Infertility%20Centre!5e0!3m2!1sen!2sin!4v1748680686053!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+              {/* Motherhood Hospital Card */}
+              <div className="bg-white rounded-xl shadow-md p-6 space-y-4">
+                <h3 className="text-xl font-semibold text-gray-800">
+                  Motherhood Hospital, Banashankari
+                </h3>
+                <p>
+                  <strong>Timings:</strong> 3:00 PM - 7:00 PM
+                </p>
+                <p>
+                  <strong>Address:</strong>
+                  <br />
+                  Motherhood Hospital, Banashankari, Bangalore
+                </p>
+                <div className="w-full h-64 rounded-lg overflow-hidden">
+                  <iframe
+                    title="Motherhood Hospital Location"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31109.341750991076!2d77.53507536506682!3d12.920857531496316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15ac760bf0d7%3A0x7d4d3d8f2e519f4d!2sMotherhood%20Hospital%2C%20Banashankari!5e0!3m2!1sen!2sin!4v1723456798000!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              </div>
             </div>
           </div>
         </div>

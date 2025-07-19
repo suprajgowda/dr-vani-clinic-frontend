@@ -2,11 +2,13 @@ import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import logo from "../app/logo.png";
 
 export default function NavBar2() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -33,7 +35,7 @@ export default function NavBar2() {
           <Link href="/contact">Contact</Link>
           <button
             className="text-stone-50 bg-[#ED9282] hover:bg-[#f3b6ab] cursor-pointer px-6 py-2 rounded-full"
-            onClick={() => console.log("Book Appointment Clicked")}
+            onClick={() => router.push("/contact")}
           >
             Book Appointment
           </button>

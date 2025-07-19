@@ -5,23 +5,53 @@ import React from "react";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import logo from "../app/logo.png";
 
+type socialsType = {
+  title: string;
+  url: string;
+};
+
 export default function Footer2() {
-  const features = [
-    "Page builder",
-    "Theme options",
-    "Theme builder",
-    "Template library",
+  const resources: socialsType[] = [
+    {
+      title: "Home",
+      url: "/",
+    },
+    {
+      title: "Services",
+      url: "/services2",
+    },
+    {
+      title: "Blogs",
+      url: "/blogs",
+    },
+    {
+      title: "Gallery",
+      url: "/gallery",
+    },
+    {
+      title: "About",
+      url: "/about",
+    },
+    {
+      title: "Contact",
+      url: "/contact",
+    },
   ];
-  const resources = ["Support center", "Documentation", "Community", "Hosting"];
-  const socials = ["Behance", "Dribbble", "Facebook", "Instagram"];
+  const socials: socialsType[] = [
+    {
+      title: "Facebook",
+      url: "https://www.facebook.com/profile.php?id=61572265288032",
+    },
+    { title: "Instagram", url: "https://www.instagram.com/dr.vani76/" },
+    { title: "Whatsapp", url: "https://wa.me/919886413073" },
+  ];
 
   return (
     <footer className="bg-[#c1e8f0] px-6 sm:px-10 md:px-20 lg:px-40 pt-10 pb-6 text-white">
       <FooterFirstRow />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 border-b border-[#FFFFFF12] py-8">
-        <FooterLinks title="Features" links={features} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 border-b border-[#FFFFFF12] py-8">
         <FooterLinks title="Resources" links={resources} />
-        <FooterLinks title="Social" links={socials} />
+        <FooterLinks title="Social" links={socials} social />
         <BusinessHours />
       </div>
       <ThirdRow />
@@ -83,13 +113,29 @@ const SocialButton = ({
   </button>
 );
 
-const FooterLinks = ({ title, links }: { title: string; links: string[] }) => {
+const FooterLinks = ({
+  title,
+  links,
+  social = false,
+}: {
+  title: string;
+  links: socialsType[];
+  social?: boolean;
+}) => {
   return (
     <div>
       <h4 className="text-lg font-semibold mb-3 text-black">{title}</h4>
       <ul className="space-y-2 text-sm text-stone-500">
         {links.map((link, index) => (
-          <li key={index}>{link}</li>
+          <li key={index}>
+            {social ? (
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
+                {link.title}
+              </a>
+            ) : (
+              <Link href={link.url}>{link.title}</Link>
+            )}
+          </li>
         ))}
       </ul>
     </div>
@@ -127,7 +173,8 @@ const ThirdRow = () => {
   return (
     <div className="pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-[#898989] gap-4">
       <div>
-        © {new Date().getFullYear()} Dr. Vani‘s Clinic. All Rights Reserved.
+        © {new Date().getFullYear()} Dr. Vani&lsquo;s Clinic. All Rights
+        Reserved.
       </div>
       <div className="flex gap-6">
         <a href="#" className="hover:underline">
