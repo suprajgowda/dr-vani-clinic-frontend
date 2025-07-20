@@ -107,7 +107,7 @@ export default function Home({
                 />
                 <div className="flex items-center mt-2">
                   <div className="mr-2 font-semibold text-gray-800">
-                    4.8 / 5
+                    4.9 / 5
                   </div>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
@@ -127,10 +127,10 @@ export default function Home({
                     className="bg-[#F3F3F7] p-6 rounded-md shadow-md flex-shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[26vw] max-w-[90vw]"
                   >
                     {/* Content */}
-                    <div className="mb-3 flex justify-between items-end">
+                    <div className="mb-0 flex justify-between items-end">
                       <p className="text-gray-700 text-base leading-relaxed">
                         {t.content}
-                        <span className="text-gray-900 font-semibold text-sm ml-4 whitespace-nowrap">
+                        <span className="text-gray-900 font-semibold text-sm whitespace-nowrap">
                           - {t.name}
                         </span>
                       </p>
