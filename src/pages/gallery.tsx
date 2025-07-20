@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { sanityClient, urlFor } from "../lib/sanity";
+import GalleryBanner from "../app/gallery_banner.jpg";
 
 type Album = {
   albumTitle: string;
@@ -33,13 +34,33 @@ export default function Gallery({ albums }: GalleryProps) {
           content="Explore precious moments captured in our gallery – real families, happy smiles, and memorable experiences."
         />
       </Head>
+      <section className="relative flex items-center justify-center w-full py-16 sm:py-20 md:py-24 min-h-120 text-white text-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src={GalleryBanner}
+            alt="Contact Background"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Optional: dark overlay */}
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        {/* Text Content */}
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4">
+          Gallery - Real Stories, Expert Care, and Remarkable Moments with Dr.
+          Vani R
+        </h1>
+      </section>
 
       <section className="bg-white py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-gray-800 mb-10">
+          {/* <h3 className="text-3xl font-bold text-center text-gray-800 mb-10">
             Gallery - Real Stories, Expert Care, and Remarkable Moments with Dr.
             Vani R
-          </h3>
+          </h3> */}
 
           {albums.length > 0 ? (
             albums.map((album, albumIdx) => (
