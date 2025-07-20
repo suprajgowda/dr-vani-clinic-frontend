@@ -41,39 +41,8 @@ const AboutPage = ({
   memberships,
   personalInterests,
 }: AboutProps) => {
-  console.log("****section1Title:", section1Title);
-  console.log("****aboutDrVanititle:", aboutDrVanititle);
-  console.log(
-    "****aboutDrVaniCompleteDescription:",
-    aboutDrVaniCompleteDescription
-  );
-  console.log("****whyDrVaniTitle:", whyDrVaniTitle);
-  console.log("****whyDrVaniDescription:", whyDrVaniDescription);
-  console.log("****awardsSectionTitle:", awardsSectionTitle);
-  console.log("****awardsSectionDescription:", awardsSectionDescription);
-
   return (
     <main className="about-page">
-      {/* Section 1 – Banner */}
-      {/* <section className="relative w-full min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] overflow-hidden">
-        {section1BannerImage && (
-          <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh]">
-            <Image
-              src={urlFor(section1BannerImage).url()}
-              alt="About Page Banner"
-              fill
-              priority
-              className="object-cover object-center sm:object-top"
-            />
-          </div>
-        )}
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-center text-white px-4 z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            {section1Title}
-          </h1>
-        </div>
-      </section> */}
-
       <HomeBanner3
         section1Title={section1Title}
         heroImage={section1BannerImage}
@@ -94,7 +63,6 @@ const AboutPage = ({
         <section className="bg-white py-12 px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {highlightedFacts.map((fact, idx) => {
-              console.log("Fact:", fact);
               return (
                 <div key={idx} className="text-center p-6">
                   <h3 className="text-xl font-semibold text-blue-700 mb-2">
@@ -132,7 +100,6 @@ const AboutPage = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {awards.map((award, idx) => {
-              console.log("Award:", award);
               return (
                 <div
                   key={idx}
@@ -283,8 +250,6 @@ const ContentListSection = ({
 export const getStaticProps: GetStaticProps = async () => {
   const query = `*[_type == "about"][0]`;
   const data = await sanityClient.fetch(query);
-  console.log("Raw about page data:", JSON.stringify(data, null, 2));
-  console.log("------------RAW Data End Section------------");
 
   return {
     props: {

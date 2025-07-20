@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // File: pages/gallery/[slug].tsx
 
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -5,17 +6,37 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { sanityClient, urlFor } from "../../lib/sanity";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 type Album = {
   albumTitle: string;
   albumDescription?: string;
-  photos: SanityImageSource[];
+  photos: SanityAsset[];
+};
+
+type SanityAsset = {
+  asset: {
+    _ref: string;
+  };
 };
 
 type AlbumPageProps = {
   album: Album;
 };
+
+// Helpers to check asset types
+function isImageAsset(photo: any): boolean {
+  return photo?.asset?._ref?.startsWith("image-");
+}
+
+function isVideoAsset(photo: any): boolean {
+  return photo?.asset?._ref?.startsWith("file-");
+}
+
+// Generate usable file URL from _ref
+function getSanityFileUrl(ref: string) {
+  const [, id, ext] = ref.split("-");
+  return `https://cdn.sanity.io/files/${process.env.SANITY_PROJECT_ID}/production/${id}.${ext}`;
+}
 
 export default function AlbumPage({ album }: AlbumPageProps) {
   return (
@@ -56,13 +77,25 @@ export default function AlbumPage({ album }: AlbumPageProps) {
                   key={idx}
                   className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-md bg-white"
                 >
-                  <Image
-                    src={urlFor(photo).width(800).url()}
-                    alt={`Photo ${idx + 1}`}
-                    width={800}
-                    height={600} // Ideally dynamic based on image or use fixed aspect
-                    className="w-full h-auto object-contain"
-                  />
+                  {isImageAsset(photo) ? (
+                    <Image
+                      src={urlFor(photo).width(800).url()}
+                      alt={`Photo ${idx + 1}`}
+                      width={800}
+                      height={600}
+                      className="w-full h-auto object-contain"
+                    />
+                  ) : isVideoAsset(photo) ? (
+                    <video
+                      controls
+                      className="w-full h-auto object-contain"
+                      src={getSanityFileUrl(photo.asset._ref)}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    <p className="text-red-500 p-4">Unsupported media type</p>
+                  )}
                 </div>
               ))}
             </div>
@@ -78,7 +111,6 @@ export default function AlbumPage({ album }: AlbumPageProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Fetch all album slugs from the first (and only) gallery document
   const slugs: string[] = await sanityClient.fetch(`
     *[_type == "gallery"][0].albums[].slug.current
   `);
@@ -96,7 +128,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
 
-  // Fetch exactly the album whose slug.current matches the URL
   const albumData: Album | null = await sanityClient.fetch(
     `
       *[_type == "gallery"][0].albums[slug.current == $slug][0]

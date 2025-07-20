@@ -42,10 +42,6 @@ export default function Navbar() {
     };
   }, [router]);
 
-  useEffect(() => {
-    console.log("Menu open state changed to:", isOpen);
-  }, [isOpen]);
-
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -75,7 +71,6 @@ export default function Navbar() {
         <button
           className="md:hidden text-gray-700 focus:outline-none transition-transform duration-300"
           onClick={() => {
-            console.log("Thee Dropdown button is in open state => ", isOpen);
             setIsOpen((prev) => !prev);
           }}
         >

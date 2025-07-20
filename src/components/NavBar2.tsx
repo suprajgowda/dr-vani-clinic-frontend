@@ -45,7 +45,6 @@ export default function NavBar2() {
         <button
           className="md:hidden text-gray-700 focus:outline-none transition-transform duration-300"
           onClick={() => {
-            console.log("Thee Dropdown button is in open state => ", isOpen);
             setIsOpen((prev) => !prev);
           }}
         >
