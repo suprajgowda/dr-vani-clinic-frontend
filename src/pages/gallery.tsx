@@ -2,17 +2,26 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { sanityClient, urlFor } from "../lib/sanity";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 type Album = {
   albumTitle: string;
   albumDescription?: string;
-  photos: SanityImageSource[];
+  photos: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  }[];
 };
 
 type GalleryProps = {
   albums: Album[];
 };
+
+function getSanityFileUrl(ref: string) {
+  const [, id, ext] = ref.split("-"); // e.g., file-ab58416215c9f65b91b93e3272fdc566867f830e-mp4
+  return `https://cdn.sanity.io/files/${process.env.SANITY_PROJECT_ID}/production/${id}.${ext}`;
+}
 
 export default function Gallery({ albums }: GalleryProps) {
   return (
@@ -52,13 +61,24 @@ export default function Gallery({ albums }: GalleryProps) {
                       key={photoIdx}
                       className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-md bg-white"
                     >
-                      <Image
-                        src={urlFor(photo).width(800).url()}
-                        alt={`Photo ${photoIdx + 1}`}
-                        width={800}
-                        height={600}
-                        className="w-full h-auto object-contain"
-                      />
+                      {"asset" in photo &&
+                      photo.asset._ref.startsWith("image-") ? (
+                        <Image
+                          src={urlFor(photo).width(800).url()}
+                          alt={`Photo ${photoIdx + 1}`}
+                          width={800}
+                          height={600}
+                          className="w-full h-auto object-contain"
+                        />
+                      ) : photo.asset._ref.startsWith("file-") ? (
+                        <video
+                          controls
+                          className="w-full h-auto object-contain"
+                          src={getSanityFileUrl(photo.asset._ref)}
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      ) : null}
                     </div>
                   ))}
                 </div>
