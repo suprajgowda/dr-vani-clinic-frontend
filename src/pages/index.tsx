@@ -14,6 +14,7 @@ import GeneticTesting from "../app/genetic-testing.svg";
 import FertilityServices from "../app/fertility-services.svg";
 import Vaccinations from "../app/vaccinations.svg";
 import HeroCarousel from "./HeroCarousel";
+import { useRouter } from "next/router";
 
 const faqContent = [
   {
@@ -338,6 +339,7 @@ function ServicesSplitSection() {
 }
 
 function SplitImageTextSection() {
+  const router = useRouter();
   return (
     <section className="bg-gray-50 py-16 px-4 md:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -362,7 +364,10 @@ function SplitImageTextSection() {
             through pregnancy, parenthood, and beyond.
           </h4>
 
-          <button className="mt-6 bg-[#ED9282] text-white cursor-pointer px-6 py-3 rounded-full hover:bg-[#ED9282] transition">
+          <button
+            onClick={() => router.push("/contact")}
+            className="mt-6 bg-[#ED9282] text-white cursor-pointer px-6 py-3 rounded-full hover:bg-[#ED9282] transition"
+          >
             Learn More
           </button>
         </div>
