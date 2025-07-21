@@ -167,10 +167,10 @@ const ContactPage = () => {
                 <strong>Phone:</strong>
                 <br />
                 <a
-                  href="tel:+919886413073"
+                  href="tel:+919591493575"
                   className="text-[#ed9282] hover:underline"
                 >
-                  +91 98864 13073
+                  +91 95914 93575
                 </a>
               </p>
               <p className="mb-4 sm:mb-0">

@@ -144,9 +144,9 @@ const FooterLinks = ({
 
 const BusinessHours = () => {
   const hours = [
-    { day: "Weekdays", time: "09.00 AM - 21.00 PM" },
-    { day: "Saturday", time: "09.00 AM - 18.00 PM" },
-    { day: "Sunday", time: "09.00 AM - 18.00 PM" },
+    { day: "Weekdays", time: "10.00 AM - 07.00 PM" },
+    { day: "Saturday", time: "10.00 AM - 07.00 PM" },
+    { day: "Sunday", time: "11.00 AM - 01.00 PM" },
   ];
 
   return (
