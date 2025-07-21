@@ -213,6 +213,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 function HomeBanner3({ heroImage }: { heroImage: SanityImageSource }) {
+  const router = useRouter();
   return (
     <section className="flex flex-col md:flex-row w-full min-h-[80vh]">
       {/* Left Section – Text */}
@@ -225,7 +226,10 @@ function HomeBanner3({ heroImage }: { heroImage: SanityImageSource }) {
           <h2 className="text-lg text-gray-700 mb-6">
             Compassionate. Trusted. Experienced.
           </h2>
-          <button className="bg-[#ED9282] text-white px-6 py-3 rounded-full hover:bg-[#e28172] transition">
+          <button
+            onClick={() => router.push("/contact")}
+            className="bg-[#ED9282] cursor-pointer text-white px-6 py-3 rounded-full hover:bg-[#e28172] transition"
+          >
             How can we help
           </button>
 

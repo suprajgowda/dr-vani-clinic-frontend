@@ -5,6 +5,7 @@ import { sanityClient, urlFor } from "../lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 type AboutProps = {
   section1Title: string;
@@ -172,6 +173,7 @@ function HomeBanner3({
   section1Title: string;
   heroImage: SanityImageSource;
 }) {
+  const router = useRouter();
   return (
     <section className="flex bg-[#fbebe9b8] flex-col md:flex-row w-full min-h-[80vh]">
       {/* Left Section – Text */}
@@ -184,7 +186,10 @@ function HomeBanner3({
           <h2 className="text-lg text-gray-700 mb-6">
             Compassionate. Trusted. Experienced.
           </h2>
-          <button className="bg-[#ED9282] text-white px-6 py-3 rounded-full hover:bg-[#e28172] transition">
+          <button
+            onClick={() => router.push("/contact")}
+            className="bg-[#ED9282] cursor-pointer text-white px-6 py-3 rounded-full hover:bg-[#e28172] transition"
+          >
             How can we help
           </button>
 
