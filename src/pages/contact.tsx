@@ -151,7 +151,7 @@ const ContactPage = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#ed9282] text-white font-semibold py-3 px-6 rounded hover:bg-[#ed9282] transition"
+                  className="w-full bg-[#ed9282] cursor-pointer text-white font-semibold py-3 px-6 rounded hover:bg-[#ed9282] transition"
                 >
                   Send Message
                 </button>
@@ -162,7 +162,7 @@ const ContactPage = () => {
           {/* Right – Contact Info */}
           <div className="text-gray-700">
             <h2 className="text-2xl font-bold mb-6">Clinic Info</h2>
-            <div className="flex flex-col sm:flex-row mb-4 sm:items-start sm:space-x-12">
+            {/* <div className="flex flex-col sm:flex-row mb-4 sm:items-start sm:space-x-12">
               <p className="mb-4 sm:mb-0">
                 <strong>Phone:</strong>
                 <br />
@@ -183,20 +183,24 @@ const ContactPage = () => {
                   dr.vani@example.com
                 </a>
               </p>
-            </div>
+            </div> */}
             <div className="grid grid-cols-1 gap-6 mt-8">
               {/* Sri Balaji Hospital Card */}
               <div className="bg-white rounded-xl shadow-md p-6 space-y-4">
                 <h3 className="text-xl font-semibold text-gray-800">
-                  Sri Balaji Hospital
+                  Balaji Gynaecology & Infertility Centre
                 </h3>
                 <p>
                   <strong>Timings:</strong> 10:00 AM - 2:00 PM
                 </p>
                 <p>
+                  <strong>Ph Number:</strong> +91 95914 93575
+                </p>
+                <p>
                   <strong>Address:</strong>
                   <br />
-                  Balaji Gynaecology & Infertility Centre, Bangalore
+                  04/1, Bull Temple Rd, NR Colony, Basavanagudi, Bengaluru,
+                  Karnataka 560050
                 </p>
                 <div className="w-full h-64 rounded-lg overflow-hidden">
                   <iframe
@@ -221,14 +225,18 @@ const ContactPage = () => {
                   <strong>Timings:</strong> 3:00 PM - 7:00 PM
                 </p>
                 <p>
+                  <strong>Ph Number:</strong> +91 63669 59613
+                </p>
+                <p>
                   <strong>Address:</strong>
                   <br />
-                  Motherhood Hospital, Banashankari, Bangalore
+                  4, 30th Main Rd, opp. Kempegowda Institute Of Medical Science,
+                  Kaveri Nagar, Banagirinagara, Banashankari 3rd Stage,
+                  Banashankari, Bengaluru, Karnataka 560085
                 </p>
                 <div className="w-full h-64 rounded-lg overflow-hidden">
                   <iframe
-                    title="Motherhood Hospital Location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31109.341750991076!2d77.53507536506682!3d12.920857531496316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15ac760bf0d7%3A0x7d4d3d8f2e519f4d!2sMotherhood%20Hospital%2C%20Banashankari!5e0!3m2!1sen!2sin!4v1723456798000!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.7007919466455!2d77.55851107572265!3d12.926942315854477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3e29ef71a267%3A0x8a9de5ce7a6281a8!2sMotherhood%20Hospital%20Banashankari%20-%20Best%20Maternity%20Hospital%20In%20Bangalore!5e0!3m2!1sen!2sin!4v1753118780409!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}

@@ -29,14 +29,6 @@ const faqContent = [
     q: "3. Is ultrasound imaging safe for my baby?",
     a: "Yes, prenatal ultrasounds are non-invasive and considered safe when performed by trained professionals using standard medical guidelines.",
   },
-  {
-    q: "4. What is included in newborn care visits?",
-    a: "Newborn care includes physical exams, weight checks, feeding support, developmental screening, and guidance for new parents.",
-  },
-  {
-    q: "5. Can I bring both parents to appointments?",
-    a: "Yes, we welcome both parents and support people to attend appointments when possible and space allows.",
-  },
 ];
 
 type HomeProps = {
@@ -155,7 +147,7 @@ export default function Home({
               <h2 className="text-3xl sm:text-4xl font-semibold leading-tight mb-3">
                 <span className="bg-gradient-to-b from-transparent to-white">
                   Questions?
-                </span>{" "}
+                </span>
                 We&lsquo;re glad you asked
               </h2>
               <p className="text-[#2E231FCC] font-light text-base sm:text-lg">
@@ -300,6 +292,7 @@ function ServicesSplitSection() {
         "Preventive health check-ups to ensure holistic gynaecological wellness.",
     },
   ];
+  const router = useRouter();
 
   return (
     <section className="bg-[#F3F3F7] py-16 px-4 md:px-8">
@@ -315,7 +308,10 @@ function ServicesSplitSection() {
             delivery and beyond.
           </h4>
 
-          <button className="mt-6 bg-[#ED9282] cursor-pointer text-white px-6 py-3 rounded-full hover:bg-[#ED9282] transition">
+          <button
+            onClick={() => router.push("/services2")}
+            className="mt-6 bg-[#ED9282] cursor-pointer text-white px-6 py-3 rounded-full hover:bg-[#ED9282] transition"
+          >
             View all services
           </button>
         </div>

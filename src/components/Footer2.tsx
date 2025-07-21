@@ -17,6 +17,10 @@ export default function Footer2() {
       url: "/",
     },
     {
+      title: "About",
+      url: "/about",
+    },
+    {
       title: "Services",
       url: "/services2",
     },
@@ -27,10 +31,6 @@ export default function Footer2() {
     {
       title: "Gallery",
       url: "/gallery",
-    },
-    {
-      title: "About",
-      url: "/about",
     },
     {
       title: "Contact",

@@ -38,7 +38,7 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
                   key={idx}
                   className="bg-gray-50 rounded-lg shadow-md overflow-hidden"
                 >
-                  <div className="relative w-full h-48">
+                  <div className="relative w-full h-34">
                     <Image
                       src={urlFor(post.coverImage).width(800).url()}
                       alt={post.title}
@@ -46,11 +46,13 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
                       className="object-cover"
                     />
                   </div>
-                  <div className="p-4">
+                  <div className="px-4 pt-4 pb-3">
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">
                       {post.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
+                    <p className="text-gray-600 text-sm mb-3 text-justify">
+                      {post.excerpt}
+                    </p>
                     <Link
                       href={`/blog/${post.slug.current}`}
                       className="text-[#ed9282] hover:underline text-sm font-medium"

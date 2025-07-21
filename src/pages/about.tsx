@@ -179,7 +179,9 @@ function HomeBanner3({
       {/* Left Section – Text */}
       <div className="w-full md:w-3/5 flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-xl text-left">
-          {/* <h3 className="text-sm text-[#ED9282] mb-2">Welcome to Our Clinic</h3> */}
+          <h3 className="text-sm text-[#000] mb-2 font-bold italic">
+            Meet Dr. Vani R
+          </h3>
           <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">
             {section1Title}
           </h1>

@@ -18,8 +18,8 @@ export default function NavBar2() {
           <Image
             src={logo} // path relative to public
             alt="Dr. Vani R Logo"
-            width={40}
-            height={40}
+            width={50}
+            height={50}
             priority
           />
           <span className="sr-only">Dr. Vani R</span>

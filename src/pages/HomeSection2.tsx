@@ -20,9 +20,6 @@ export default function HomeSectionTwo({ services }: { services: Service[] }) {
         <h2 className="text-4xl font-bold text-gray-800 mb-2">
           Care Through Every Stage
         </h2>
-        <h4 className="text-lg text-gray-600">
-          From newborns to nurturing families
-        </h4>
       </div>
 
       {/* Tabs */}
