@@ -28,10 +28,10 @@ export default function NavBar2() {
         {/* Desktop Nav Links */}
         <div className="hidden items-center md:flex space-x-8 text-gray-700 font-medium">
           <Link href="/">Home</Link>
+          <Link href="/about">About</Link>
           <Link href="/services2">Services</Link>
           <Link href="/blogs">Blogs</Link>
           <Link href="/gallery">Gallery</Link>
-          <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
           <button
             className="text-stone-50 bg-[#ED9282] hover:bg-[#f3b6ab] cursor-pointer px-6 py-2 rounded-full"
@@ -84,6 +84,9 @@ export default function NavBar2() {
             <Link href="/" onClick={() => setIsOpen(false)}>
               Home
             </Link>
+            <Link href="/about" onClick={() => setIsOpen(false)}>
+              About
+            </Link>
             <Link href="/services2" onClick={() => setIsOpen(false)}>
               Services
             </Link>
@@ -92,9 +95,6 @@ export default function NavBar2() {
             </Link>
             <Link href="/gallery" onClick={() => setIsOpen(false)}>
               Gallery
-            </Link>
-            <Link href="/about" onClick={() => setIsOpen(false)}>
-              About
             </Link>
             <Link href="/contact" onClick={() => setIsOpen(false)}>
               Contact
