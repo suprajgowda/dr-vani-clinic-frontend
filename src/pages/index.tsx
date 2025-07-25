@@ -16,20 +16,20 @@ import Vaccinations from "../app/vaccinations.svg";
 import HeroCarousel from "./HeroCarousel";
 import { useRouter } from "next/router";
 
-const faqContent = [
-  {
-    q: "1. When should I schedule my first prenatal visit?",
-    a: "You should schedule your first prenatal visit as soon as you know you are pregnant, ideally around 6–8 weeks.",
-  },
-  {
-    q: "2. What vaccines are recommended during pregnancy?",
-    a: "Vaccines like flu and Tdap are recommended to protect you and your baby from serious infections before and after birth.",
-  },
-  {
-    q: "3. Is ultrasound imaging safe for my baby?",
-    a: "Yes, prenatal ultrasounds are non-invasive and considered safe when performed by trained professionals using standard medical guidelines.",
-  },
-];
+// const faqContent = [
+//   {
+//     q: "1. When should I schedule my first prenatal visit?",
+//     a: "You should schedule your first prenatal visit as soon as you know you are pregnant, ideally around 6–8 weeks.",
+//   },
+//   {
+//     q: "2. What vaccines are recommended during pregnancy?",
+//     a: "Vaccines like flu and Tdap are recommended to protect you and your baby from serious infections before and after birth.",
+//   },
+//   {
+//     q: "3. Is ultrasound imaging safe for my baby?",
+//     a: "Yes, prenatal ultrasounds are non-invasive and considered safe when performed by trained professionals using standard medical guidelines.",
+//   },
+// ];
 
 type HomeProps = {
   heroTitle: string;
@@ -56,12 +56,14 @@ type HomeProps = {
     content: string;
     rating: number;
   }[];
+  faqContent: { question: string; answer: string }[];
 };
 
 export default function Home({
   heroImage,
   services,
   testimonials,
+  faqContent,
 }: HomeProps & { testimonials: never[] }) {
   return (
     <>
@@ -161,9 +163,11 @@ export default function Home({
               {faqContent.map((faq, idx) => (
                 <div key={idx} className="p-4 bg-white rounded shadow-sm">
                   <div className="font-semibold text-gray-800 mb-2">
-                    {faq.q}
+                    Q - {faq.question}
                   </div>
-                  <div className="font-normal text-gray-600">{faq.a}</div>
+                  <div className="font-normal text-gray-600">
+                    A - {faq.answer}
+                  </div>
                 </div>
               ))}
             </div>
@@ -176,6 +180,7 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await sanityClient.fetch(`*[_type == "home"][0]`);
+  const faqsData = await sanityClient.fetch(`*[_type == "faqsPage"][0]{faqs}`);
 
   const testimonials = await sanityClient.fetch(`*[_type == "testimonial"]{
     name,
@@ -199,6 +204,7 @@ export const getStaticProps: GetStaticProps = async () => {
       awardsSectionDescription: data?.awardsSectionDescription || "",
       sectionAwards: data?.sectionAwards || [],
       testimonials: testimonials || [],
+      faqContent: faqsData?.faqs?.slice(0, 5) || [],
     },
     revalidate: 60,
   };
