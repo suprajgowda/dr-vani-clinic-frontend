@@ -39,6 +39,7 @@ type HomeProps = {
   services: {
     serviceImage: SanityImageSource;
     serviceText: string;
+    serviceDescription: string;
   }[];
   sectionImage: SanityImageSource;
   sectionTitle: string;
@@ -125,7 +126,7 @@ export default function Home({
                       <p className="text-gray-700 text-base leading-relaxed">
                         {t.content}
                         <span className="text-gray-900 font-semibold text-sm whitespace-nowrap">
-                          - {t.name}
+                          - {t.name || "Anonymous"}
                         </span>
                       </p>
                     </div>
@@ -217,7 +218,9 @@ function HomeBanner3({ heroImage }: { heroImage: SanityImageSource }) {
       {/* Left Section – Text */}
       <div className="w-full md:w-3/5 bg-white flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-xl text-left">
-          {/* <h3 className="text-sm text-[#ED9282] mb-2">Welcome to Our Clinic</h3> */}
+          <h3 className="text-sm text-[#000] mb-2 font-bold italic">
+            Meet Dr. Vani R
+          </h3>
           <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">
             Expert Gynecological Care
           </h1>

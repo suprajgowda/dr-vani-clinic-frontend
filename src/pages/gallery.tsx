@@ -96,6 +96,12 @@ export default function Gallery({ albums }: GalleryProps) {
                           controls
                           className="w-full h-auto object-contain"
                           src={getSanityFileUrl(photo.asset._ref)}
+                          onError={() =>
+                            console.error(
+                              "Video failed to load:",
+                              photo.asset._ref
+                            )
+                          }
                         >
                           Your browser does not support the video tag.
                         </video>

@@ -6,6 +6,7 @@ import { urlFor } from "@/lib/sanity";
 type Service = {
   serviceText: string;
   serviceImage: SanityImageSource;
+  serviceDescription: string;
 };
 
 export default function HomeSectionTwo({ services }: { services: Service[] }) {
@@ -40,16 +41,14 @@ export default function HomeSectionTwo({ services }: { services: Service[] }) {
       </div>
 
       {/* Active Tab Content */}
-      <div className="max-w-7xl mx-auto bg-[#F3F3F7] rounded-xl shadow p-8 md:p-16 flex flex-col md:flex-row gap-8 items-center">
+      <div className="max-w-7xl mx-auto bg-[#F3F3F7] rounded-xl shadow p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center">
         {/* Left - Text */}
         <div className="flex-1 text-center md:text-left">
-          <h3 className="text-lg text-[#ED9282] mb-2">Compassion & Care</h3>
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">
             {services[activeTab].serviceText}
           </h2>
           <h4 className="text-lg text-gray-600 mb-6">
-            We provide safe, evidence-based support for your baby’s first days
-            and months of life, ensuring comfort, health, and growth.
+            {services[activeTab].serviceDescription}
           </h4>
           <button className="bg-[#ED9282] cursor-pointer text-white px-5 py-2 rounded-full hover:bg-[#ED9282] transition">
             Learn More

@@ -197,6 +197,15 @@ const ContactPage = () => {
                   <strong>Ph Number:</strong> +91 95914 93575
                 </p>
                 <p>
+                  <strong className="mr-2">Email:</strong>
+                  <a
+                    href="mailto:drvanigynlap@gmail.com"
+                    className="text-[#ed9282] hover:underline"
+                  >
+                    drvanigynlap@gmail.com
+                  </a>
+                </p>
+                <p>
                   <strong>Address:</strong>
                   <br />
                   04/1, Bull Temple Rd, NR Colony, Basavanagudi, Bengaluru,
@@ -226,6 +235,15 @@ const ContactPage = () => {
                 </p>
                 <p>
                   <strong>Ph Number:</strong> +91 63669 59613
+                </p>
+                <p>
+                  <strong className="mr-2">Email:</strong>
+                  <a
+                    href="mailto:drvanigynlap@gmail.com"
+                    className="text-[#ed9282] hover:underline"
+                  >
+                    drvanigynlap@gmail.com
+                  </a>
                 </p>
                 <p>
                   <strong>Address:</strong>

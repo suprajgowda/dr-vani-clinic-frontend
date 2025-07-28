@@ -34,6 +34,7 @@ export default function NavBar2() {
           <Link href="/gallery">Gallery</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/faqs">FAQ&lsquo;s</Link>
+          <Link href="/testimonials">Testimonials</Link>
           <button
             className="text-stone-50 bg-[#ED9282] hover:bg-[#f3b6ab] cursor-pointer px-6 py-2 rounded-full"
             onClick={() => router.push("/contact")}
@@ -102,6 +103,9 @@ export default function NavBar2() {
             </Link>
             <Link href="/faqs" onClick={() => setIsOpen(false)}>
               FAQ&lsquo;s
+            </Link>
+            <Link href="/testimonials" onClick={() => setIsOpen(false)}>
+              Testimonials
             </Link>
             <Link href="/contact" onClick={() => setIsOpen(false)}>
               Book Appointment

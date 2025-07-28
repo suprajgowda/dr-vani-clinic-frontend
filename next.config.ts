@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["cdn.sanity.io"],
   },
+  env: {
+    SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
+  },
 };
 
 export default nextConfig;
