@@ -2,14 +2,12 @@ import Slider from "react-slick";
 import Image from "next/image";
 import Meditation from "../app/meditation.jpg";
 import Baby from "../app/baby.jpg";
-
-// type HeroCarouselProps = {
-//   images?: any[]; // Not currently used but retained if dynamic images added
-// };
+import HumanFetusPrenatal from "../app/human-fetus-prenatal.jpg";
+import Laproscopy from "../app/laproscopy.jpg";
 
 export default function HeroCarousel() {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     autoplay: true,
     speed: 800,
@@ -24,12 +22,26 @@ export default function HeroCarousel() {
     {
       img: Meditation,
       title: "Experience Peaceful Motherhood",
-      subtitle: "Holistic gynecological care, tailored for you.",
+      subtitle:
+        "Embrace your journey to motherhood with expert guidance and heartfelt care. Dr. Vani ensures every step is safe, supported, and stress-free.",
     },
     {
       img: Baby,
       title: "Bringing New Life with Care",
-      subtitle: "Every baby's first step starts with expert hands.",
+      subtitle:
+        "Welcoming every baby with expert hands and a compassionate heart. Dr. Vani provides safe, personalized care for every birth journey.",
+    },
+    {
+      img: HumanFetusPrenatal,
+      title: "Fertility Treatments",
+      subtitle:
+        "Struggling with fertility can be overwhelming but you're not alone. Dr. Vani provides empathetic, evidence-based support every step of the way.",
+    },
+    {
+      img: Laproscopy,
+      title: "Laparoscopy",
+      subtitle:
+        "Gentle surgical care with smaller cuts and quicker healing. Laparoscopic procedures by Dr. Vani ensure safety, comfort, and results.",
     },
   ];
 

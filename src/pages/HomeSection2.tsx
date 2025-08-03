@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { urlFor } from "@/lib/sanity";
 
@@ -7,11 +8,17 @@ type Service = {
   serviceText: string;
   serviceImage: SanityImageSource;
   serviceDescription: string;
+  blogLink?: {
+    slug: {
+      current: string;
+    };
+  };
 };
 
 export default function HomeSectionTwo({ services }: { services: Service[] }) {
   const [activeTab, setActiveTab] = useState(0);
   if (!services || services.length === 0) return null;
+  console.log("Blog Link:", services[activeTab].blogLink);
 
   return (
     <section className="bg-white py-16 px-4 md:px-8">
@@ -50,9 +57,14 @@ export default function HomeSectionTwo({ services }: { services: Service[] }) {
           <h4 className="text-lg text-gray-600 mb-6">
             {services[activeTab].serviceDescription}
           </h4>
-          <button className="bg-[#ED9282] cursor-pointer text-white px-5 py-2 rounded-full hover:bg-[#ED9282] transition">
-            Learn More
-          </button>
+          {services[activeTab]?.blogLink?.slug?.current && (
+            <Link
+              href={`/blog/${services[activeTab].blogLink.slug.current}`}
+              className="bg-[#ED9282] cursor-pointer text-white px-5 py-2 rounded-full hover:bg-[#ED9282] transition"
+            >
+              Learn More
+            </Link>
+          )}
         </div>
 
         {/* Right - Image */}

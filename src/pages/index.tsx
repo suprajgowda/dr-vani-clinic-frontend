@@ -16,21 +16,6 @@ import Vaccinations from "../app/vaccinations.svg";
 import HeroCarousel from "./HeroCarousel";
 import { useRouter } from "next/router";
 
-// const faqContent = [
-//   {
-//     q: "1. When should I schedule my first prenatal visit?",
-//     a: "You should schedule your first prenatal visit as soon as you know you are pregnant, ideally around 6–8 weeks.",
-//   },
-//   {
-//     q: "2. What vaccines are recommended during pregnancy?",
-//     a: "Vaccines like flu and Tdap are recommended to protect you and your baby from serious infections before and after birth.",
-//   },
-//   {
-//     q: "3. Is ultrasound imaging safe for my baby?",
-//     a: "Yes, prenatal ultrasounds are non-invasive and considered safe when performed by trained professionals using standard medical guidelines.",
-//   },
-// ];
-
 type HomeProps = {
   heroTitle: string;
   ctaText: string;
@@ -40,6 +25,11 @@ type HomeProps = {
     serviceImage: SanityImageSource;
     serviceText: string;
     serviceDescription: string;
+    blogLink?: {
+      slug: {
+        current: string;
+      };
+    };
   }[];
   sectionImage: SanityImageSource;
   sectionTitle: string;
@@ -65,6 +55,7 @@ export default function Home({
   services,
   testimonials,
   faqContent,
+  sectionDescription,
 }: HomeProps & { testimonials: never[] }) {
   return (
     <>
@@ -73,7 +64,10 @@ export default function Home({
       </Head>
 
       <HeroCarousel />
-      <HomeBanner3 heroImage={heroImage} />
+      <HomeBanner3
+        heroImage={heroImage}
+        sectionDescription={sectionDescription}
+      />
       <HomeSectionTwo services={services} />
       <ServicesSplitSection />
       <SplitImageTextSection />
@@ -180,7 +174,27 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await sanityClient.fetch(`*[_type == "home"][0]`);
+  const data = await sanityClient.fetch(`*[_type == "home"][0]{
+    heroTitle,
+    ctaText,
+    ctaLink,
+    heroImage,
+    services[]{
+      serviceImage,
+      serviceText,
+      serviceDescription,
+      blogLink->{
+        slug
+      }
+    },
+    sectionImage,
+    sectionTitle,
+    sectionDescription,
+    sectionAchievements,
+    awardsSectionTitle,
+    awardsSectionDescription,
+    sectionAwards,
+  }`);
   const faqsData = await sanityClient.fetch(`*[_type == "faqsPage"][0]{faqs}`);
 
   const testimonials = await sanityClient.fetch(`*[_type == "testimonial"]{
@@ -189,6 +203,7 @@ export const getStaticProps: GetStaticProps = async () => {
     content,
     rating
   }`);
+  console.log("Data.services[0].blogLink----->", data.services[0].blogLink);
 
   return {
     props: {
@@ -211,8 +226,15 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-function HomeBanner3({ heroImage }: { heroImage: SanityImageSource }) {
+function HomeBanner3({
+  heroImage,
+  sectionDescription,
+}: {
+  heroImage: SanityImageSource;
+  sectionDescription: string;
+}) {
   const router = useRouter();
+  console.log("THe Section Description----->", sectionDescription);
   return (
     <section className="flex flex-col md:flex-row w-full min-h-[80vh]">
       {/* Left Section – Text */}
@@ -227,6 +249,9 @@ function HomeBanner3({ heroImage }: { heroImage: SanityImageSource }) {
           <h2 className="text-lg text-gray-700 mb-6">
             Compassionate. Trusted. Experienced.
           </h2>
+          <h4 className="text-sm text-gray-700 mb-6 text-justify">
+            {sectionDescription}
+          </h4>
           <button
             onClick={() => router.push("/contact")}
             className="bg-[#ED9282] cursor-pointer text-white px-6 py-3 rounded-full hover:bg-[#e28172] transition"
@@ -374,7 +399,7 @@ function SplitImageTextSection() {
           </h4>
 
           <button
-            onClick={() => router.push("/contact")}
+            onClick={() => router.push("/blogs")}
             className="mt-6 bg-[#ED9282] text-white cursor-pointer px-6 py-3 rounded-full hover:bg-[#ED9282] transition"
           >
             Learn More
