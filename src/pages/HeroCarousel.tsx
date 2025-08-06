@@ -3,7 +3,7 @@ import Image from "next/image";
 import Meditation from "../app/meditation.jpg";
 import Baby from "../app/baby.jpg";
 import HumanFetusPrenatal from "../app/human-fetus-prenatal.jpg";
-import Laproscopy from "../app/laproscopy.jpg";
+import Laproscopy from "../app/laproscopy_banner.jpeg";
 
 export default function HeroCarousel() {
   const settings = {
@@ -35,7 +35,7 @@ export default function HeroCarousel() {
       img: HumanFetusPrenatal,
       title: "Fertility Treatments",
       subtitle:
-        "Struggling with fertility can be overwhelming but you're not alone. Dr. Vani provides empathetic, evidence-based support every step of the way.",
+        "Struggling with fertility issues can be overwhelming but you're not alone. Dr. Vani provides empathetic, evidence-based support every step of the way.",
     },
     {
       img: Laproscopy,

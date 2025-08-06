@@ -162,33 +162,11 @@ const ContactPage = () => {
           {/* Right – Contact Info */}
           <div className="text-gray-700">
             <h2 className="text-2xl font-bold mb-6">Clinic Info</h2>
-            {/* <div className="flex flex-col sm:flex-row mb-4 sm:items-start sm:space-x-12">
-              <p className="mb-4 sm:mb-0">
-                <strong>Phone:</strong>
-                <br />
-                <a
-                  href="tel:+919591493575"
-                  className="text-[#ed9282] hover:underline"
-                >
-                  +91 95914 93575
-                </a>
-              </p>
-              <p className="mb-4 sm:mb-0">
-                <strong>Email:</strong>
-                <br />
-                <a
-                  href="mailto:dr.vani@example.com"
-                  className="text-[#ed9282] hover:underline"
-                >
-                  dr.vani@example.com
-                </a>
-              </p>
-            </div> */}
             <div className="grid grid-cols-1 gap-6 mt-8">
               {/* Sri Balaji Hospital Card */}
               <div className="bg-white rounded-xl shadow-md p-6 space-y-4">
                 <h3 className="text-xl font-semibold text-gray-800">
-                  Balaji Gynaecology & Infertility Centre
+                  Sri Balaji Hospital
                 </h3>
                 <p>
                   <strong>Timings:</strong> 10:00 AM - 2:00 PM
@@ -208,8 +186,8 @@ const ContactPage = () => {
                 <p>
                   <strong>Address:</strong>
                   <br />
-                  04/1, Bull Temple Rd, NR Colony, Basavanagudi, Bengaluru,
-                  Karnataka 560050
+                  #118, 5th Main, 7th Cross, N.R. Colony, Bull Temple Road,
+                  Bengaluru - 560019
                 </p>
                 <div className="w-full h-64 rounded-lg overflow-hidden">
                   <iframe

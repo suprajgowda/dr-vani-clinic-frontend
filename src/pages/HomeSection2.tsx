@@ -18,7 +18,6 @@ type Service = {
 export default function HomeSectionTwo({ services }: { services: Service[] }) {
   const [activeTab, setActiveTab] = useState(0);
   if (!services || services.length === 0) return null;
-  console.log("Blog Link:", services[activeTab].blogLink);
 
   return (
     <section className="bg-white py-16 px-4 md:px-8">

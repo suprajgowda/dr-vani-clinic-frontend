@@ -2,6 +2,7 @@ import React from "react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import { sanityClient } from "../lib/sanity";
+import Faq_bg from "../app/faq_bg.png";
 
 interface FAQ {
   question: string;
@@ -26,7 +27,7 @@ export default function FAQPage({ faqs, pageTitle }: FAQPageProps) {
 
       <section className="bg-white py-16 px-4 md:px-8">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#f5a597] mb-8 text-center">
             {pageTitle}
           </h1>
 
@@ -34,17 +35,29 @@ export default function FAQPage({ faqs, pageTitle }: FAQPageProps) {
             {faqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="bg-white shadow-md rounded-lg p-6 border border-gray-200"
+                className="relative bg-white shadow-md rounded-lg p-6 border border-gray-200 overflow-hidden"
               >
-                <div className="mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    Q: {faq.question}
-                  </h3>
+                {/* Top-right tilted background image */}
+                <div className="absolute top-0 right-0 z-0 transform rotate-40 translate-x-6 -translate-y-6 opacity-80 pointer-events-none">
+                  <img
+                    src={Faq_bg.src}
+                    alt="FAQ decoration"
+                    className="w-24 h-24 object-contain"
+                  />
                 </div>
-                <div>
-                  <p className="text-gray-700 leading-relaxed">
-                    A: {faq.answer}
-                  </p>
+
+                {/* Content above background image */}
+                <div className="relative z-10">
+                  <div className="mb-2">
+                    <h3 className="text-lg font-semibold text-[#dd6f82]">
+                      Q: {faq.question}
+                    </h3>
+                  </div>
+                  <div>
+                    <p className="text-gray-700 leading-relaxed">
+                      A: {faq.answer}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}

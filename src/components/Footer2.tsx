@@ -36,6 +36,14 @@ export default function Footer2() {
       title: "Contact",
       url: "/contact",
     },
+    {
+      title: "FAQs",
+      url: "/faqs",
+    },
+    {
+      title: "Testimonials",
+      url: "/testimonials",
+    },
   ];
   const socials: socialsType[] = [
     {

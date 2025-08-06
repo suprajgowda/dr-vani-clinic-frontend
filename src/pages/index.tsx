@@ -109,21 +109,18 @@ export default function Home({
 
             {/* Testimonials */}
             <div className="overflow-x-auto">
-              <div className="flex gap-6">
+              <div className="flex gap-6 items-start">
                 {testimonials.map((t, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#F3F3F7] p-6 rounded-md shadow-md flex-shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[26vw] max-w-[90vw]"
+                    className="bg-[#F3F3F7] p-6 rounded-md shadow-md flex-shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[26vw] max-w-[90vw] h-[280px] flex flex-col justify-between"
                   >
-                    {/* Content */}
-                    <div className="mb-0 flex justify-between items-end">
-                      <p className="text-gray-700 text-base leading-relaxed">
-                        {t.content}
-                        <span className="text-gray-900 font-semibold text-sm whitespace-nowrap">
-                          - {t.name || "Anonymous"}
-                        </span>
-                      </p>
-                    </div>
+                    <p className="text-gray-700 text-base text-justify leading-relaxed line-clamp-7">
+                      {t.content}
+                    </p>
+                    <span className="text-gray-900 font-semibold text-sm mt-3">
+                      - {t.name || "Anonymous"}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -138,14 +135,14 @@ export default function Home({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Left Side - Title & Description */}
             <div className="sm:pt-4 max-w-xl">
-              <div className="text-[#ED9282] text-xs tracking-[.10em] uppercase pb-2">
-                FAQS
+              <div className="text-[#ED9282] text-xl italic tracking-[.10em] pb-2">
+                FAQ&lsquo;s
               </div>
-              <h2 className="text-3xl sm:text-4xl font-semibold leading-tight mb-3">
+              <h2 className="text-2xl sm:text-2xl font-semibold leading-tight mb-3">
                 <span className="bg-gradient-to-b from-transparent to-white">
-                  Questions?
+                  Questions ?
                 </span>
-                We&lsquo;re glad you asked
+                &nbsp;We&lsquo;re glad you asked
               </h2>
               <p className="text-[#2E231FCC] font-light text-base sm:text-lg">
                 Get clear, expert answers to the most important questions about
@@ -157,7 +154,7 @@ export default function Home({
             <div className="space-y-4">
               {faqContent.map((faq, idx) => (
                 <div key={idx} className="p-4 bg-white rounded shadow-sm">
-                  <div className="font-semibold text-gray-800 mb-2">
+                  <div className="font-semibold mb-2 text-[#dd6f82] italic">
                     Q - {faq.question}
                   </div>
                   <div className="font-normal text-gray-600">
@@ -203,7 +200,6 @@ export const getStaticProps: GetStaticProps = async () => {
     content,
     rating
   }`);
-  console.log("Data.services[0].blogLink----->", data.services[0].blogLink);
 
   return {
     props: {
@@ -234,22 +230,21 @@ function HomeBanner3({
   sectionDescription: string;
 }) {
   const router = useRouter();
-  console.log("THe Section Description----->", sectionDescription);
   return (
     <section className="flex flex-col md:flex-row w-full min-h-[80vh]">
       {/* Left Section – Text */}
       <div className="w-full md:w-3/5 bg-white flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-xl text-left">
-          <h3 className="text-sm text-[#000] mb-2 font-bold italic">
+          <h3 className="text-xl text-[#ED9282] mb-2 antialiased font-medium italic">
             Meet Dr. Vani R
           </h3>
-          <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">
+          <h1 className="text-2xl sm:text-2xl font-bold text-black mb-4">
             Expert Gynecological Care
           </h1>
-          <h2 className="text-lg text-gray-700 mb-6">
+          <h2 className="text-base text-gray-700 mb-6">
             Compassionate. Trusted. Experienced.
           </h2>
-          <h4 className="text-sm text-gray-700 mb-6 text-justify">
+          <h4 className="text-base text-gray-700 mb-6 text-justify">
             {sectionDescription}
           </h4>
           <button
