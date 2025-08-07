@@ -4,15 +4,25 @@ import Image from "next/image";
 import { sanityClient, urlFor } from "../lib/sanity";
 import GalleryBanner from "../app/gallery_banner.jpg";
 
+type Photo = {
+  title?: string;
+  image?: {
+    asset: {
+      _id: string;
+      url: string;
+    };
+  };
+  video?: {
+    asset: {
+      _ref: string;
+    };
+  };
+};
+
 type Album = {
   albumTitle: string;
   albumDescription?: string;
-  photos: {
-    asset: {
-      _ref: string;
-      _type: string;
-    };
-  }[];
+  photos: Photo[];
 };
 
 type GalleryProps = {
@@ -57,11 +67,6 @@ export default function Gallery({ albums }: GalleryProps) {
 
       <section className="bg-white py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* <h3 className="text-3xl font-bold text-center text-gray-800 mb-10">
-            Gallery - Real Stories, Expert Care, and Remarkable Moments with Dr.
-            Vani R
-          </h3> */}
-
           {albums.length > 0 ? (
             albums.map((album, albumIdx) => (
               <div key={albumIdx} className="mb-16">
@@ -79,33 +84,45 @@ export default function Gallery({ albums }: GalleryProps) {
                 <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
                   {album.photos?.map((photo, photoIdx) => (
                     <div
-                      key={photoIdx}
+                      key={photo._key || photoIdx}
                       className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-md bg-white"
                     >
-                      {"asset" in photo &&
-                      photo.asset._ref.startsWith("image-") ? (
+                      {/* Render Image if available */}
+                      {photo.image?.asset?._ref ? (
                         <Image
-                          src={urlFor(photo).width(800).url()}
-                          alt={`Photo ${photoIdx + 1}`}
+                          src={urlFor(photo.image).width(800).url()}
+                          alt={photo.title || `Photo ${photoIdx + 1}`}
                           width={800}
                           height={600}
                           className="w-full h-auto object-contain"
                         />
-                      ) : photo.asset._ref.startsWith("file-") ? (
+                      ) : photo.video?.asset?._ref ? (
+                        // Render Video if available
                         <video
                           controls
                           className="w-full h-auto object-contain"
-                          src={getSanityFileUrl(photo.asset._ref)}
+                          src={getSanityFileUrl(photo.video.asset._ref)}
                           onError={() =>
                             console.error(
                               "Video failed to load:",
-                              photo.asset._ref
+                              photo.video?.asset._ref
                             )
                           }
                         >
                           Your browser does not support the video tag.
                         </video>
-                      ) : null}
+                      ) : (
+                        <div className="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-500">
+                          No media available
+                        </div>
+                      )}
+
+                      {/* Optional Title */}
+                      {photo.title && (
+                        <p className="p-2 font-semibold text-base text-gray-700 text-center">
+                          {photo.title}
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
