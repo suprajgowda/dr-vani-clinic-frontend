@@ -52,7 +52,7 @@ const ContactPage = () => {
             src={ContactImage}
             alt="Contact Background"
             fill
-            className="object-cover object-center"
+            className="object-cover object-top"
             priority
           />
           {/* Optional: dark overlay */}

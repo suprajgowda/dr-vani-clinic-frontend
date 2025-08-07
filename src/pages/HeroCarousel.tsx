@@ -35,7 +35,7 @@ export default function HeroCarousel() {
       img: HumanFetusPrenatal,
       title: "Fertility Treatments",
       subtitle:
-        "Struggling with fertility issues can be overwhelming but you're not alone. Dr. Vani provides empathetic, evidence-based support every step of the way.",
+        "Advanced fertility care rooted in evidence-based medicine. Dr. Vani delivers precise, personalized treatment plans you can trust.",
     },
     {
       img: Laproscopy,

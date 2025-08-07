@@ -28,7 +28,7 @@ export default function ServicesPage({ services }: ServicesPageProps) {
               key={idx}
               className="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden"
             >
-              <div className="relative w-full h-48 bg-white">
+              <div className="relative w-full h-92 bg-white">
                 <Image
                   src={urlFor(service.image).url()}
                   alt={service.title}
