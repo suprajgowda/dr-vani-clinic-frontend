@@ -6,15 +6,19 @@ import GalleryBanner from "../app/gallery_banner.jpg";
 
 type Photo = {
   title?: string;
+  _key: string;
   image?: {
+    _type: string;
     asset: {
-      _id: string;
-      url: string;
+      _ref: string;
+      _type: string;
     };
   };
   video?: {
+    _type: string;
     asset: {
       _ref: string;
+      _type: string;
     };
   };
 };
