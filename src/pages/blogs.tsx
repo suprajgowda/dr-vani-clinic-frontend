@@ -32,13 +32,13 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
           </h1>
 
           {posts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
               {posts.map((post, idx) => (
                 <div
                   key={idx}
                   className="bg-gray-50 rounded-lg shadow-md overflow-hidden"
                 >
-                  <div className="relative w-full h-34">
+                  <div className="relative w-full h-52">
                     <Image
                       src={urlFor(post.coverImage).width(800).url()}
                       alt={post.title}

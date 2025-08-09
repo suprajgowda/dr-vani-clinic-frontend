@@ -7,16 +7,23 @@ import PinkRibbonWithPinkFlowers from "../app/pink-ribbon-with-pink-flowers.jpg"
 
 type Testimonial = {
   _id: string;
-  name: string;
+  name?: string;
   content: string;
-  date?: string;
+  date?: string; // ISO string
+  videoUrl?: string | null;
+  videoMimeType?: string | null;
+  videoOriginalFilename?: string | null;
 };
 
-type Props = {
+type TestimonialsPageProps = {
   testimonials: Testimonial[];
 };
 
-export default function TestimonialsPage({ testimonials }: Props) {
+export default function TestimonialsPage({
+  testimonials,
+}: TestimonialsPageProps) {
+  const featuredVideo = testimonials.find((t) => t.videoUrl);
+
   return (
     <>
       <Head>
@@ -26,10 +33,48 @@ export default function TestimonialsPage({ testimonials }: Props) {
           content="Heartfelt testimonials from patients of Dr. Vani"
         />
       </Head>
+
       <section className="max-w-5xl mx-auto py-12 px-4 space-y-10">
         <h1 className="text-3xl font-bold text-center text-gray-800">
           Patient Testimonials
         </h1>
+      </section>
+
+      {/* Featured Video Banner */}
+      {featuredVideo && (
+        <div className="max-w-6xl mx-auto w-full px-[5%]">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-0">
+              {/* Left: Video */}
+              <div className="relative bg-black flex items-center justify-center">
+                <video
+                  className="max-h-[70vh] w-auto rounded-lg"
+                  controls
+                  preload="metadata"
+                >
+                  <source
+                    src={featuredVideo.videoUrl!}
+                    type={featuredVideo.videoMimeType ?? "video/mp4"}
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+
+              {/* Right: Description + Author */}
+              <div className="p-6 md:p-8 flex flex-col justify-center">
+                <p className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
+                  {featuredVideo.content}
+                </p>
+                <div className="text-gray-900 font-semibold">
+                  — {featuredVideo.name || "Anonymous"}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <section className="max-w-5xl mx-auto py-12 px-4 space-y-10">
         <div className="columns-1 md:columns-2 gap-6 space-y-6">
           {testimonials.map((t) => (
             <div
@@ -59,7 +104,11 @@ export const getStaticProps: GetStaticProps = async () => {
       _id,
       name,
       content,
-      date
+      video,
+      date,
+        "videoUrl": video.asset->url,
+        "videoMimeType": video.asset->mimeType,
+        "videoOriginalFilename": video.asset->originalFilename
     }`
   );
 

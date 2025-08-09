@@ -22,18 +22,18 @@ export default function ServicesPage({ services }: ServicesPageProps) {
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
           Our Services
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
           {services.map((service, idx) => (
             <div
               key={idx}
               className="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden"
             >
-              <div className="relative w-full h-92 bg-white">
+              <div className="relative w-full sm:h-[30rem] md:h-[30rem] h-[15rem] bg-white">
                 <Image
                   src={urlFor(service.image).url()}
                   alt={service.title}
                   fill
-                  className="object-cover"
+                  className="object-fill"
                 />
               </div>
               <div className="p-6">
