@@ -44,25 +44,28 @@ const ContactPage = () => {
         <title>Contact | Dr. Vani&lsquo;s Clinic</title>
       </Head>
 
-      {/* Section 1 – Banner */}
-      <section className="relative flex items-center justify-center w-full py-16 sm:py-20 md:py-24 min-h-120 text-white text-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 -z-10">
+      {/* Section 1 – Banner (responsive) */}
+      <section className="relative w-full">
+        {/* Image container with explicit, smaller heights per breakpoint */}
+        <div className="relative h-[38vh] sm:h-[46vh] md:h-[56vh] lg:h-[64vh]">
           <Image
             src={ContactImage}
             alt="Contact Background"
             fill
-            className="object-cover object-top"
             priority
+            sizes="100vw"
+            className="object-cover [object-position:20%_20%]"
+            // 50% x, 20% y -> keeps the top area more visible. Adjust to taste.
           />
-          {/* Optional: dark overlay */}
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        {/* Text Content */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4">
-          Contact Us
-        </h1>
+        {/* Text overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white px-4 text-center">
+            Contact Us
+          </h1>
+        </div>
       </section>
 
       {/* Section 2 – Form + Info Grid */}
