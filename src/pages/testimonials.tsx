@@ -4,6 +4,7 @@ import Head from "next/head";
 import { GetStaticProps } from "next";
 import { sanityClient } from "../lib/sanity";
 import PinkRibbonWithPinkFlowers from "../app/pink-ribbon-with-pink-flowers.jpg";
+import React from "react";
 
 type Testimonial = {
   _id: string;
@@ -15,9 +16,69 @@ type Testimonial = {
   videoOriginalFilename?: string | null;
 };
 
+type FeaturedVideo = {
+  videoUrl: string;
+  videoMimeType?: string;
+  content?: string;
+  name?: string;
+};
+
 type TestimonialsPageProps = {
   testimonials: Testimonial[];
 };
+
+function VideoCard({ featuredVideo }: { featuredVideo: FeaturedVideo }) {
+  const [aspect, setAspect] = React.useState<"16/9" | "9/16" | "1/1">("16/9");
+
+  const handleMeta = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const v = e.currentTarget;
+    const ar = v.videoWidth / v.videoHeight;
+    if (!ar || Number.isNaN(ar)) return;
+    if (Math.abs(ar - 1) < 0.08) setAspect("1/1");
+    else if (ar < 1) setAspect("9/16");
+    else setAspect("16/9");
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto w-full px-[5%] mb-8">
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(280px,520px)_1fr] gap-0">
+          {/* Left: Video (keeps ratio, no cropping) */}
+          <div className="bg-black">
+            <div
+              className="relative w-full"
+              style={{ aspectRatio: aspect.replace("/", " / ") }}
+            >
+              <video
+                className="absolute inset-0 h-full w-full object-contain"
+                controls
+                playsInline
+                preload="metadata"
+                onLoadedMetadata={handleMeta}
+              >
+                <source
+                  src={featuredVideo.videoUrl}
+                  type={featuredVideo.videoMimeType ?? "video/mp4"}
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+
+          {/* Right: Description + Author */}
+          <div className="p-6 md:p-8 flex flex-col justify-center">
+            <p className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
+              {featuredVideo.content}
+            </p>
+            <div className="text-gray-900 font-semibold">
+              — {featuredVideo.name || "Anonymous"}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function TestimonialsPage({
   testimonials,
@@ -42,42 +103,9 @@ export default function TestimonialsPage({
       </section>
 
       {/* Featured Video Banner */}
-      {featuredVideos &&
-        featuredVideos.map((featuredVideo, index) => (
-          <div key={index} className="max-w-6xl mx-auto w-full px-[5%] mb-8">
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-0">
-                {/* Left: Video */}
-                <div
-                  className="relative bg-black flex items-center justify-center"
-                  style={{ maxWidth: "30em" }}
-                >
-                  <video
-                    className="max-h-[70vh] w-auto rounded-lg"
-                    controls
-                    preload="metadata"
-                  >
-                    <source
-                      src={featuredVideo.videoUrl!}
-                      type={featuredVideo.videoMimeType ?? "video/mp4"}
-                    />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-
-                {/* Right: Description + Author */}
-                <div className="p-6 md:p-8 flex flex-col justify-center">
-                  <p className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
-                    {featuredVideo.content}
-                  </p>
-                  <div className="text-gray-900 font-semibold">
-                    — {featuredVideo.name || "Anonymous"}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+      {featuredVideos?.map((featuredVideo, index) => (
+        <VideoCard key={index} featuredVideo={featuredVideo} />
+      ))}
 
       <section className="max-w-5xl mx-auto py-12 px-4 space-y-10">
         <div className="columns-1 md:columns-2 gap-6 space-y-6">
