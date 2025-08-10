@@ -38,12 +38,23 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
                   key={idx}
                   className="bg-gray-50 rounded-lg shadow-md overflow-hidden"
                 >
-                  <div className="relative w-full h-52">
+                  <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden rounded-lg">
+                    {/* Background fill (blurred) */}
                     <Image
-                      src={urlFor(post.coverImage).width(800).url()}
+                      src={urlFor(post.coverImage).width(1200).url()}
+                      alt=""
+                      fill
+                      className="object-cover blur-sm scale-110 opacity-70"
+                      aria-hidden
+                      priority={false}
+                    />
+                    {/* Foreground image (no crop) */}
+                    <Image
+                      src={urlFor(post.coverImage).width(1200).url()}
                       alt={post.title}
                       fill
-                      className="object-cover"
+                      className="object-contain"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
                   <div className="px-4 pt-4 pb-3">

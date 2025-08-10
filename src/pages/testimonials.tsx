@@ -22,7 +22,8 @@ type TestimonialsPageProps = {
 export default function TestimonialsPage({
   testimonials,
 }: TestimonialsPageProps) {
-  const featuredVideo = testimonials.find((t) => t.videoUrl);
+  const featuredVideos = testimonials.filter((t) => t.videoUrl);
+  console.log("The Testimonials data--->", testimonials);
 
   return (
     <>
@@ -41,38 +42,42 @@ export default function TestimonialsPage({
       </section>
 
       {/* Featured Video Banner */}
-      {featuredVideo && (
-        <div className="max-w-6xl mx-auto w-full px-[5%]">
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-0">
-              {/* Left: Video */}
-              <div className="relative bg-black flex items-center justify-center">
-                <video
-                  className="max-h-[70vh] w-auto rounded-lg"
-                  controls
-                  preload="metadata"
+      {featuredVideos &&
+        featuredVideos.map((featuredVideo, index) => (
+          <div key={index} className="max-w-6xl mx-auto w-full px-[5%] mb-8">
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-0">
+                {/* Left: Video */}
+                <div
+                  className="relative bg-black flex items-center justify-center"
+                  style={{ maxWidth: "30em" }}
                 >
-                  <source
-                    src={featuredVideo.videoUrl!}
-                    type={featuredVideo.videoMimeType ?? "video/mp4"}
-                  />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+                  <video
+                    className="max-h-[70vh] w-auto rounded-lg"
+                    controls
+                    preload="metadata"
+                  >
+                    <source
+                      src={featuredVideo.videoUrl!}
+                      type={featuredVideo.videoMimeType ?? "video/mp4"}
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
 
-              {/* Right: Description + Author */}
-              <div className="p-6 md:p-8 flex flex-col justify-center">
-                <p className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
-                  {featuredVideo.content}
-                </p>
-                <div className="text-gray-900 font-semibold">
-                  — {featuredVideo.name || "Anonymous"}
+                {/* Right: Description + Author */}
+                <div className="p-6 md:p-8 flex flex-col justify-center">
+                  <p className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
+                    {featuredVideo.content}
+                  </p>
+                  <div className="text-gray-900 font-semibold">
+                    — {featuredVideo.name || "Anonymous"}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        ))}
 
       <section className="max-w-5xl mx-auto py-12 px-4 space-y-10">
         <div className="columns-1 md:columns-2 gap-6 space-y-6">

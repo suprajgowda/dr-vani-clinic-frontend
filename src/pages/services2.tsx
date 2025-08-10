@@ -28,12 +28,22 @@ export default function ServicesPage({ services }: ServicesPageProps) {
               key={idx}
               className="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden"
             >
-              <div className="relative w-full sm:h-[30rem] md:h-[30rem] h-[15rem] bg-white">
+              <div className="relative w-full h-[15rem] sm:h-[28rem] overflow-hidden bg-white rounded-md">
+                {/* Background layer – fills the box */}
+                <Image
+                  src={urlFor(service.image).url()}
+                  alt=""
+                  fill
+                  className="object-cover blur-sm scale-110 opacity-60"
+                  aria-hidden // decorative
+                />
+                {/* Foreground layer – real image without distortion */}
                 <Image
                   src={urlFor(service.image).url()}
                   alt={service.title}
                   fill
-                  className="object-fill"
+                  className="object-contain"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
               <div className="p-6">
