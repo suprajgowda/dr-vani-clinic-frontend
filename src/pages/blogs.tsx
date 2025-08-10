@@ -32,7 +32,7 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
           </h1>
 
           {posts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-12">
               {posts.map((post, idx) => (
                 <div
                   key={idx}
