@@ -16,18 +16,18 @@ type Testimonial = {
   videoOriginalFilename?: string | null;
 };
 
-type FeaturedVideo = {
-  videoUrl: string;
-  videoMimeType?: string;
-  content?: string;
-  name?: string;
-};
-
 type TestimonialsPageProps = {
   testimonials: Testimonial[];
 };
 
-function VideoCard({ featuredVideo }: { featuredVideo: FeaturedVideo }) {
+// Utility: make certain keys required & non-null
+type WithRequired<T, K extends keyof T> = T & {
+  [P in K]-?: NonNullable<T[P]>;
+};
+
+type TestimonialWithVideo = WithRequired<Testimonial, "videoUrl">;
+
+function VideoCard({ featuredVideo }: { featuredVideo: TestimonialWithVideo }) {
   const [aspect, setAspect] = React.useState<"16/9" | "9/16" | "1/1">("16/9");
 
   const handleMeta = (e: React.SyntheticEvent<HTMLVideoElement>) => {
@@ -83,8 +83,16 @@ function VideoCard({ featuredVideo }: { featuredVideo: FeaturedVideo }) {
 export default function TestimonialsPage({
   testimonials,
 }: TestimonialsPageProps) {
-  const featuredVideos = testimonials.filter((t) => t.videoUrl);
-  console.log("The Testimonials data--->", testimonials);
+  // const featuredVideos = testimonials.filter((t) => t.videoUrl);
+  // console.log("The Testimonials data--->", testimonials);
+
+  // Type guard to filter only the ones that truly have a video
+  function hasVideo(t: Testimonial): t is TestimonialWithVideo {
+    return typeof t.videoUrl === "string" && t.videoUrl.length > 0;
+  }
+
+  // Use it where you build the list for the video cards
+  const featuredVideos = testimonials.filter(hasVideo);
 
   return (
     <>
