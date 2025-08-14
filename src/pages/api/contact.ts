@@ -1,6 +1,6 @@
 // pages/api/contact.ts
 import type { NextApiRequest, NextApiResponse } from "next";
-import { supabase } from "@/lib/supabaseClient";
+import { supabaseServer } from "@/lib/supabaseServer";
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,6 +11,7 @@ export default async function handler(
   const { name, email, message, phone, preferredDate, recaptchaToken } =
     req.body;
 
+  console.log("the Contact Data which is recieved is: ", req.body);
   if (!name || !email || !message || !phone || !preferredDate) {
     return res.status(400).json({ error: "Missing fields" });
   }
@@ -25,12 +26,13 @@ export default async function handler(
   );
 
   const verifyData = await verifyRes.json();
+  console.log("Recaptcha verification response:", verifyData);
 
   if (!verifyData.success || verifyData.score < 0.5) {
     return res.status(400).json({ error: "Captcha score too low or invalid" });
   }
 
-  const { error } = await supabase.from("contact_submissions").insert([
+  const { error } = await supabaseServer.from("contact_submissions").insert([
     {
       name,
       email,
@@ -39,6 +41,7 @@ export default async function handler(
       preferred_appointment_date: preferredDate,
     },
   ]);
+  console.log("Supabase insert response:", error);
 
   if (error) return res.status(500).json({ error: error.message });
 
