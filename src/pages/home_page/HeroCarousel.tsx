@@ -4,7 +4,7 @@ import { urlFor } from "@/lib/sanity";
 import { ScrollingBanners } from "@/types";
 
 export default function HeroCarousel({
-  scrollingBanner,
+  scrollingBanner = [],
 }: {
   scrollingBanner: ScrollingBanners[];
 }) {
@@ -19,6 +19,9 @@ export default function HeroCarousel({
     arrows: false,
     pauseOnHover: false,
   };
+  if (!Array.isArray(scrollingBanner) || scrollingBanner.length === 0) {
+    return null;
+  }
 
   return (
     <div className="relative w-full">

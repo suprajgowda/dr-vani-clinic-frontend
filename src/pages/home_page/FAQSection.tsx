@@ -1,10 +1,14 @@
 import React from "react";
 
 export default function FAQSection({
-  faqContent,
+  faqContent = [],
 }: {
   faqContent: { question: string; answer: string }[];
 }) {
+  if (!Array.isArray(faqContent) || faqContent.length === 0) {
+    return null;
+  }
+
   return (
     <div className="bg-[#f3f3f7] font-medium py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">

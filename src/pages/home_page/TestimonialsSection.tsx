@@ -4,11 +4,11 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 
 export default function TestimonialsSection({
-  testimonials,
+  testimonials = [],
 }: {
   testimonials: HomeTestimonials[];
 }) {
-  if (testimonials && testimonials.length === 0) {
+  if (!Array.isArray(testimonials) || testimonials.length === 0) {
     return null;
   }
 
