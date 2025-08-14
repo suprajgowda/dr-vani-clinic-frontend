@@ -38,28 +38,30 @@ export default function MedicalServicesSection({
 
         {/* Right Section (70%) */}
         <div className="w-full md:w-2.5/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {medicalServicesList.map((service, idx) => (
-            <div
-              key={idx}
-              className="bg-gray-50 p-6 rounded-lg shadow hover:shadow-md transition text-center flex flex-col items-center"
-            >
-              <div className="w-20 bg-[#ED9282] flex justify-center items-center rounded-lg h-20 mb-4 relative">
-                <Image
-                  src={urlFor(service.serviceImage).url()}
-                  alt={service.serviceTitle}
-                  className=""
-                  width={40}
-                  height={40}
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                {service.serviceTitle}
-              </h3>
-              <p className="text-gray-600 text-sm">
-                {service.serviceDescription}
-              </p>
-            </div>
-          ))}
+          {medicalServicesList
+            ? medicalServicesList.map((service, idx) => (
+                <div
+                  key={idx}
+                  className="bg-gray-50 p-6 rounded-lg shadow hover:shadow-md transition text-center flex flex-col items-center"
+                >
+                  <div className="w-20 bg-[#ED9282] flex justify-center items-center rounded-lg h-20 mb-4 relative">
+                    <Image
+                      src={urlFor(service.serviceImage).url()}
+                      alt={service.serviceTitle}
+                      className=""
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {service.serviceTitle}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    {service.serviceDescription}
+                  </p>
+                </div>
+              ))
+            : null}
         </div>
       </div>
     </section>

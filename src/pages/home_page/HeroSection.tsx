@@ -54,12 +54,14 @@ export default function HeroSection({
         style={{ borderRadius: "0px 0px 0px 50px" }}
       >
         <div className="w-full max-w-md h-auto aspect-[4/5] md:aspect-auto md:h-full md:pl-0">
-          <div
-            className="w-full h-full bg-contain bg-no-repeat bg-center md:bg-left"
-            style={{
-              backgroundImage: `url(${urlFor(heroImage).url()})`,
-            }}
-          />
+          {heroImage ? (
+            <div
+              className="w-full h-full bg-contain bg-no-repeat bg-center md:bg-left"
+              style={{
+                backgroundImage: `url(${urlFor(heroImage).url()})`,
+              }}
+            />
+          ) : null}
         </div>
       </div>
     </section>
