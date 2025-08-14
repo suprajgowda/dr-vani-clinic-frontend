@@ -11,9 +11,6 @@ import HeroCarousel from "./HeroCarousel";
 import { NextRouter, useRouter } from "next/router";
 
 type HomeProps = {
-  heroTitle: string;
-  ctaText: string;
-  ctaLink: string;
   heroImage: SanityImageSource;
   services: {
     serviceImage: SanityImageSource;
@@ -25,16 +22,7 @@ type HomeProps = {
       };
     };
   }[];
-  sectionImage: SanityImageSource;
-  sectionTitle: string;
   sectionDescription: string;
-  sectionAchievements: string[];
-  awardsSectionTitle: string;
-  awardsSectionDescription: string;
-  sectionAwards: {
-    awardImage: SanityImageSource;
-    awardTitle: string;
-  }[];
 
   medicalServicesTitle: string;
   medicalServicesDescription: string;
@@ -348,10 +336,8 @@ function SplitImageTextSection({ router }: { router: NextRouter }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await sanityClient.fetch(`*[_type == "home"][0]`);
+  const homeData = await sanityClient.fetch(`*[_type == "home"][0]`);
   const faqsData = await sanityClient.fetch(`*[_type == "faqsPage"][0]{faqs}`);
-  console.log("Home Page Data---->", data);
-
   const testimonials = await sanityClient.fetch(`*[_type == "testimonial"]{
     name,
     photo,
@@ -361,21 +347,12 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      heroTitle: data?.heroTitle || "Welcome to Dr. Vani’s Clinic",
-      ctaText: data?.ctaText || "Book Appointment",
-      ctaLink: data?.ctaLink || "/contact",
-      heroImage: data?.heroImage || null,
-      medicalServicesTitle: data?.medicalServicesTitle || "",
-      medicalServicesDescription: data?.medicalServicesDescription || "",
-      medicalServicesList: data?.medicalServicesList || "",
-      services: data?.services || [],
-      sectionImage: data?.sectionImage || null,
-      sectionTitle: data?.sectionTitle || "",
-      sectionDescription: data?.sectionDescription || "",
-      sectionAchievements: data?.sectionAchievements || [],
-      awardsSectionTitle: data?.awardsSectionTitle || "",
-      awardsSectionDescription: data?.awardsSectionDescription || "",
-      sectionAwards: data?.sectionAwards || [],
+      heroImage: homeData?.heroImage || null,
+      medicalServicesTitle: homeData?.medicalServicesTitle || "",
+      medicalServicesDescription: homeData?.medicalServicesDescription || "",
+      medicalServicesList: homeData?.medicalServicesList || "",
+      services: homeData?.services || [],
+      sectionDescription: homeData?.sectionDescription || "",
       testimonials: testimonials || [],
       faqContent: faqsData?.faqs?.slice(0, 5) || [],
     },
