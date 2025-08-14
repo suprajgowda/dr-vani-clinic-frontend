@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-// import logo from "../app/white_logo.png";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import logo from "../app/logo.png";
 
