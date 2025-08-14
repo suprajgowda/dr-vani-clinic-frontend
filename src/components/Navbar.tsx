@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import logo from "../app/logo.png";
 
-export default function NavBar2() {
+export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function NavBar2() {
         {/* Logo/Brand */}
         <Link href="/" className="flex items-center space-x-2">
           <Image
-            src={logo} // path relative to public
+            src={logo}
             alt="Dr. Vani R Logo"
             width={50}
             height={50}
@@ -29,7 +29,7 @@ export default function NavBar2() {
         <div className="hidden items-center md:flex space-x-8 text-gray-700 font-medium">
           <Link href="/">Home</Link>
           <Link href="/about">About</Link>
-          <Link href="/services2">Services</Link>
+          <Link href="/services">Services</Link>
           <Link href="/blogs">Blogs</Link>
           <Link href="/gallery">Gallery</Link>
           <Link href="/contact">Contact</Link>
@@ -89,7 +89,7 @@ export default function NavBar2() {
             <Link href="/about" onClick={() => setIsOpen(false)}>
               About
             </Link>
-            <Link href="/services2" onClick={() => setIsOpen(false)}>
+            <Link href="/services" onClick={() => setIsOpen(false)}>
               Services
             </Link>
             <Link href="/blogs" onClick={() => setIsOpen(false)}>

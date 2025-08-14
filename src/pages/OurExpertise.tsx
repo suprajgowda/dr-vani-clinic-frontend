@@ -4,7 +4,7 @@ import Link from "next/link";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { urlFor } from "@/lib/sanity";
 
-type Service = {
+type OurExpertise = {
   serviceText: string;
   serviceImage: SanityImageSource;
   serviceDescription: string;
@@ -15,7 +15,11 @@ type Service = {
   };
 };
 
-export default function HomeSectionTwo({ services }: { services: Service[] }) {
+export default function OurExpertise({
+  services,
+}: {
+  services: OurExpertise[];
+}) {
   const [activeTab, setActiveTab] = useState(0);
   if (!services || services.length === 0) return null;
 

@@ -5,16 +5,10 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Head from "next/head";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
-import HomeSectionTwo from "./HomeSection2";
+import OurExpertise from "./OurExpertise";
 import MedicoraPregnancyImg from "../app/medicora-pregnancy-img.jpg";
-import PrenatalCare from "../app/prenatal-care.svg";
-import LaborDelivery from "../app/labor-delivery.svg";
-import Ultrasound from "../app/ultrasound.svg";
-import GeneticTesting from "../app/genetic-testing.svg";
-import FertilityServices from "../app/fertility-services.svg";
-import Vaccinations from "../app/vaccinations.svg";
 import HeroCarousel from "./HeroCarousel";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 
 type HomeProps = {
   heroTitle: string;
@@ -41,6 +35,11 @@ type HomeProps = {
     awardImage: SanityImageSource;
     awardTitle: string;
   }[];
+
+  medicalServicesTitle: string;
+  medicalServicesDescription: string;
+  medicalServicesList: MedicalServicesList[];
+
   testimonials: {
     name: string;
     photo: SanityImageSource;
@@ -50,13 +49,23 @@ type HomeProps = {
   faqContent: { question: string; answer: string }[];
 };
 
+type MedicalServicesList = {
+  serviceDescription: string;
+  serviceImage: SanityImageSource;
+  serviceTitle: string;
+};
+
 export default function Home({
   heroImage,
   services,
   testimonials,
   faqContent,
   sectionDescription,
+  medicalServicesTitle,
+  medicalServicesDescription,
+  medicalServicesList,
 }: HomeProps & { testimonials: never[] }) {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -67,10 +76,16 @@ export default function Home({
       <HomeBanner3
         heroImage={heroImage}
         sectionDescription={sectionDescription}
+        router={router}
       />
-      <HomeSectionTwo services={services} />
-      <ServicesSplitSection />
-      <SplitImageTextSection />
+      <OurExpertise services={services} />
+      <MedicalServicesSection
+        medicalServicesTitle={medicalServicesTitle}
+        medicalServicesDescription={medicalServicesDescription}
+        medicalServicesList={medicalServicesList}
+        router={router}
+      />
+      <SplitImageTextSection router={router} />
 
       {testimonials && testimonials.length > 0 && (
         <section className="py-12 bg-white px-4 sm:px-6 lg:px-8">
@@ -170,66 +185,15 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await sanityClient.fetch(`*[_type == "home"][0]{
-    heroTitle,
-    ctaText,
-    ctaLink,
-    heroImage,
-    services[]{
-      serviceImage,
-      serviceText,
-      serviceDescription,
-      blogLink->{
-        slug
-      }
-    },
-    sectionImage,
-    sectionTitle,
-    sectionDescription,
-    sectionAchievements,
-    awardsSectionTitle,
-    awardsSectionDescription,
-    sectionAwards,
-  }`);
-  const faqsData = await sanityClient.fetch(`*[_type == "faqsPage"][0]{faqs}`);
-
-  const testimonials = await sanityClient.fetch(`*[_type == "testimonial"]{
-    name,
-    photo,
-    content,
-    rating
-  }`);
-
-  return {
-    props: {
-      heroTitle: data?.heroTitle || "Welcome to Dr. Vani’s Clinic",
-      ctaText: data?.ctaText || "Book Appointment",
-      ctaLink: data?.ctaLink || "/contact",
-      heroImage: data?.heroImage || null,
-      services: data?.services || [],
-      sectionImage: data?.sectionImage || null,
-      sectionTitle: data?.sectionTitle || "",
-      sectionDescription: data?.sectionDescription || "",
-      sectionAchievements: data?.sectionAchievements || [],
-      awardsSectionTitle: data?.awardsSectionTitle || "",
-      awardsSectionDescription: data?.awardsSectionDescription || "",
-      sectionAwards: data?.sectionAwards || [],
-      testimonials: testimonials || [],
-      faqContent: faqsData?.faqs?.slice(0, 5) || [],
-    },
-    revalidate: 60,
-  };
-};
-
 function HomeBanner3({
   heroImage,
   sectionDescription,
+  router,
 }: {
   heroImage: SanityImageSource;
   sectionDescription: string;
+  router: NextRouter;
 }) {
-  const router = useRouter();
   return (
     <section className="flex flex-col md:flex-row w-full min-h-[80vh]">
       {/* Left Section – Text */}
@@ -283,46 +247,18 @@ function HomeBanner3({
   );
 }
 
-function ServicesSplitSection() {
-  const cards = [
-    {
-      icon: PrenatalCare,
-      title: "Personalized Attention",
-      description:
-        "Every patient receives individual care tailored to their needs.",
-    },
-    {
-      icon: LaborDelivery,
-      title: "Pregnancy Care",
-      description:
-        "End-to-end care from conception to postpartum, ensuring the wellbeing of both mother and baby.",
-    },
-    {
-      icon: Ultrasound,
-      title: "Advanced Techniques",
-      description: "State-of-the-art procedures ensuring safety and comfort.",
-    },
-    {
-      icon: GeneticTesting,
-      title: "Fertility Services",
-      description:
-        "Comprehensive workups and treatments tailored for couples trying to conceive.",
-    },
-    {
-      icon: FertilityServices,
-      title: "Adolescent Health",
-      description:
-        "Guiding teenagers through physical, emotional, and hormonal changes with empathy and expertise.",
-    },
-    {
-      icon: Vaccinations,
-      title: "Annual Wellness Checks",
-      description:
-        "Preventive health check-ups to ensure holistic gynaecological wellness.",
-    },
-  ];
-  const router = useRouter();
-
+// Medical Services Section
+function MedicalServicesSection({
+  medicalServicesTitle,
+  medicalServicesDescription,
+  medicalServicesList,
+  router,
+}: {
+  medicalServicesTitle: string;
+  medicalServicesDescription: string;
+  medicalServicesList: MedicalServicesList[];
+  router: NextRouter;
+}) {
   return (
     <section className="bg-[#F3F3F7] py-16 px-4 md:px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 items-start">
@@ -330,15 +266,14 @@ function ServicesSplitSection() {
         <div className="w-full md:w-2/3 text-center md:text-left space-y-4">
           <h3 className="text-lg text-[#ED9282]">Medical services</h3>
           <h2 className="text-4xl font-bold text-gray-800">
-            Care built around your needs
+            {medicalServicesTitle}
           </h2>
           <h4 className="text-lg text-gray-600">
-            Comprehensive medical care through every step—from planning to
-            delivery and beyond.
+            {medicalServicesDescription}
           </h4>
 
           <button
-            onClick={() => router.push("/services2")}
+            onClick={() => router.push("/services")}
             className="mt-6 bg-[#ED9282] cursor-pointer text-white px-6 py-3 rounded-full hover:bg-[#ED9282] transition"
           >
             View all services
@@ -347,18 +282,26 @@ function ServicesSplitSection() {
 
         {/* Right Section (70%) */}
         <div className="w-full md:w-2.5/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {cards.map((card, idx) => (
+          {medicalServicesList.map((service, idx) => (
             <div
               key={idx}
               className="bg-gray-50 p-6 rounded-lg shadow hover:shadow-md transition text-center flex flex-col items-center"
             >
               <div className="w-20 bg-[#ED9282] flex justify-center items-center rounded-lg h-20 mb-4 relative">
-                <Image src={card.icon} alt={card.title} className="" />
+                <Image
+                  src={urlFor(service.serviceImage).url()}
+                  alt={service.serviceTitle}
+                  className=""
+                  width={40}
+                  height={40}
+                />
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                {card.title}
+                {service.serviceTitle}
               </h3>
-              <p className="text-gray-600 text-sm">{card.description}</p>
+              <p className="text-gray-600 text-sm">
+                {service.serviceDescription}
+              </p>
             </div>
           ))}
         </div>
@@ -367,8 +310,7 @@ function ServicesSplitSection() {
   );
 }
 
-function SplitImageTextSection() {
-  const router = useRouter();
+function SplitImageTextSection({ router }: { router: NextRouter }) {
   return (
     <section className="bg-gray-50 py-16 px-4 md:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -404,3 +346,39 @@ function SplitImageTextSection() {
     </section>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await sanityClient.fetch(`*[_type == "home"][0]`);
+  const faqsData = await sanityClient.fetch(`*[_type == "faqsPage"][0]{faqs}`);
+  console.log("Home Page Data---->", data);
+
+  const testimonials = await sanityClient.fetch(`*[_type == "testimonial"]{
+    name,
+    photo,
+    content,
+    rating
+  }`);
+
+  return {
+    props: {
+      heroTitle: data?.heroTitle || "Welcome to Dr. Vani’s Clinic",
+      ctaText: data?.ctaText || "Book Appointment",
+      ctaLink: data?.ctaLink || "/contact",
+      heroImage: data?.heroImage || null,
+      medicalServicesTitle: data?.medicalServicesTitle || "",
+      medicalServicesDescription: data?.medicalServicesDescription || "",
+      medicalServicesList: data?.medicalServicesList || "",
+      services: data?.services || [],
+      sectionImage: data?.sectionImage || null,
+      sectionTitle: data?.sectionTitle || "",
+      sectionDescription: data?.sectionDescription || "",
+      sectionAchievements: data?.sectionAchievements || [],
+      awardsSectionTitle: data?.awardsSectionTitle || "",
+      awardsSectionDescription: data?.awardsSectionDescription || "",
+      sectionAwards: data?.sectionAwards || [],
+      testimonials: testimonials || [],
+      faqContent: faqsData?.faqs?.slice(0, 5) || [],
+    },
+    revalidate: 60,
+  };
+};

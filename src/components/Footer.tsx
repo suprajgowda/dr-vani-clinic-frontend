@@ -9,7 +9,7 @@ type socialsType = {
   url: string;
 };
 
-export default function Footer2() {
+export default function Footer() {
   const resources: socialsType[] = [
     {
       title: "Home",
@@ -21,7 +21,7 @@ export default function Footer2() {
     },
     {
       title: "Services",
-      url: "/services2",
+      url: "/services",
     },
     {
       title: "Blogs",
