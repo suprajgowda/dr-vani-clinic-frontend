@@ -1,4 +1,3 @@
-// pages/api/admin/submissions.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getAdminFromReq } from "@/lib/adminSession";
 import { supabaseServer } from "@/lib/supabaseServer";
@@ -10,13 +9,25 @@ export default async function handler(
   const admin = getAdminFromReq(req);
   if (!admin) return res.status(401).json({ error: "Unauthorized" });
 
-  const { data, error } = await supabaseServer
+  const page = Math.max(
+    parseInt((req.query.page as string) || "1", 10) || 1,
+    1
+  );
+  const pageSize = 25;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const { data, error, count } = await supabaseServer
     .from("contact_submissions")
     .select(
-      "id, name, email, phone, message, preferred_appointment_date, created_at"
+      "id, name, email, phone, message, preferred_appointment_date, created_at",
+      { count: "exact" }
     )
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .range(from, to);
 
   if (error) return res.status(500).json({ error: error.message });
-  res.status(200).json({ submissions: data ?? [] });
+  res
+    .status(200)
+    .json({ submissions: data ?? [], total: count ?? 0, page, pageSize });
 }
