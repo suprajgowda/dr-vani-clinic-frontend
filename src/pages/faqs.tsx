@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import { sanityClient } from "../lib/sanity";
 import Faq_bg from "../app/faq_bg.png";
+import Image from "next/image";
 
 interface FAQ {
   question: string;
@@ -39,8 +40,8 @@ export default function FAQPage({ faqs, pageTitle }: FAQPageProps) {
               >
                 {/* Top-right tilted background image */}
                 <div className="absolute top-0 right-0 z-0 transform rotate-40 translate-x-6 -translate-y-6 opacity-80 pointer-events-none">
-                  <img
-                    src={Faq_bg.src}
+                  <Image
+                    src={Faq_bg}
                     alt="FAQ decoration"
                     className="w-24 h-24 object-contain"
                   />
