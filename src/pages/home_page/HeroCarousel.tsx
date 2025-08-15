@@ -37,10 +37,10 @@ export default function HeroCarousel({
                 className="object-cover object-center"
               />
               <div className="absolute inset-0 bg-black/40 flex flex-col items-start justify-center px-6 sm:px-10 md:px-16 text-white">
-                <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-[#fea38e] mb-3 leading-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#fea38e] mb-3 leading-tight">
                   {slide.bannerTitle}
                 </h2>
-                <p className="text-sm sm:text-base md:text-lg max-w-xl">
+                <p className="text-base sm:text-lg leading-7 max-w-xl">
                   {slide.bannerDescription}
                 </p>
               </div>

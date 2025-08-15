@@ -18,18 +18,18 @@ export default function HeroSection({
       {/* Left Section – Text */}
       <div className="w-full md:w-3/5 bg-white flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-xl text-left">
-          <h3 className="text-xl text-[#ED9282] mb-2 antialiased font-medium italic">
+          <h3 className="text-sm tracking-[.10em] uppercase text-[#ED9282] mb-2 antialiased font-medium">
             Meet Dr. Vani R
           </h3>
-          <h1 className="text-2xl sm:text-2xl font-bold text-black mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">
             Expert Gynecological Care
-          </h1>
-          <h2 className="text-base text-gray-700 mb-6">
+          </h2>
+          <h2 className="text-base sm:text-lg leading-7 text-gray-700 mb-6">
             Compassionate. Trusted. Experienced.
           </h2>
-          <h4 className="text-base text-gray-700 mb-6 text-justify">
+          <p className="text-base sm:text-lg leading-7 text-gray-700 mb-6 text-justify">
             {sectionDescription}
-          </h4>
+          </p>
           <button
             onClick={() => router.push("/contact")}
             className="bg-[#ED9282] cursor-pointer text-white px-6 py-3 rounded-full hover:bg-[#e28172] transition"

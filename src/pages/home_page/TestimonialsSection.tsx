@@ -20,7 +20,7 @@ export default function TestimonialsSection({
             {/* Header */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div>
-                <h6 className="text-[#ED9282] text-xs font-medium tracking-[.10em] pb-2 uppercase">
+                <h6 className="text-sm tracking-[.10em] uppercase text-[#ED9282] font-medium pb-2">
                   Patient Stories
                 </h6>
                 <h2 className="text-3xl sm:text-4xl font-semibold leading-snug">
@@ -57,10 +57,10 @@ export default function TestimonialsSection({
                     key={idx}
                     className="bg-[#F3F3F7] p-6 rounded-md shadow-md flex-shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[26vw] max-w-[90vw] h-[280px] flex flex-col justify-between"
                   >
-                    <p className="text-gray-700 text-base text-justify leading-relaxed line-clamp-7">
-                      {t.content}
+                    <p className="text-base sm:text-lg leading-7 text-gray-700 text-justify line-clamp-7">
+                      “{t.content}”
                     </p>
-                    <span className="text-gray-900 font-semibold text-sm mt-3">
+                    <span className="text-base sm:text-lg font-semibold text-gray-900 mt-3">
                       - {t.name || "Anonymous"}
                     </span>
                   </div>

@@ -20,13 +20,15 @@ export default function MedicalServicesSection({
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 items-start">
         {/* Left Section (30%) */}
         <div className="w-full md:w-2/3 text-center md:text-left space-y-4">
-          <h3 className="text-lg text-[#ED9282]">Medical services</h3>
-          <h2 className="text-4xl font-bold text-gray-800">
+          <h3 className="text-sm tracking-[.10em] uppercase text-[#ED9282]">
+            Medical services
+          </h3>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
             {medicalServicesTitle}
           </h2>
-          <h4 className="text-lg text-gray-600">
+          <p className="text-base sm:text-lg leading-7 text-gray-600">
             {medicalServicesDescription}
-          </h4>
+          </p>
 
           <button
             onClick={() => router.push("/services")}
@@ -53,10 +55,10 @@ export default function MedicalServicesSection({
                       height={40}
                     />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">
                     {service.serviceTitle}
                   </h3>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-base sm:text-lg leading-7 text-gray-600">
                     {service.serviceDescription}
                   </p>
                 </div>

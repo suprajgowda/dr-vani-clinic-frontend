@@ -19,7 +19,7 @@ export default function ServicesPage({ services }: ServicesPageProps) {
   return (
     <div className="bg-gray-50 py-16 px-4 md:px-12">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-12">
           Our Services
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
@@ -47,14 +47,16 @@ export default function ServicesPage({ services }: ServicesPageProps) {
                 />
               </div>
               <div className="p-6">
-                <h2 className="text-xl font-semibold text-[#ed9282] mb-2">
+                <h2 className="text-xl sm:text-2xl font-semibold text-[#ed9282] mb-2">
                   {service.title}
                 </h2>
-                <p className="text-gray-700 text-sm mb-4">
+
+                <p className="text-base sm:text-lg leading-7 text-gray-700 mb-4">
                   {service.description}
                 </p>
+
                 {service.subServices && (
-                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                  <ul className="list-disc list-inside text-base sm:text-lg leading-7 text-gray-600 space-y-1">
                     {service.subServices.map((item, subIdx) => (
                       <li key={subIdx}>{item}</li>
                     ))}

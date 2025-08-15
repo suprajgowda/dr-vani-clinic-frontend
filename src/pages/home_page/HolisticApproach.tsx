@@ -19,14 +19,16 @@ export default function HolisticApproach({ router }: { router: NextRouter }) {
 
         {/* Right – Text */}
         <div className="text-center md:text-left space-y-4">
-          <h3 className="text-lg text-[#ED9282]">Holistic Approach</h3>
-          <h2 className="text-4xl font-bold text-gray-800">
+          <h3 className="text-sm tracking-[.10em] uppercase text-[#ED9282]">
+            Holistic Approach
+          </h3>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
             Dedicated to families and their health
           </h2>
-          <h4 className="text-lg text-gray-600">
+          <p className="text-base sm:text-lg leading-7 text-gray-600">
             We deliver compassionate, professional care to support your journey
             through pregnancy, parenthood, and beyond.
-          </h4>
+          </p>
 
           <button
             onClick={() => router.push("/blogs")}

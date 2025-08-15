@@ -50,10 +50,12 @@ const AboutPage = ({
       />
 
       {/* Section 2 – About Dr. Vani */}
-      <section className="bg-gray-50 py-12 px-4 md:px-8">
+      <section className="bg-gray-50 py-12 px-8 md:px-8">
         <div className="text-center text-gray-800">
-          <h2 className="text-3xl font-bold mb-6">{aboutDrVanititle}</h2>
-          <p className="text-lg leading-relaxed max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-3xl font-bold text-black mb-4">
+            {aboutDrVanititle}
+          </h1>
+          <p className="text-base sm:text-lg leading-7 max-w-4xl mx-auto text-gray-700">
             {aboutDrVaniCompleteDescription}
           </p>
         </div>
@@ -66,12 +68,14 @@ const AboutPage = ({
             {highlightedFacts.map((fact, idx) => {
               return (
                 <div key={idx} className="text-center p-6">
-                  <h3 className="text-xl font-semibold text-blue-700 mb-2">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-blue-700 mb-2">
                     {typeof fact.title === "string"
                       ? fact.title
                       : JSON.stringify(fact.title)}
                   </h3>
-                  <p className="text-gray-600">{fact.description}</p>
+                  <p className="text-base sm:text-lg leading-7 text-gray-700">
+                    {fact.description}
+                  </p>
                 </div>
               );
             })}
@@ -82,8 +86,10 @@ const AboutPage = ({
       {/* Section 4 – Why Dr. Vani */}
       <section className="bg-blue-50 py-12 px-4 md:px-8">
         <div className="text-center text-gray-800">
-          <h2 className="text-3xl font-bold mb-4">{whyDrVaniTitle}</h2>
-          <p className="text-lg leading-relaxed max-w-4xl mx-auto">
+          <h2 className="text-3xl sm:text-3xl font-bold text-black mb-4">
+            {whyDrVaniTitle}
+          </h2>
+          <p className="text-base sm:text-lg leading-7 max-w-4xl mx-auto text-gray-700">
             {whyDrVaniDescription}
           </p>
         </div>
@@ -92,10 +98,10 @@ const AboutPage = ({
       {/* Section 5 – Awards & Recognition */}
       {awards?.length > 0 && (
         <section className="bg-white py-16 px-4 md:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
+          <h2 className="text-3xl sm:text-3xl font-bold text-center text-black mb-4">
             {awardsSectionTitle}
           </h2>
-          <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg leading-7 text-center text-gray-600 mb-10 max-w-2xl mx-auto">
             {awardsSectionDescription}
           </p>
 
@@ -116,7 +122,7 @@ const AboutPage = ({
                       />
                     </div>
                   )}
-                  <h3 className="text-lg  items-center font-medium text-gray-800">
+                  <h3 className="text-base sm:text-lg font-medium text-gray-800">
                     {award.awardTitle}
                   </h3>
                 </div>
@@ -238,7 +244,7 @@ const ContentListSection = ({
   items: any[];
 }) => (
   <section className="bg-gray-50 py-12 px-4 md:px-8">
-    <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+    <h2 className="text-3xl sm:text-3xl font-bold text-center text-gray-800 mb-6">
       {title}
     </h2>
     <div className="flex flex-col gap-4 max-w-2xl mx-auto">
@@ -249,8 +255,7 @@ const ContentListSection = ({
             key={idx}
             className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition"
           >
-            {/* <BsHeartFill className="w-5 h-5 text-pink-300" /> */}
-            <span className="text-gray-700 text-base font-medium">
+            <span className="text-base sm:text-lg leading-7 text-gray-700 font-medium">
               {content}
             </span>
           </div>

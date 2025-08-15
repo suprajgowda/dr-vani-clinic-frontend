@@ -27,7 +27,8 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
 
       <section className="bg-white py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">
+          {/* Section title (match Home/Services H2 scale) */}
+          <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-10">
             Blog & Health Tips
           </h1>
 
@@ -36,7 +37,7 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
               {posts.map((post, idx) => (
                 <div
                   key={idx}
-                  className="bg-gray-50 rounded-lg shadow-md overflow-hidden"
+                  className="bg-gray-50 rounded-lg shadow-md overflow-hidden p-2"
                 >
                   <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden rounded-lg">
                     {/* Background fill (blurred) */}
@@ -58,15 +59,19 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
                     />
                   </div>
                   <div className="px-4 pt-4 pb-3">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {/* Card title (H3 scale) */}
+                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">
                       {post.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-3 text-justify">
+
+                    {/* Excerpt (Body scale) */}
+                    <p className="text-base sm:text-lg leading-7 text-gray-600 mb-3 text-justify">
                       {post.excerpt}
                     </p>
+
                     <Link
                       href={`/blog/${post.slug.current}`}
-                      className="text-[#ed9282] hover:underline text-sm font-medium"
+                      className="text-[#ed9282] hover:underline text-base font-medium"
                     >
                       Read more →
                     </Link>

@@ -15,16 +15,16 @@ export default function FAQSection({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {/* Left Side - Title & Description */}
           <div className="sm:pt-4 max-w-xl">
-            <div className="text-[#ED9282] text-xl italic tracking-[.10em] pb-2">
-              FAQ&lsquo;s
+            <div className="text-[#ED9282] text-sm tracking-[.10em] uppercase pb-2">
+              FAQ’s
             </div>
-            <h2 className="text-2xl sm:text-2xl font-semibold leading-tight mb-3">
+            <h2 className="text-3xl sm:text-4xl font-semibold leading-tight mb-3">
               <span className="bg-gradient-to-b from-transparent to-white">
-                Questions ?
+                Questions?
               </span>
-              &nbsp;We&lsquo;re glad you asked
+              &nbsp;We’re glad you asked
             </h2>
-            <p className="text-[#2E231FCC] font-light text-base sm:text-lg">
+            <p className="text-base sm:text-lg leading-7 text-[#2E231FCC]">
               Get clear, expert answers to the most important questions about
               your care and your child&apos;s health.
             </p>
@@ -34,10 +34,10 @@ export default function FAQSection({
           <div className="space-y-4">
             {faqContent.map((faq, idx) => (
               <div key={idx} className="p-4 bg-white rounded shadow-sm">
-                <div className="font-semibold mb-2 text-[#dd6f82] italic">
+                <div className="font-semibold text-base sm:text-lg text-[#dd6f82] mb-2 italic">
                   Q - {faq.question}
                 </div>
-                <div className="font-normal text-gray-600">
+                <div className="font-normal text-base sm:text-lg leading-7 text-gray-600">
                   A - {faq.answer}
                 </div>
               </div>

@@ -27,10 +27,10 @@ export default function OurExpertise({
     <section className="bg-white py-16 px-4 md:px-8">
       {/* Section Titles */}
       <div className="text-center max-w-7xl mx-auto mb-10">
-        <h3 className="text-base sm:text-lg text-[#ED9282] mb-2">
+        <h3 className="text-sm tracking-[.10em] uppercase text-[#ED9282] mb-2">
           Our Expertise
         </h3>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">
           Care Through Every Stage
         </h2>
       </div>
@@ -40,7 +40,7 @@ export default function OurExpertise({
         {services.map((s, idx) => (
           <button
             key={idx}
-            className={`px-6 sm:px-8 md:px-12 w-xs py-2 cursor-pointer rounded-lg font-medium text-sm sm:text-base md:text-lg transition border ${
+            className={`px-6 sm:px-8 md:px-12 py-2 cursor-pointer rounded-lg font-medium text-sm sm:text-base transition border ${
               activeTab === idx
                 ? "bg-[#ED9282] text-white border-[#ED9282]"
                 : "bg-[#f3f3f7] text-gray-700 border-[#f3f3f7] hover:bg-blue-50"
@@ -56,12 +56,12 @@ export default function OurExpertise({
       <div className="max-w-7xl mx-auto bg-[#F3F3F7] rounded-xl shadow p-6 sm:p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center">
         {/* Left - Text */}
         <div className="flex-1 text-center md:text-left">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
             {services[activeTab].serviceText}
           </h2>
-          <h4 className="text-base sm:text-lg text-gray-600 mb-6">
+          <p className="text-base sm:text-lg leading-7 text-gray-600 mb-6">
             {services[activeTab].serviceDescription}
-          </h4>
+          </p>
           {services[activeTab]?.blogLink?.slug?.current && (
             <Link
               href={`/blog/${services[activeTab].blogLink.slug.current}`}
