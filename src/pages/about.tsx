@@ -201,7 +201,13 @@ function HomeBanner3({
             ))}
           </div>
           <h6 className="mt-1">
-            from 1,250+ <span className="underline">reviews</span>
+            from 1,250+{" "}
+            <button
+              onClick={() => router.push("/testimonials")}
+              className="cursor-pointer"
+            >
+              <span className="underline">reviews</span>
+            </button>
           </h6>
         </div>
       </div>
