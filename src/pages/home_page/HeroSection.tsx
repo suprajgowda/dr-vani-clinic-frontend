@@ -18,12 +18,13 @@ export default function HeroSection({
       {/* Left Section – Text */}
       <div className="w-full md:w-3/5 bg-white flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-xl text-left">
-          <h3 className="text-2xl text-[#ED9282] mb-2 antialiased font-medium italic">
-            Meet Dr. Vani R{" "}
-            <span className="text-xs">
-              ( MBBS, MS, MRCOG 1, FELLOWSHIP IN GYNAEC ENDOSCOPY )
-            </span>
+          <h3 className="text-3xl sm:text-4xl text-[#ED9282] mb-2 antialiased font-medium italic">
+            Meet Dr. Vani R
           </h3>
+          <p className="text-xs sm:text-xs text-[#92210d] mb-2 antialiased font-medium italic">
+            MBBS, MS, MRCOG 1, FELLOWSHIP IN GYNAEC ENDOSCOPY, FELLOWSHIP IN
+            INFERTILITY
+          </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">
             Expert Gynecological Care
           </h2>

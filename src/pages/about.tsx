@@ -186,11 +186,12 @@ function HomeBanner3({
       <div className="w-full md:w-3/5 flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-xl text-left">
           <h3 className="text-2xl text-[#ED9282] mb-2 antialiased font-medium italic">
-            Meet Dr. Vani R{" "}
-            <span className="text-xs">
-              ( MBBS, MS, MRCOG 1, FELLOWSHIP IN GYNAEC ENDOSCOPY )
-            </span>
+            Meet Dr. Vani R
           </h3>
+          <p className="text-xs sm:text-xs text-[#92210d] mb-2 antialiased font-medium italic">
+            MBBS, MS, MRCOG 1, FELLOWSHIP IN GYNAEC ENDOSCOPY, FELLOWSHIP IN
+            INFERTILITY
+          </p>
           <h1 className="text-4xl sm:text-3xl font-bold text-black mb-4">
             {section1Title}
           </h1>
