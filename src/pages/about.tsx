@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { sanityClient, urlFor } from "../lib/sanity";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
-import { FaStar } from "react-icons/fa";
+import { FaCheckCircle, FaStar } from "react-icons/fa";
 import { useRouter } from "next/router";
 
 type HobbyItem = {
@@ -17,9 +17,14 @@ type AboutProps = {
   section1BannerImage: SanityImageSource;
   aboutDrVanititle: string;
   aboutDrVaniCompleteDescription: string;
-  highlightedFacts: { title: string; description: string }[];
+  highlightedFacts: {
+    title: string;
+    description: string;
+    image: SanityImageSource;
+  }[];
   whyDrVaniTitle: string;
   whyDrVaniDescription: string;
+  whyDrVaniImage?: SanityImageSource | null;
   awardsSectionTitle: string;
   awardsSectionDescription: string;
   awards: { awardImage: SanityImageSource; awardTitle: string }[];
@@ -38,6 +43,7 @@ const AboutPage = ({
   highlightedFacts,
   whyDrVaniTitle,
   whyDrVaniDescription,
+  whyDrVaniImage,
   awardsSectionTitle,
   awardsSectionDescription,
   awards,
@@ -47,20 +53,20 @@ const AboutPage = ({
   memberships,
   personalInterests,
 }: AboutProps) => {
+  console.log("whyDrVaniImage------>", whyDrVaniImage);
   return (
     <main className="about-page">
       <HomeBanner3
         section1Title={section1Title}
         heroImage={section1BannerImage}
       />
-
       {/* Section 2 – About Dr. Vani */}
-      <section className="bg-gray-50 py-12 px-8 md:px-8">
+      <section className="bg-gray-50 py-12 px-8 md:px-8 max-w-7xl mx-auto">
         <div className="text-center text-gray-800">
           <h1 className="text-3xl sm:text-3xl font-bold text-black mb-4">
             {aboutDrVanititle}
           </h1>
-          <p className="text-base sm:text-lg leading-7 max-w-4xl mx-auto text-gray-700">
+          <p className="text-base sm:text-lg leading-7 text-center text-gray-600">
             {aboutDrVaniCompleteDescription}
           </p>
         </div>
@@ -68,11 +74,31 @@ const AboutPage = ({
 
       {/* Section 3 – Highlighted Facts */}
       {highlightedFacts?.length > 0 && (
-        <section className="bg-white py-12 px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section className="bg-gray-50 py-12 px-4 max-w-8xl md:px-8 mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {highlightedFacts.map((fact, idx) => {
+              const hasImage = fact.image;
               return (
-                <div key={idx} className="text-center p-6">
+                <div
+                  key={idx}
+                  className="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition max-w-sm w-full mx-auto"
+                >
+                  {/* Icon */}
+                  <div className="flex justify-center mb-4">
+                    {hasImage ? (
+                      <div className="relative w-14 h-14">
+                        <Image
+                          src={urlFor(fact.image).url()}
+                          alt={fact.title || "fact icon"}
+                          fill
+                          className="object-contain rounded-full shadow"
+                        />
+                      </div>
+                    ) : (
+                      <FaCheckCircle className="text-blue-600 text-4xl" />
+                    )}
+                  </div>
+
                   <h3 className="text-xl sm:text-2xl font-semibold text-blue-700 mb-2">
                     {typeof fact.title === "string"
                       ? fact.title
@@ -89,14 +115,51 @@ const AboutPage = ({
       )}
 
       {/* Section 4 – Why Dr. Vani */}
-      <section className="bg-blue-50 py-12 px-4 md:px-8">
-        <div className="text-center text-gray-800">
-          <h2 className="text-3xl sm:text-3xl font-bold text-black mb-4">
-            {whyDrVaniTitle}
-          </h2>
-          <p className="text-base sm:text-lg leading-7 max-w-4xl mx-auto text-gray-700">
-            {whyDrVaniDescription}
-          </p>
+      <section className="relative bg-[#ffedea] py-12 px-4 md:px-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-8 items-center">
+          {/* Left: Image with local blurred bg (not whole section) */}
+          <div className="flex justify-center">
+            {whyDrVaniImage && (
+              <div className="relative w-full max-w-sm h-64 sm:h-72 md:h-80 rounded-xl overflow-hidden shadow">
+                {/* Local blurred background using the SAME image */}
+                <Image
+                  src={urlFor(whyDrVaniImage).width(1200).url()}
+                  alt=""
+                  fill
+                  aria-hidden
+                  className="object-cover blur-xl scale-110 opacity-70"
+                  sizes="(max-width: 768px) 320px, 480px"
+                  priority={false}
+                />
+
+                {/* Optional soft gradient so edges blend nicer */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-white/40 pointer-events-none" />
+
+                {/* Foreground actual portrait (contained, no crop) */}
+                <div className="absolute inset-0 flex items-center justify-center p-3">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={urlFor(whyDrVaniImage).width(900).url()}
+                      alt="Why Dr Vani"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 320px, 480px"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Right: Content */}
+          <div className="text-gray-800">
+            <h2 className="text-3xl sm:text-3xl font-bold text-black mb-4">
+              {whyDrVaniTitle}
+            </h2>
+            <p className="text-lg md:text-xl leading-8 text-gray-700">
+              {whyDrVaniDescription}
+            </p>
+          </div>
         </div>
       </section>
 
@@ -106,7 +169,7 @@ const AboutPage = ({
           <h2 className="text-3xl sm:text-3xl font-bold text-center text-black mb-4">
             {awardsSectionTitle}
           </h2>
-          <p className="text-base sm:text-lg leading-7 text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg leading-7 text-center text-gray-600 mb-10 max-w-8xl mx-auto">
             {awardsSectionDescription}
           </p>
 
@@ -136,7 +199,6 @@ const AboutPage = ({
           </div>
         </section>
       )}
-
       {/* Section 6 – Education & Training */}
       {educationAndTraining?.length > 0 && (
         <ContentListSection
@@ -144,12 +206,10 @@ const AboutPage = ({
           items={educationAndTraining}
         />
       )}
-
       {/* Section 7 – Areas of Expertise */}
       {expertise?.length > 0 && (
         <ContentListSection title="Areas of Expertise" items={expertise} />
       )}
-
       {/* Section 8 – Professional Experience */}
       {experience?.length > 0 && (
         <ContentListSection
@@ -157,7 +217,6 @@ const AboutPage = ({
           items={experience}
         />
       )}
-
       {/* Section 9 – Memberships & Affiliations */}
       {memberships?.length > 0 && (
         <ContentListSection
@@ -165,7 +224,6 @@ const AboutPage = ({
           items={memberships}
         />
       )}
-
       {/* Section 10 – Personal Interests */}
       {personalInterests?.length > 0 && (
         <HobbiesSection title="Hobbies & Interests" items={personalInterests} />
@@ -312,7 +370,7 @@ export function HobbiesSection({
                 src={urlFor(item.image).url()}
                 alt={item.title || "Hobby icon"}
                 className="w-full h-full object-contain"
-                width={56} // matches sm size; will scale down on mobile via class
+                width={56}
                 height={56}
                 priority={false}
               />
@@ -332,6 +390,7 @@ export function HobbiesSection({
 export const getStaticProps: GetStaticProps = async () => {
   const query = `*[_type == "about"][0]`;
   const data = await sanityClient.fetch(query);
+  console.log("Fetched data for About page:", data);
 
   return {
     props: {
@@ -343,6 +402,7 @@ export const getStaticProps: GetStaticProps = async () => {
       highlightedFacts: data?.highlightedFacts || [],
       whyDrVaniTitle: data?.whyDrVaniTitle || "",
       whyDrVaniDescription: data?.whyDrVaniDescription || "",
+      whyDrVaniImage: data?.whyDrVaniImage || null,
       awardsSectionTitle: data?.awardsSectionTitle || "",
       awardsSectionDescription: data?.awardsSectionDescription || "",
       awards: data?.awards || [],
