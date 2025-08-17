@@ -7,6 +7,11 @@ import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { useRouter } from "next/router";
 
+type HobbyItem = {
+  image: SanityImageSource;
+  title: string;
+};
+
 type AboutProps = {
   section1Title: string;
   section1BannerImage: SanityImageSource;
@@ -22,7 +27,7 @@ type AboutProps = {
   expertise: string[];
   experience: string[];
   memberships: string[];
-  personalInterests: string[];
+  personalInterests: HobbyItem[];
 };
 
 const AboutPage = ({
@@ -113,9 +118,9 @@ const AboutPage = ({
                   className="bg-gray-50 rounded-lg shadow-md p-4 flex flex-col md:flex-row items-center md:items-center text-center md:text-left gap-4 hover:shadow-lg transition"
                 >
                   {award.awardImage && (
-                    <div className="relative w-24 h-24 flex-shrink-0">
+                    <div className="relative w-20 h-20 flex-shrink-0">
                       <Image
-                        src={urlFor(award.awardImage).width(200).url()}
+                        src={urlFor(award.awardImage).width(150).url()}
                         alt={award.awardTitle}
                         fill
                         className="object-contain rounded"
@@ -163,10 +168,7 @@ const AboutPage = ({
 
       {/* Section 10 – Personal Interests */}
       {personalInterests?.length > 0 && (
-        <ContentListSection
-          title="Hobbies & Interests"
-          items={personalInterests}
-        />
+        <HobbiesSection title="Hobbies & Interests" items={personalInterests} />
       )}
     </main>
   );
@@ -268,6 +270,64 @@ const ContentListSection = ({
     </div>
   </section>
 );
+
+export function HobbiesSection({
+  title,
+  items,
+  layout = "grid",
+}: {
+  title: string;
+  items: any[];
+  layout?: "grid" | "list";
+}) {
+  const containerClass =
+    layout === "list"
+      ? "flex flex-col gap-3"
+      : "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4";
+
+  return (
+    <section className="bg-gray-50 py-12 px-4 md:px-8">
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+        {title}
+      </h2>
+
+      <div className={`max-w-4xl mx-auto ${containerClass}`}>
+        {items.map((item, idx) => (
+          <div
+            key={idx}
+            className="group flex items-center gap-3 rounded-2xl bg-white border border-gray-200 px-4 py-3 shadow-sm hover:shadow-md transition transform hover:-translate-y-0.5 focus-within:ring-2 focus-within:ring-[#ed9282]/50"
+            tabIndex={0}
+            aria-label={`${idx}`}
+          >
+            {/* Icon wrapper */}
+            <div
+              className="
+                shrink-0 flex items-center justify-center
+                rounded-full shadow-sm bg-gray-100 group-hover:bg-[#fff3f0]
+                p-2
+                h-12 w-12 sm:h-14 sm:w-14
+              "
+            >
+              <Image
+                src={urlFor(item.image).url()}
+                alt={item.title || "Hobby icon"}
+                className="w-full h-full object-contain"
+                width={56} // matches sm size; will scale down on mobile via class
+                height={56}
+                priority={false}
+              />
+            </div>
+
+            {/* Label */}
+            <span className="text-sm sm:text-base leading-6 text-gray-800 font-medium">
+              {item.title}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   const query = `*[_type == "about"][0]`;
