@@ -11,7 +11,6 @@ export default async function handler(
   const { name, email, message, phone, preferredDate, recaptchaToken } =
     req.body;
 
-  console.log("the Contact Data which is recieved is: ", req.body);
   if (!name || !email || !message || !phone || !preferredDate) {
     return res.status(400).json({ error: "Missing fields" });
   }
@@ -26,7 +25,6 @@ export default async function handler(
   );
 
   const verifyData = await verifyRes.json();
-  console.log("Recaptcha verification response:", verifyData);
 
   if (!verifyData.success || verifyData.score < 0.5) {
     return res.status(400).json({ error: "Captcha score too low or invalid" });
@@ -41,7 +39,6 @@ export default async function handler(
       preferred_appointment_date: preferredDate,
     },
   ]);
-  console.log("Supabase insert response:", error);
 
   if (error) return res.status(500).json({ error: error.message });
 

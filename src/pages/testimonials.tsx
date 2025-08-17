@@ -83,9 +83,6 @@ function VideoCard({ featuredVideo }: { featuredVideo: TestimonialWithVideo }) {
 export default function TestimonialsPage({
   testimonials,
 }: TestimonialsPageProps) {
-  // const featuredVideos = testimonials.filter((t) => t.videoUrl);
-  // console.log("The Testimonials data--->", testimonials);
-
   // Type guard to filter only the ones that truly have a video
   function hasVideo(t: Testimonial): t is TestimonialWithVideo {
     return typeof t.videoUrl === "string" && t.videoUrl.length > 0;

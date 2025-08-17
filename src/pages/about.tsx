@@ -53,7 +53,6 @@ const AboutPage = ({
   memberships,
   personalInterests,
 }: AboutProps) => {
-  console.log("whyDrVaniImage------>", whyDrVaniImage);
   return (
     <main className="about-page">
       <HomeBanner3
@@ -390,7 +389,6 @@ export function HobbiesSection({
 export const getStaticProps: GetStaticProps = async () => {
   const query = `*[_type == "about"][0]`;
   const data = await sanityClient.fetch(query);
-  console.log("Fetched data for About page:", data);
 
   return {
     props: {
