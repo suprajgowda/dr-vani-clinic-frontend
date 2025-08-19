@@ -90,6 +90,7 @@ export default function TestimonialsPage({
 
   // Use it where you build the list for the video cards
   const featuredVideos = testimonials.filter(hasVideo);
+  const textTestimonials = testimonials.filter((t) => !hasVideo(t));
 
   return (
     <>
@@ -114,7 +115,7 @@ export default function TestimonialsPage({
 
       <section className="max-w-5xl mx-auto py-12 px-4 space-y-10">
         <div className="columns-1 md:columns-2 gap-6 space-y-6">
-          {testimonials.map((t) => (
+          {textTestimonials.map((t) => (
             <div
               key={t._id}
               className="bg-white p-8 rounded-xl shadow-md bg-no-repeat bg-cover bg-center break-inside-avoid text-justify"
