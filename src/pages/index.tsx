@@ -2,15 +2,15 @@ import React from "react";
 import { GetStaticProps } from "next";
 import { sanityClient } from "../lib/sanity";
 import Head from "next/head";
-import OurExpertise from "./home_page/OurExpertise";
-import HeroCarousel from "./home_page/HeroCarousel";
+import OurExpertise from "../components/home_page/OurExpertise";
+import HeroCarousel from "../components/home_page/HeroCarousel";
 import { useRouter } from "next/router";
-import HolisticApproach from "./home_page/HolisticApproach";
-import FAQSection from "./home_page/FAQSection";
-import MedicalServicesSection from "./home_page/MedicalServicesSection";
+import HolisticApproach from "../components/home_page/HolisticApproach";
+import FAQSection from "../components/home_page/FAQSection";
+import MedicalServicesSection from "../components/home_page/MedicalServicesSection";
 import { HomeProps } from "@/types";
-import HeroSection from "./home_page/HeroSection";
-import TestimonialsSection from "./home_page/TestimonialsSection";
+import HeroSection from "../components/home_page/HeroSection";
+import TestimonialsSection from "../components/home_page/TestimonialsSection";
 
 export default function Home({
   scrollingBanner,
