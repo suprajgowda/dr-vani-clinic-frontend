@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -67,7 +67,7 @@ type BlogProps = {
 
 export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
   return (
-    <>
+    <React.Fragment>
       <Head>
         <title>{post.title} | Dr. Vani R</title>
         <meta name="description" content={post.title} />
@@ -160,7 +160,7 @@ export default function BlogDetailPage({ post, relatedPosts }: BlogProps) {
           )}
         </div>
       </section>
-    </>
+    </React.Fragment>
   );
 }
 
