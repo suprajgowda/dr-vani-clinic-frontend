@@ -6,6 +6,7 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 import { FaCheckCircle, FaStar } from "react-icons/fa";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 type HobbyItem = {
   image: SanityImageSource;
@@ -55,6 +56,94 @@ const AboutPage = ({
 }: AboutProps) => {
   return (
     <main className="about-page">
+      <Head>
+        <title>About Dr. Vani R — Experienced Gynecologist in Bangalore</title>
+        <meta
+          name="description"
+          content="Meet Dr. Vani R, senior gynecologist and laparoscopic surgeon in Basavanagudi, Bangalore. 23+ years of experience and 5000+ laparoscopic procedures."
+        />
+        <link
+          rel="canonical"
+          href="https://www.drvanigynaecologistbangalore.com/about"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="profile" />
+        <meta property="og:title" content="About — Dr. Vani R" />
+        <meta
+          property="og:description"
+          content="Trusted gynecologist in Basavanagudi, Bangalore with 23+ years of experience."
+        />
+        <meta
+          property="og:url"
+          content="https://www.drvanigynaecologistbangalore.com/about"
+        />
+        {/* Optional: add an OG image if you have a static asset */}
+        {/* <meta property="og:image" content="https://www.drvanigynaecologistbangalore.com/og-about.jpg" /> */}
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About — Dr. Vani R" />
+        <meta
+          name="twitter:description"
+          content="Senior gynecologist & laparoscopic surgeon in Bangalore."
+        />
+
+        {/* Physician JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Physician",
+              name: "Dr. Vani R",
+              description:
+                "Senior gynecologist and laparoscopic surgeon in Basavanagudi, Bangalore with 23+ years of experience and 5000+ laparoscopic procedures.",
+              medicalSpecialty: "Gynecology",
+              url: "https://www.drvanigynaecologistbangalore.com/about",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "04/1, Bull Temple Rd, NR Colony, Basavanagudi",
+                addressLocality: "Bengaluru",
+                addressRegion: "Karnataka",
+                postalCode: "560050",
+                addressCountry: "IN",
+              },
+              telephone: "+919591493575",
+              sameAs: [
+                "https://www.instagram.com/",
+                "https://www.facebook.com/",
+              ],
+            }),
+          }}
+        />
+
+        {/* Breadcrumbs JSON-LD (Home > About) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: "https://www.drvanigynaecologistbangalore.com/",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "About",
+                  item: "https://www.drvanigynaecologistbangalore.com/about",
+                },
+              ],
+            }),
+          }}
+        />
+      </Head>
+
       <HomeBanner3
         section1Title={section1Title}
         heroImage={section1BannerImage}

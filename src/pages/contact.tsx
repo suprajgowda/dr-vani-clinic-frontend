@@ -41,7 +41,38 @@ const ContactPage = () => {
   return (
     <>
       <Head>
-        <title>Contact | Dr. Vani&lsquo;s Clinic</title>
+        <title>
+          Contact Dr. Vani R | Gynecologist in Basavanagudi, Bangalore
+        </title>
+        <meta
+          name="description"
+          content="Book an appointment with Dr. Vani R, leading gynecologist in Basavanagudi, Bangalore. Call +91 95914 93575 or visit our clinic at Bull Temple Road for consultations in gynecology, laparoscopy & infertility care."
+        />
+        <meta
+          name="keywords"
+          content="Dr Vani contact, Gynecologist Basavanagudi, Bangalore, book appointment, call doctor, infertility clinic contact, motherhood hospital contact, gynaecology consultation"
+        />
+        <link
+          rel="canonical"
+          href="https://www.drvanigynaecologistbangalore.com/contact"
+        />
+        <meta
+          property="og:title"
+          content="Contact Dr. Vani R | Gynecologist in Bangalore"
+        />
+        <meta
+          property="og:description"
+          content="Reach out to Dr. Vani R at her Basavanagudi clinic for gynecology, laparoscopy, and infertility care. Book your consultation today."
+        />
+        <meta
+          property="og:url"
+          content="https://www.drvanigynaecologistbangalore.com/contact"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://www.drvanigynaecologistbangalore.com/og-contact.jpg"
+        />
       </Head>
 
       {/* Section 1 – Banner (responsive) */}

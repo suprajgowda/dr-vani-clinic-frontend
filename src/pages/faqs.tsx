@@ -19,10 +19,46 @@ export default function FAQPage({ faqs, pageTitle }: FAQPageProps) {
   return (
     <>
       <Head>
-        <title>{pageTitle} | Dr. Vani R</title>
+        <title>{pageTitle} | Dr. Vani R — Gynecologist in Bangalore</title>
         <meta
           name="description"
-          content="Common questions answered about fertility, pregnancy, gynecological care, and more."
+          content="Get answers to frequently asked questions about gynecology, pregnancy care, fertility, and laparoscopic surgery by Dr. Vani R, senior gynecologist in Basavanagudi, Bangalore."
+        />
+        <link
+          rel="canonical"
+          href="https://www.drvanigynaecologistbangalore.com/faqs"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${pageTitle} | Dr. Vani R`} />
+        <meta
+          property="og:description"
+          content="Find answers to common questions on fertility, pregnancy care, gynecological treatments, and laparoscopy in Bangalore."
+        />
+        <meta
+          property="og:url"
+          content="https://www.drvanigynaecologistbangalore.com/faqs"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        {/* FAQPage JSON-LD Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: faq.answer,
+                },
+              })),
+            }),
+          }}
         />
       </Head>
 

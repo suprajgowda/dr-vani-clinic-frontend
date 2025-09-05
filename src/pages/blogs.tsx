@@ -22,7 +22,79 @@ export default function BlogsPage({ posts }: BlogsPageProps) {
   return (
     <>
       <Head>
-        <title>Blog | Dr. Vani R</title>
+        <title>
+          Women&lsquo;s Health & Pregnancy Tips Blog | Dr. Vani R Bangalore
+        </title>
+        <meta
+          name="description"
+          content="Read expert articles on pregnancy care, fertility, laparoscopy, and women’s health by Dr. Vani R, senior gynecologist in Basavanagudi, Bangalore."
+        />
+        <link
+          rel="canonical"
+          href="https://www.drvanigynaecologistbangalore.com/blogs"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Women’s Health & Pregnancy Tips Blog | Dr. Vani R"
+        />
+        <meta
+          property="og:description"
+          content="Expert blogs on fertility, pregnancy care, laparoscopy & women’s health in Bangalore."
+        />
+        <meta
+          property="og:url"
+          content="https://www.drvanigynaecologistbangalore.com/blogs"
+        />
+        {/* Optional: use first post cover as OG image if available */}
+        {posts?.[0]?.coverImage ? (
+          <meta
+            property="og:image"
+            content={urlFor(posts[0].coverImage).width(1200).height(630).url()}
+          />
+        ) : null}
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Women’s Health & Pregnancy Tips Blog | Dr. Vani R"
+        />
+        <meta
+          name="twitter:description"
+          content="Trusted gynecologist in Basavanagudi, Bangalore. Insights on pregnancy, fertility, and laparoscopy."
+        />
+
+        {/* JSON-LD: Blog with recent posts */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              name: "Dr. Vani R — Women’s Health & Pregnancy Tips",
+              url: "https://www.drvanigynaecologistbangalore.com/blogs",
+              description:
+                "Expert articles on pregnancy care, fertility, laparoscopy, and women’s health by a senior gynecologist in Bangalore.",
+              blogPost: (posts || []).slice(0, 6).map((p) => ({
+                "@type": "BlogPosting",
+                headline: p.title,
+                url: `https://www.drvanigynaecologistbangalore.com/blog/${p.slug.current}`,
+                datePublished: p.publishedAt,
+                description: p.excerpt,
+                ...(p.coverImage
+                  ? {
+                      image: [
+                        urlFor(p.coverImage).width(1200).height(630).url(),
+                      ],
+                    }
+                  : {}),
+              })),
+            }),
+          }}
+        />
       </Head>
 
       <section className="bg-white py-16 px-4 md:px-8">

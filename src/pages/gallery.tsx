@@ -42,12 +42,92 @@ export default function Gallery({ albums }: GalleryProps) {
   return (
     <>
       <Head>
-        <title>Gallery | Dr. Vani R</title>
+        <title>
+          Clinic Gallery — Deliveries, Happy Families & Milestones | Dr. Vani R
+        </title>
         <meta
           name="description"
-          content="Explore precious moments captured in our gallery – real families, happy smiles, and memorable experiences."
+          content="Browse our gallery of real patient journeys—deliveries, happy families, awards, and clinic milestones with Dr. Vani R, senior gynecologist in Basavanagudi, Bangalore."
+        />
+
+        {/* Canonical (www as primary) */}
+        <link
+          rel="canonical"
+          href="https://www.drvanigynaecologistbangalore.com/gallery"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Clinic Gallery — Deliveries, Happy Families & Milestones"
+        />
+        <meta
+          property="og:description"
+          content="See real stories and memorable moments from our clinic in Basavanagudi, Bangalore."
+        />
+        <meta
+          property="og:url"
+          content="https://www.drvanigynaecologistbangalore.com/gallery"
+        />
+        {/* If you have a banner image, you can set a static OG image too */}
+        {/* <meta property="og:image" content="https://www.drvanigynaecologistbangalore.com/og-gallery.jpg" /> */}
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Clinic Gallery — Deliveries, Happy Families & Milestones"
+        />
+        <meta
+          name="twitter:description"
+          content="Memorable moments and patient stories with Dr. Vani R."
+        />
+
+        {/* JSON-LD: CollectionPage with an ImageGallery of albums */}
+        <script
+          type="application/ld+json"
+          // Builds an ImageGallery from your Sanity data to improve understanding of this page
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              name: "Clinic Gallery — Dr. Vani R",
+              url: "https://www.drvanigynaecologistbangalore.com/gallery",
+              about:
+                "Photo and video collection of real patient journeys, deliveries, awards, and clinic life.",
+              hasPart: (albums || []).map((album) => ({
+                "@type": "ImageGallery",
+                name: album.albumTitle,
+                description: album.albumDescription || undefined,
+                // Optional: list first few items; search engines don't need every image
+                associatedMedia: (album.photos || [])
+                  .slice(0, 6)
+                  .map((p, idx) => {
+                    // Prefer images; if a video exists, mark it as MediaObject
+                    if (p?.image?.asset?._ref) {
+                      return {
+                        "@type": "ImageObject",
+                        name: p.title || `Photo ${idx + 1}`,
+                        // If you have absolute URLs, use those. urlFor(...) returns absolute URLs in Next.
+                        contentUrl: "", // can be filled at runtime if you render JSON-LD server-side with absolute URL
+                      };
+                    }
+                    if (p?.video?.asset?._ref) {
+                      return {
+                        "@type": "MediaObject",
+                        name: p.title || `Video ${idx + 1}`,
+                      };
+                    }
+                    return undefined;
+                  })
+                  .filter(Boolean),
+              })),
+            }),
+          }}
         />
       </Head>
+
       <section className="relative flex items-center justify-center w-full py-16 sm:py-20 md:py-24 min-h-120 text-white text-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 -z-10">

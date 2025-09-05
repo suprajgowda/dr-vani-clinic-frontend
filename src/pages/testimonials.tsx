@@ -95,10 +95,55 @@ export default function TestimonialsPage({
   return (
     <>
       <Head>
-        <title>Patient Testimonials | Dr. Vani</title>
+        <title>
+          Patient Testimonials | Dr. Vani R | Gynecologist in Basavanagudi,
+          Bangalore
+        </title>
         <meta
           name="description"
-          content="Heartfelt testimonials from patients of Dr. Vani"
+          content="Read real patient testimonials and watch heartfelt video stories from Dr. Vani R’s patients in Basavanagudi, Bangalore. Trusted gynecologist with 23+ years of experience."
+        />
+        <meta
+          name="keywords"
+          content="Dr Vani reviews, patient testimonials, gynecologist Basavanagudi Bangalore, laparoscopic surgery feedback, infertility care reviews, motherhood hospital testimonials"
+        />
+        <link
+          rel="canonical"
+          href="https://www.drvanigynaecologistbangalore.com/testimonials"
+        />
+
+        {/* Open Graph for social sharing */}
+        <meta
+          property="og:title"
+          content="Patient Testimonials | Dr. Vani R | Gynecologist in Bangalore"
+        />
+        <meta
+          property="og:description"
+          content="Discover patient experiences — real testimonials and video reviews of Dr. Vani R, leading gynecologist in Basavanagudi, Bangalore."
+        />
+        <meta
+          property="og:url"
+          content="https://www.drvanigynaecologistbangalore.com/testimonials"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://www.drvanigynaecologistbangalore.com/og-testimonials.jpg"
+        />
+
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Patient Testimonials | Dr. Vani R | Bangalore"
+        />
+        <meta
+          name="twitter:description"
+          content="Explore patient testimonials & video reviews of Dr. Vani R, trusted gynecologist in Basavanagudi, Bangalore."
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.drvanigynaecologistbangalore.com/og-testimonials.jpg"
         />
       </Head>
 
